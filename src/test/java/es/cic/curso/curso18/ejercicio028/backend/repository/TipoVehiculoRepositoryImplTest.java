@@ -18,8 +18,12 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long, TipoVehiculo> {
 
-	private Vehiculo vehiculo1,vehiculo2,vehiculo3;
-	private Marca marca1,marca2,marca3;
+	private Vehiculo vehiculo1,
+						vehiculo2,
+						vehiculo3;
+	private Marca marca1,
+					marca2,
+					marca3;
 	
     @Autowired
     private TipoVehiculoRepository sut;
@@ -100,17 +104,19 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
     
     private void generaBaseDatos(){
         marca1 = new Marca("Toyota");
-        em.persist(marca1);
         marca2 = new Marca("Skoda");
-        em.persist(marca2);
         marca3 = new Marca("Seat");
+        
+        em.persist(marca1);
+        em.persist(marca2);
         em.persist(marca3);
         
         vehiculo1 =new Vehiculo("Corola","0387-DCC",marca1);
-        em.persist(vehiculo1);
         vehiculo2 =new Vehiculo("Favia","0127-DRC",marca2);
-        em.persist(vehiculo2);
         vehiculo3 =new Vehiculo("Panda","0327-DOC",marca3);
+        
+        em.persist(vehiculo1);
+        em.persist(vehiculo2);
         em.persist(vehiculo3);
     }
 }
