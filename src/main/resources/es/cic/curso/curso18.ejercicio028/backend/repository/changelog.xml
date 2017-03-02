@@ -34,6 +34,7 @@
 			<column name="nombre" type="VARCHAR(30)" />
 			<column name="marca" type="VARCHAR(30)" />
 			<column name="matricula" type="INT(10)" />
+            <column name="fkidMarca" type="INT(10)"/>
 		</createTable>
 
 		<!-- Tabla Tipo Vehiculo -->
@@ -44,6 +45,7 @@
 			</column>
 			<column name="tipo" type="VARCHAR(30)" />
 			<column name="descripcion" type="VARCHAR(30)" />
+			<column name="fkidVehiculo" type="INT(10)"/>
 		</createTable>
 
 	</changeSet>
