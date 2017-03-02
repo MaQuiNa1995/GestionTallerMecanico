@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import es.cic.curso.curso18.ejercicio028.backend.repository.Identificable;
@@ -31,9 +31,9 @@ public class Vehiculo implements Identificable<Long> {
 	@Column(name = "matricula")
 	String matricula;
 
-	// TODO Cambiar lo del OneToOne
-	@JoinColumn(name = "fkidMarca")
-	@OneToOne(fetch = FetchType.LAZY)
+	// TODO Cambiar lo del many2One OneToOne
+	@JoinColumn(name = "pkidMarca")
+	@ManyToOne(fetch = FetchType.LAZY)
 	Marca marca;
 
 	public Vehiculo() {
