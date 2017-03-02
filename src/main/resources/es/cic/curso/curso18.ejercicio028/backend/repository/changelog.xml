@@ -53,12 +53,12 @@
 	<changeSet author="usuario (generated)" id="1400847488682-1">
 
 		<addForeignKeyConstraint constraintName="fk_VEHICULO_TIPOVEHICULO"
-			referencedTableName="VEHICULO" baseColumnNames="pkidVehiculo"
-			baseTableName="TIPOVEHICULO" referencedColumnNames="fkidVehiculo" />
+			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculo"
+			baseTableName="TIPOVEHICULO" referencedColumnNames="pkidVehiculo" />
 
 		<addForeignKeyConstraint constraintName="fk_MARCA_VEHICULO"
-			referencedTableName="MARCA" baseColumnNames="pkidMarca"
-			baseTableName="VEHICULO" referencedColumnNames="fkidMarca" />
+			referencedTableName="MARCA" baseColumnNames="fkidMarca"
+			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
 
 	</changeSet>
 
