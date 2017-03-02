@@ -56,10 +56,10 @@ public class TipoVehiculoServiceImplTest {
 		Vehiculo vehiculo = new Vehiculo("Corola", "0387-DCC", marca);
 		Long idTipoVehiculo = sut.aniadirTipoVehiculo("Motocicleta", "Vehiculo De Cuatro Ruedas", vehiculo);
 
-		TipoVehiculo sala = sut.obtenerTipoVehiculo(idTipoVehiculo);
-		sala.setTipo("Coche");
+		TipoVehiculo tipoVehiculo = sut.obtenerTipoVehiculo(idTipoVehiculo);
+		tipoVehiculo.setTipo("Coche");
 		TipoVehiculo salaMod = sut.obtenerTipoVehiculo(idTipoVehiculo);
-		assertTrue(sala.getTipo().equals(salaMod.getTipo()));
+		assertTrue(tipoVehiculo.getTipo().equals(salaMod.getTipo()));
 	}
 
 	@Test
