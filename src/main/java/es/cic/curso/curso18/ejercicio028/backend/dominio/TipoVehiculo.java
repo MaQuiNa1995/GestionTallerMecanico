@@ -31,7 +31,7 @@ public class TipoVehiculo implements Identificable<Long> {
 	@Column(name = "descripcion")
 	String descripcion;
 
-	@JoinColumn(name = "pkidVehiculo")
+	@JoinColumn(name = "fkidVehiculo")
 	@ManyToOne(fetch = FetchType.LAZY)
 	Vehiculo vehiculo;
 
