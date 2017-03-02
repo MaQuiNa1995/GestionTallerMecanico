@@ -1,6 +1,13 @@
 package es.cic.curso.curso18.ejercicio028.backend.dominio;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import es.cic.curso.curso18.ejercicio028.backend.repository.Identificable;
@@ -14,12 +21,19 @@ public class Vehiculo implements Identificable<Long> {
 	 */
 	private static final long serialVersionUID = -4582114734221516816L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	long Pk_idVehiculo;
 
+	@Column(name = "nombre")
 	String nombre;
-	
+
+	@Column(name = "matricula")
 	String matricula;
 
+	// TODO Cambiar lo del OneToOne
+	@JoinColumn(name = "Pk_idMarca")
+	@OneToOne(fetch = FetchType.LAZY)
 	Marca marca;
 
 	public Vehiculo() {

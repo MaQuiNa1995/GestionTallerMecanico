@@ -1,22 +1,31 @@
 package es.cic.curso.curso18.ejercicio028.backend.dominio;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import es.cic.curso.curso18.ejercicio028.backend.repository.Identificable;
 
-
 @Entity
-@Table(name="AVERIA")
+@Table(name = "AVERIA")
 public class Averia implements Identificable<Long> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4583881797217483524L;
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	long Pk_idAveria;
+
+	@Column(name = "nombre")
 	String nombre;
+
+	@Column(name = "descripcion")
 	String descripcion;
 
 	public Averia() {
@@ -52,7 +61,7 @@ public class Averia implements Identificable<Long> {
 
 	@Override
 	public void setId(Long Pk_idAveria) {
-		this.Pk_idAveria=Pk_idAveria;
+		this.Pk_idAveria = Pk_idAveria;
 	}
 
 }
