@@ -9,7 +9,7 @@
 		<!-- Tabla Averia -->
 
 		<createTable catalogName="curso18" tableName="AVERIA">
-			<column autoIncrement="true" name="id" type="INT(10)">
+			<column autoIncrement="true" name="pkidAveria" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
 			<column name="nombre" type="VARCHAR(30)" />
@@ -19,7 +19,7 @@
 		<!-- Tabla Marca -->
 
 		<createTable catalogName="curso18" tableName="MARCA">
-			<column autoIncrement="true" name="id" type="INT(10)">
+			<column autoIncrement="true" name="pkidMarca" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
 			<column name="nombre" type="VARCHAR(30)" />
@@ -28,7 +28,7 @@
 		<!-- Tabla Vehiculo -->
 
 		<createTable catalogName="curso18" tableName="VEHICULO">
-			<column autoIncrement="true" name="id" type="INT(10)">
+			<column autoIncrement="true" name="pkidVehiculo" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
 			<column name="nombre" type="VARCHAR(30)" />
@@ -39,7 +39,7 @@
 		<!-- Tabla Tipo Vehiculo -->
 
 		<createTable catalogName="curso18" tableName="TIPOVEHICULO">
-			<column autoIncrement="true" name="id" type="INT(10)">
+			<column autoIncrement="true" name="pkidTipoVehiculo" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
 			<column name="tipo" type="VARCHAR(30)" />
