@@ -27,7 +27,7 @@
 
 		<!-- Tabla Vehiculo -->
 
-		<createTable catalogName="curso18" tableName="TIPOVEHICULO">
+		<createTable catalogName="curso18" tableName="VEHICULO">
 			<column autoIncrement="true" name="id" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
