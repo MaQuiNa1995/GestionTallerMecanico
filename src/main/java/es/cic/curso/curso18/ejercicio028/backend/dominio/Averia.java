@@ -1,7 +1,13 @@
 package es.cic.curso.curso18.ejercicio028.backend.dominio;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import es.cic.curso.curso18.ejercicio028.backend.repository.Identificable;
 
+
+@Entity
+@Table(name="AVERIA")
 public class Averia implements Identificable<Long> {
 
 	/**
