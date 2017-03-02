@@ -6,16 +6,32 @@
     
     <changeSet author="usuario (generated)" id="1400847488681-1">
         
-        <createTable catalogName="curso18" tableName="Dummie">
+        <createTable catalogName="curso18" tableName="AVERIA">
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true" />
             </column>
-            <column name="palabra" type="VARCHAR(30)" />
-            <column name="apagado" type="BOOLEAN" />
-            <column name="numero" type="INT(3)" />
-            <column name="numeroGran" type="INT(10)" />
-            <column name="numeroComas" type="DECIMAL(10)" />
+            <column name="nombre" type="VARCHAR(30)" />
+            <column name="descripcion" type="VARCHAR(30)" />
+        </createTable>
+        
+        <createTable catalogName="curso18" tableName="TIPOVEHICULO">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="tipo" type="VARCHAR(30)" />
+            <column name="descripcion" type="VARCHAR(30)" />
+            <column name="pkidVehiculo" type="INT(10)"/>
         </createTable>
         
     </changeSet>
+    
+    <changeSet author="usuario (generated)" id="1400847488682-1">
+        <addForeignKeyConstraint 
+            constraintName="fk_idBase" 
+            referencedTableName="VEHICULO" 
+            baseColumnNames="fkidVehiculo" 
+            baseTableName="TIPOVEHICULO" 
+            referencedColumnNames="pkidVehiculo"/>       			
+    </changeSet>
+    
 </databaseChangeLog>
