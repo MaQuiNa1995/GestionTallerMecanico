@@ -20,7 +20,7 @@ public class Marca implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long pk_idMarca;
+	long pkidMarca;
 
 	@Column(name = "nombre")
 	String nombre;
@@ -44,12 +44,12 @@ public class Marca implements Identificable<Long> {
 
 	@Override
 	public Long getId() {
-		return pk_idMarca;
+		return pkidMarca;
 	}
 
 	@Override
-	public void setId(Long pk_idMarca) {
-		this.pk_idMarca = pk_idMarca;
+	public void setId(Long pkidMarca) {
+		this.pkidMarca = pkidMarca;
 	}
 
 }

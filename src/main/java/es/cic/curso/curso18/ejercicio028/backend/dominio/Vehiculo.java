@@ -23,7 +23,7 @@ public class Vehiculo implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long pk_idVehiculo;
+	long pkidVehiculo;
 
 	@Column(name = "nombre")
 	String nombre;
@@ -32,7 +32,7 @@ public class Vehiculo implements Identificable<Long> {
 	String matricula;
 
 	// TODO Cambiar lo del OneToOne
-	@JoinColumn(name = "pk_idMarca")
+	@JoinColumn(name = "pkidMarca")
 	@OneToOne(fetch = FetchType.LAZY)
 	Marca marca;
 
@@ -73,12 +73,12 @@ public class Vehiculo implements Identificable<Long> {
 
 	@Override
 	public Long getId() {
-		return pk_idVehiculo;
+		return pkidVehiculo;
 	}
 
 	@Override
-	public void setId(Long pk_idVehiculo) {
-		this.pk_idVehiculo = pk_idVehiculo;
+	public void setId(Long pkidVehiculo) {
+		this.pkidVehiculo = pkidVehiculo;
 	}
 
 }

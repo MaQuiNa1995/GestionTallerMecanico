@@ -23,7 +23,7 @@ public class TipoVehiculo implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long pk_idTipoVehiculo;
+	long pkidTipoVehiculo;
 
 	@Column(name = "tipo")
 	String tipo;
@@ -31,7 +31,7 @@ public class TipoVehiculo implements Identificable<Long> {
 	@Column(name = "descripcion")
 	String descripcion;
 
-	@JoinColumn(name = "pk_idVehiculo")
+	@JoinColumn(name = "pkidVehiculo")
 	@ManyToOne(fetch = FetchType.LAZY)
 	Vehiculo vehiculo;
 
@@ -72,12 +72,12 @@ public class TipoVehiculo implements Identificable<Long> {
 
 	@Override
 	public Long getId() {
-		return pk_idTipoVehiculo;
+		return pkidTipoVehiculo;
 	}
 
 	@Override
-	public void setId(Long pk_idTipoVehiculo) {
-		this.pk_idTipoVehiculo = pk_idTipoVehiculo;
+	public void setId(Long pkidTipoVehiculo) {
+		this.pkidTipoVehiculo = pkidTipoVehiculo;
 
 	}
 

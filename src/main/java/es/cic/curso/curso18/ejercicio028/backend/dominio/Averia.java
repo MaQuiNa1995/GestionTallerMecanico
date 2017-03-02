@@ -20,7 +20,7 @@ public class Averia implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long pk_idAveria;
+	long pkidAveria;
 
 	@Column(name = "nombre")
 	String nombre;
@@ -56,12 +56,12 @@ public class Averia implements Identificable<Long> {
 
 	@Override
 	public Long getId() {
-		return pk_idAveria;
+		return pkidAveria;
 	}
 
 	@Override
-	public void setId(Long pk_idAveria) {
-		this.pk_idAveria = pk_idAveria;
+	public void setId(Long pkidAveria) {
+		this.pkidAveria = pkidAveria;
 	}
 
 }
