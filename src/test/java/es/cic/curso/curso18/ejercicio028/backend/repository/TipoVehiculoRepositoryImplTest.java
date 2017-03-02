@@ -31,7 +31,7 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
     public TipoVehiculo getInstanceDeTParaNuevo() {
         TipoVehiculo claseTipoVehiculo = new TipoVehiculo();
         
-        Vehiculo vehiculo = new Vehiculo("Fabia", "0387-DCC", new Marca("Skoda"));
+        Vehiculo vehiculo = new Vehiculo("Fabia", "0857-ABC", new Marca("Skoda"));
         
         claseTipoVehiculo.setTipo("Coche");
         claseTipoVehiculo.setDescripcion("Esto es un coche y tiene cuatro ruedas");
@@ -44,7 +44,7 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
     public TipoVehiculo getInstanceDeTParaLectura() {
         TipoVehiculo claseTipoVehiculo = new TipoVehiculo();
         
-        Vehiculo vehiculo = new Vehiculo("Fabia", "0387-DCC", new Marca("Skoda"));
+        Vehiculo vehiculo = new Vehiculo("Fabia", "0857-ABC", new Marca("Skoda"));
         
         claseTipoVehiculo.setTipo("Coche");
         claseTipoVehiculo.setDescripcion("Esto es un coche y tiene cuatro ruedas");
@@ -62,7 +62,7 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
     public TipoVehiculo getInstanceDeTParaModificar(Long clave) {
         TipoVehiculo claseTipoVehiculo = getInstanceDeTParaLectura();
         
-        Vehiculo vehiculo = new Vehiculo("Fabia", "0387-DCC", new Marca("Skoda"));
+        Vehiculo vehiculo = new Vehiculo("Fabia", "0857-ABC", new Marca("Skoda"));
         
         claseTipoVehiculo.setId(clave);
         claseTipoVehiculo.setTipo("Coche");
