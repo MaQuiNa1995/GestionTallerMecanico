@@ -33,6 +33,7 @@ public class Dummie implements Identificable<Long>{
     float numeroComas;
 
     public Dummie() {
+    	super();
     }
 
     public Dummie(String palabra, boolean apagado, int numero, long numeroGran, float numeroComas) {

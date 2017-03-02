@@ -8,7 +8,6 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 
 @Theme("myTheme")
@@ -31,19 +30,20 @@ public class FormPrincipal extends UI {
 		
 		/**
 		 * final VerticalLayout gridFiguras = new GridFiguras();
-		 */
+		 
 		
-//		final VerticalLayout annadirFiguras = new AnnadirFiguras();
-//		final VerticalLayout eliminarFiguras = new EliminarFiguras();
-//		final VerticalLayout actualizarFiguras = new ActualizarFiguras();
-//		final VerticalLayout listarFiguras = new ListarFiguras();
+		final VerticalLayout annadirFiguras = new AnnadirFiguras();
+		final VerticalLayout eliminarFiguras = new EliminarFiguras();
+		final VerticalLayout actualizarFiguras = new ActualizarFiguras();
+		final VerticalLayout listarFiguras = new ListarFiguras();
 
-//		TabSheet menu = new TabSheet();
-//        menu.setHeight(100.0f, Unit.PERCENTAGE);
-//        menu.addTab(, "Añadir Figuras");
-//        menu.addTab(, "Eliminar Figuras");
-//        menu.addTab(, "Actualizar Figuras");
-//        menu.addTab(, "listar Figuras");
+		TabSheet menu = new TabSheet();
+        menu.setHeight(100.0f, Unit.PERCENTAGE);
+        menu.addTab(, "Añadir Figuras");
+        menu.addTab(, "Eliminar Figuras");
+        menu.addTab(, "Actualizar Figuras");
+        menu.addTab(, "listar Figuras");
+        */
 	
 		panelTodo.addComponent(labelDummie);
 		
