@@ -12,8 +12,8 @@
 			<column autoIncrement="true" name="pkidAveria" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
-			<column name="nombre" type="VARCHAR(30)" />
-			<column name="descripcion" type="VARCHAR(30)" />
+			<column name="nombre" type="VARCHAR(60)" />
+			<column name="descripcion" type="VARCHAR(60)" />
 		</createTable>
 
 		<!-- Tabla Marca -->

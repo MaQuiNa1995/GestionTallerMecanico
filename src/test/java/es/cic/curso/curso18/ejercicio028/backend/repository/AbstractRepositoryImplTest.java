@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import org.junit.Before;
-
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -48,6 +48,7 @@ public abstract class AbstractRepositoryImplTest<K extends Number, T extends Ide
 
     }
 
+    @Ignore
     @Test
     public void testAdd() {
         T instancia = getInstanceDeTParaNuevo();
