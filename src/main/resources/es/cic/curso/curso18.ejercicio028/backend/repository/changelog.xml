@@ -1,21 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
 			http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-    
-    <changeSet author="usuario (generated)" id="1400847488681-1">
-        
-        <createTable catalogName="curso18" tableName="Dummie">
-            <column autoIncrement="true" name="id" type="INT(10)">
-                <constraints primaryKey="true" />
-            </column>
-            <column name="palabra" type="VARCHAR(30)" />
-            <column name="apagado" type="BOOLEAN" />
-            <column name="numero" type="INT(3)" />
-            <column name="numeroGran" type="INT(10)" />
-            <column name="numeroComas" type="DECIMAL(10)" />
-        </createTable>
-        
-    </changeSet>
+
+	<changeSet author="usuario (generated)" id="1400847488681-1">
+
+		<!-- Tabla Averia -->
+
+		<createTable catalogName="curso18" tableName="AVERIA">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="nombre" type="VARCHAR(30)" />
+			<column name="descripcion" type="VARCHAR(30)" />
+		</createTable>
+
+		<!-- Tabla Marca -->
+
+		<createTable catalogName="curso18" tableName="MARCA">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="nombre" type="VARCHAR(30)" />
+		</createTable>
+
+		<!-- Tabla Vehiculo -->
+
+		<createTable catalogName="curso18" tableName="TIPOVEHICULO">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="nombre" type="VARCHAR(30)" />
+			<column name="marca" type="VARCHAR(30)" />
+			<column name="matricula" type="INT(10)" />
+		</createTable>
+
+		<!-- Tabla Tipo Vehiculo -->
+
+		<createTable catalogName="curso18" tableName="TIPOVEHICULO">
+			<column autoIncrement="true" name="id" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="tipo" type="VARCHAR(30)" />
+			<column name="descripcion" type="VARCHAR(30)" />
+		</createTable>
+
+	</changeSet>
+
+	<changeSet author="usuario (generated)" id="1400847488682-1">
+
+		<addForeignKeyConstraint constraintName="fk_VEHICULO_TIPOVEHICULO"
+			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculo"
+			baseTableName="TIPOVEHICULO" referencedColumnNames="pkidVehiculo" />
+
+		<addForeignKeyConstraint constraintName="fk_MARCA_VEHICULO"
+			referencedTableName="MARCA" baseColumnNames="fkidMarca"
+			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
+
+	</changeSet>
+
 </databaseChangeLog>
