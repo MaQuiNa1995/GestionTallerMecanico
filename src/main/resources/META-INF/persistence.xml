@@ -8,7 +8,6 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <!-- Ruta de lo que va en el Dominio
         <class>es.cic.curso.curso18.ejercicio026.dominio.</class> -->
-        <class>es.cic.curso.curso18.ejercicio028.backend.dominio.Dummie</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
