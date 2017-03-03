@@ -20,7 +20,7 @@ public class Averia implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long pkidAveria;
+	Long pkidAveria;
 
 	@Column(name = "nombre")
 	String nombre;

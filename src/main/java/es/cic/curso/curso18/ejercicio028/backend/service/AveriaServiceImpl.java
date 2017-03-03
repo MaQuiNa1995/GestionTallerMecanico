@@ -34,7 +34,8 @@ public class AveriaServiceImpl implements AveriaSerive {
 
 	@Override
 	public Averia actualizarAveria(Averia modificada) {
-		return claseAveriaRepository.update(modificada);
+		return claseAveriaRepository
+				.update(modificada);
 	}
 
 	@Override

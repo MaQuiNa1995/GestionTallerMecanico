@@ -20,7 +20,7 @@ public class Marca implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long pkidMarca;
+	Long pkidMarca;
 
 	@Column(name = "nombre")
 	String nombre;

@@ -48,7 +48,6 @@ public abstract class AbstractRepositoryImplTest<K extends Number, T extends Ide
 
     }
 
-    @Ignore
     @Test
     public void testAdd() {
         T instancia = getInstanceDeTParaNuevo();
