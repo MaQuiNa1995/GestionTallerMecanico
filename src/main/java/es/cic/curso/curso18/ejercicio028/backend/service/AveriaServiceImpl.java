@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class AveriaServiceImpl implements AveriaSerive {
+public class AveriaServiceImpl implements AveriaService {
 
 	@Autowired
 	private AveriaRepository claseAveriaRepository;

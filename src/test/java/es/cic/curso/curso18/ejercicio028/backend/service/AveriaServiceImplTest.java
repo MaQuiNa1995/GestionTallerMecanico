@@ -31,7 +31,7 @@ public class AveriaServiceImplTest {
     @PersistenceContext
 	protected EntityManager entityManager;
 	@Autowired
-	private AveriaSerive sut;
+	private AveriaService sut;
 
 	@Before
 	public void setUp() throws Exception {

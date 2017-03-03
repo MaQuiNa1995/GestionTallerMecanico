@@ -16,7 +16,8 @@
     <!-- Ruta Repository
     <context:component-scan base-package="es.cic.curso.curso18.ejercicio023.repository"/>
     -->
-    <context:component-scan base-package="es.cic.curso.curso18.ejercicio028.backend"/>
+    <context:component-scan base-package="es.cic.curso.curso18.ejercicio028.backend.repository"/>
+    <context:component-scan base-package="es.cic.curso.curso18.ejercicio028.backend.service"/>
 
     <tx:annotation-driven mode="proxy" transaction-manager="transactionManager"/>
  	     

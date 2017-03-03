@@ -4,7 +4,7 @@ import java.util.List;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Averia;
 
-public interface AveriaSerive {
+public interface AveriaService {
 
 	Long aniadirAveria(String nombre, String descripcion);
 
