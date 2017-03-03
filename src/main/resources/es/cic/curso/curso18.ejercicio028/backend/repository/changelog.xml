@@ -32,8 +32,7 @@
 				<constraints primaryKey="true" />
 			</column>
 			<column name="nombre" type="VARCHAR(30)" />
-			<column name="marca" type="VARCHAR(30)" />
-			<column name="matricula" type="INT(10)" />
+			<column name="matricula" type="VARCHAR(30)" />
             <column name="fkidMarca" type="INT(10)"/>
 		</createTable>
 

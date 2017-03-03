@@ -32,7 +32,7 @@ public class Vehiculo implements Identificable<Long> {
 	String matricula;
 
 	// TODO Cambiar lo del many2One OneToOne
-	@JoinColumn(name = "pkidMarca")
+	@JoinColumn(name = "fkidMarca")
 	@ManyToOne(fetch = FetchType.LAZY)
 	Marca marca;
 
