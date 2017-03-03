@@ -55,11 +55,11 @@
 		<addForeignKeyConstraint constraintName="fk_VEHICULO_TIPOVEHICULO"
 			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculo"
 			baseTableName="TIPOVEHICULO" referencedColumnNames="pkidVehiculo" />
-
+ 
 		<addForeignKeyConstraint constraintName="fk_MARCA_VEHICULO"
-			referencedTableName="MARCA" baseColumnNames="fkidMarca"
+			referencedTableName="MARCA" baseColumnNames="fkiddMarca"
 			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
-
+ 
 	</changeSet>
 
 </databaseChangeLog>

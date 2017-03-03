@@ -21,6 +21,7 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
 	private Vehiculo vehiculo1,
 						vehiculo2,
 						vehiculo3;
+	
 	private Marca marca1,
 					marca2,
 					marca3;
