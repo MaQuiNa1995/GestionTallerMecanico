@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -71,6 +70,7 @@ public abstract class AbstractRepositoryImplTest<K extends Number, T extends Ide
     public void testRead_NoExiste() {
         K clavePrimaria = getClavePrimariaNoExistente();
 
+		@SuppressWarnings("unused")
 		T resultado = getRepository().read(clavePrimaria);
     }
 
@@ -91,7 +91,8 @@ public abstract class AbstractRepositoryImplTest<K extends Number, T extends Ide
 
         T sala2 = getInstanceDeTParaModificar(clavePrimaria);
 
-        T resultado = getRepository().update(sala2);
+        @SuppressWarnings("unused")
+		T resultado = getRepository().update(sala2);
 
         T enBBDD = em.find(getRepository().getClassDeT(), clavePrimaria);
 
@@ -103,7 +104,8 @@ public abstract class AbstractRepositoryImplTest<K extends Number, T extends Ide
         K clavePrimaria = generaDatoLectura();
 
         getRepository().delete(clavePrimaria);
-        Identificable c;
+        @SuppressWarnings("rawtypes")
+		Identificable c;
         try {
             c = em.find(getRepository().getClassDeT(), clavePrimaria);
         } catch (PersistenceException pe) {
