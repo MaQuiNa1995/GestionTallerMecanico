@@ -20,9 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
-import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
-
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:es/cic/curso/curso18.ejercicio028/applicationContext.xml" })
