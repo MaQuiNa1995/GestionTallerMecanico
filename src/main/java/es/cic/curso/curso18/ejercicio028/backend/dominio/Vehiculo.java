@@ -42,8 +42,8 @@ public class Vehiculo implements Identificable<Long> {
 	public Vehiculo(String nombre, String matricula, Marca marca) {
 		super();
 		this.nombre = nombre;
-		this.marca = marca;
 		this.matricula = matricula;
+		this.marca = marca;
 	}
 
 	public String getNombre() {

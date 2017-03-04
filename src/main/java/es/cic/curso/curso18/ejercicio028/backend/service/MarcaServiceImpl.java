@@ -1,7 +1,7 @@
 package es.cic.curso.curso18.ejercicio028.backend.service;
 
-import es.cic.curso.curso18.ejercicio028.backend.dominio.Averia;
-import es.cic.curso.curso18.ejercicio028.backend.repository.AveriaRepository;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
+import es.cic.curso.curso18.ejercicio028.backend.repository.MarcaRepository;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,48 +10,47 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class MarcaServiceImpl implements AveriaService {
+public class MarcaServiceImpl implements MarcaService {
 
 	@Autowired
-	private AveriaRepository claseAveriaRepository;
+	private MarcaRepository claseMarcaRepository;
 
 	@Override
-	public Long aniadirAveria(String nombre, String descripcion) {
+	public Long aniadirMarca(String nombre) {
 
-		Averia claseAveria = new Averia();
+		Marca claseMarca = new Marca();
 
-		claseAveria.setNombre(nombre);
-		claseAveria.setDescripcion(descripcion);
+		claseMarca.setNombre(nombre);
 
-		Averia nuevo = aniadirAveria(claseAveria);
+		Marca nuevo = aniadirMarca(claseMarca);
 
 		return nuevo.getId();
 	}
 
-	private Averia aniadirAveria(Averia nueva) {
-		return claseAveriaRepository.add(nueva);
+	private Marca aniadirMarca(Marca nueva) {
+		return claseMarcaRepository.add(nueva);
 	}
 
 	@Override
-	public Averia actualizarAveria(Averia modificada) {
-		return claseAveriaRepository
+	public Marca actualizarMarca(Marca modificada) {
+		return claseMarcaRepository
 				.update(modificada);
 	}
 
 	@Override
-	public void borrarAveria(Long id) {
-		Averia objetoEliminable = obtenerAveria(id);
-		claseAveriaRepository.delete(objetoEliminable);
+	public void borrarMarca(Long id) {
+		Marca objetoEliminable = obtenerMarca(id);
+		claseMarcaRepository.delete(objetoEliminable);
 	}
 
 	@Override
-	public Averia obtenerAveria(Long id) {
-		return claseAveriaRepository.read(id);
+	public Marca obtenerMarca(Long id) {
+		return claseMarcaRepository.read(id);
 	}
 
 	@Override
-	public List<Averia> obtenerAverias() {
-		return claseAveriaRepository.list();
+	public List<Marca> obtenerMarcas() {
+		return claseMarcaRepository.list();
 	}
 
 }

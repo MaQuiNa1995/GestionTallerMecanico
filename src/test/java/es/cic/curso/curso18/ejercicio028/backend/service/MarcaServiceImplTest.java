@@ -19,8 +19,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
-
-
+import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:es/cic/curso/curso18.ejercicio028/applicationContext.xml" })
@@ -28,50 +27,51 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
 @Transactional
 public class MarcaServiceImplTest {
 
-    @PersistenceContext
+	@PersistenceContext
 	protected EntityManager entityManager;
-    
+
 	@Autowired
 	private MarcaService sut;
-
+	
 	@Before
 	public void setUp() throws Exception {
-
 	}
 
 	@Test
 	public void testCrearMarca() {
 		Long idMarca = sut.aniadirMarca("Skoda");
-		
+
 		assertNotNull(idMarca);
 	}
 
 	@Test
 	public void testEditarMarca() {
 		Long idMarca = sut.aniadirMarca("Fabia");
-		
-		Marca sala = sut.obtenerMarca(idMarca);
-		sala.setNombre("Tubo Escape No Legal");
-		Marca salaMod = sut.obtenerMarca(idMarca);
-		assertTrue(sala.getNombre().equals(salaMod.getNombre()));
+
+		Marca marca = sut.obtenerMarca(idMarca);
+		marca.setNombre("Tubo Escape No Legal");
+		Marca marcaMod = sut.obtenerMarca(idMarca);
+		assertTrue(marca.getNombre().equals(marcaMod.getNombre()));
 	}
 
 	@Test
 	public void testBorrarMarca() {
 		Long idMarca = sut.aniadirMarca("Toyota");
-		
+
 		sut.borrarMarca(idMarca);
-		List<Marca> salas = sut.obtenerMarcas();
-		assertTrue(salas.isEmpty());
+		List<Marca> marcas = sut.obtenerMarcas();
+		assertTrue(marcas.isEmpty());
 	}
 
 	@Test
 	public void testListarMarca() {
-		List<Marca> salasLista = sut.obtenerMarcas();
-		for (Marca salaSacada : salasLista) {
-			assertNotNull(salaSacada.getId());
+		List<Marca> marcasLista = sut.obtenerMarcas();
+		for (Marca marcaSacada : marcasLista) {
+			assertNotNull(marcaSacada.getId());
 		}
 
 	}
+
+
 
 }

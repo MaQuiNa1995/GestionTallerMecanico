@@ -51,10 +51,10 @@ public class AveriaServiceImplTest {
 		Long idAveria = sut.aniadirAveria("Tubo Escape Ilegal",
 				"El tubo de escape expulsa muchos gases contaminantes");
 		
-		Averia sala = sut.obtenerAveria(idAveria);
-		sala.setNombre("Tubo Escape No Legal");
-		Averia salaMod = sut.obtenerAveria(idAveria);
-		assertTrue(sala.getNombre().equals(salaMod.getNombre()));
+		Averia averia = sut.obtenerAveria(idAveria);
+		averia.setNombre("Tubo Escape No Legal");
+		Averia averiaMod = sut.obtenerAveria(idAveria);
+		assertTrue(averia.getNombre().equals(averiaMod.getNombre()));
 	}
 
 	@Test
@@ -63,15 +63,15 @@ public class AveriaServiceImplTest {
 				"El tubo de escape expulsa muchos gases contaminantes");
 		
 		sut.borrarAveria(idAveria);
-		List<Averia> salas = sut.obtenerAverias();
-		assertTrue(salas.isEmpty());
+		List<Averia> averias = sut.obtenerAverias();
+		assertTrue(averias.isEmpty());
 	}
 
 	@Test
 	public void testListarAveria() {
-		List<Averia> salasLista = sut.obtenerAverias();
-		for (Averia salaSacada : salasLista) {
-			assertNotNull(salaSacada.getId());
+		List<Averia> averiasLista = sut.obtenerAverias();
+		for (Averia averiaSacada : averiasLista) {
+			assertNotNull(averiaSacada.getId());
 		}
 
 	}
