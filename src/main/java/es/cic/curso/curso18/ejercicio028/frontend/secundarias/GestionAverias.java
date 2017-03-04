@@ -4,6 +4,7 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -22,15 +23,14 @@ public class GestionAverias extends VerticalLayout {
 	HorizontalLayout panelBotones;
 	
 	private Averia averia;
-	
-	public GestionAverias() {
-		super();
-	}
+	Grid averiasGrid;
 
-	public GestionAverias(String hola) {
+	public GestionAverias() {
 		definirPanelTodo();
 		definirPanelDatos();
 		definirPanelBotones();
+		
+		
 		agregarAPanelTodo();
 	}
 	
