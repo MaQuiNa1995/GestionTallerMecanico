@@ -31,7 +31,8 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		
 		panelBotones = new HorizontalLayout();
 		
-		Button anadir,eliminar; 
+		Button anadir;
+		Button eliminar; 
 		
 		anadir = new Button("Dar De Alta");
 		eliminar = new Button("Dar De Baja");
@@ -46,11 +47,11 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		HorizontalLayout panelIntroducirDatos = new HorizontalLayout();
 		HorizontalLayout panelConfirmacion = new HorizontalLayout();
 		
-		TextField tipo,
-				descripcion;
+		TextField tipo;
+		TextField descripcion;
 		
-		Button confirmar,
-				cancelar;
+		Button confirmar;
+		Button	cancelar;
 		
 		tipo = new TextField("Introduce Nombre Del Tipo De Vehiculo:");
 		descripcion = new TextField("Introduce La Descripción:");
@@ -85,14 +86,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		
 		comboVehiculos.addItem("Moto");
 		comboVehiculos.addItem("Coche");
-		
-//		VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
-//		
-//		List<Vehiculo> listaVehiculos = vehiculoService.obtenerVehiculos();
-//		
-//		for (Vehiculo vehiculo : listaVehiculos) {
-//			comboVehiculos.addItem(vehiculo.getNombre());
-//		}
+
 	}
 	
 	

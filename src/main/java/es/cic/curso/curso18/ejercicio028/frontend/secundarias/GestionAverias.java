@@ -32,6 +32,9 @@ public class GestionAverias extends HorizontalLayout {
 	
 	AveriaService averiaService;
 	
+	TextField nombre;
+	TextField descripcion;
+	
 	Grid maestro;
 	
 	List<Averia> averiaLista;
@@ -39,9 +42,9 @@ public class GestionAverias extends HorizontalLayout {
 	Averia averia;
 
 	public GestionAverias() {
-		generaBBDD();
-		
 		definirBean();
+		
+		generaBBDD();
 		
 		definirPanelTodo();
 		
@@ -60,9 +63,13 @@ public class GestionAverias extends HorizontalLayout {
 
 		panelBotones = new HorizontalLayout();
 
-		Button anadir, eliminar;
+		Button anadir;
+		Button eliminar;
 
-		anadir = new Button("Dar De Alta");
+		// TODO Funcionalidad boton
+		anadir = new Button("Dar De Alta");	
+		
+		// TODO Funcionalidad boton
 		eliminar = new Button("Dar De Baja");
 
 		panelBotones.addComponents(anadir, eliminar);
@@ -72,20 +79,34 @@ public class GestionAverias extends HorizontalLayout {
 
 		panelDatos = new VerticalLayout();
 
-		HorizontalLayout panelIntroducirDatos = new HorizontalLayout();
+		VerticalLayout panelIntroducirDatos = new VerticalLayout();
 		HorizontalLayout panelConfirmacion = new HorizontalLayout();
 
-		TextField nombre, descripcion;
-
-		Button confirmar, cancelar;
+		Button confirmar;
+		Button cancelar;
 
 		nombre = new TextField("Introduce El Nombre De la Avería:");
+		nombre.setSizeFull();
 		descripcion = new TextField("Introduce La Descripción:");
+		descripcion.setSizeFull();
 
 		panelIntroducirDatos.addComponents(nombre, descripcion);
 
 		confirmar = new Button("Confirmar");
+		
+		// TODO Los visibles
+		confirmar.addClickListener(e->{	
+			averiaService.aniadirAveria(nombre.getValue(), descripcion.getValue());
+			cargaGrid();
+
+			limpiarCampos();
+		});
+		
 		cancelar = new Button("Cancelar");
+		
+		cancelar.addClickListener(e->{	
+			limpiarCampos();
+		});
 
 		panelConfirmacion.addComponents(confirmar, cancelar);
 
@@ -154,6 +175,8 @@ public class GestionAverias extends HorizontalLayout {
 			Averia averia = null;
 			if (!e.getSelected().isEmpty()) {
 				averia = (Averia) e.getSelected().iterator().next();
+				nombre.setValue(averia.getNombre());
+				descripcion.setValue(averia.getDescripcion());
 			}
 			setAveria(averia);
 		});
@@ -162,6 +185,11 @@ public class GestionAverias extends HorizontalLayout {
 		panelGrid.setMargin(true);
 		panelGrid.setSpacing(true);
 
+	}
+	
+	
+	private void modificarAveria(Averia averia){
+		averiaService.actualizarAveria(averia);	
 	}
 
 	public void annadirAveria(Averia averia) {
@@ -191,8 +219,17 @@ public class GestionAverias extends HorizontalLayout {
 		Averia averia = new Averia("Tubo De Escape Ilegal","Expulsa Demasiado CO2");
 		averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
 		
-		averia = new Averia("Carburador Roto","No Carbura Bien");
-		averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
+		Averia averia2 = new Averia("Carburador Roto","No Carbura Bien");
+		averiaService.aniadirAveria(averia.getNombre(), averia2.getDescripcion());
+	}
+	
+	private void controladorEstados(short estado){
+		
+	}
+	
+	private void limpiarCampos(){
+		nombre.setValue("");
+		descripcion.setValue("");
 	}
 
 }
