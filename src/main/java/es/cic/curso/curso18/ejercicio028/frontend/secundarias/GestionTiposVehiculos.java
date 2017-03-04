@@ -1,15 +1,10 @@
 package es.cic.curso.curso18.ejercicio028.frontend.secundarias;
 
-import java.util.List;
-
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-
-import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
-import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoServiceImpl;
 
 public class GestionTiposVehiculos extends VerticalLayout {
 

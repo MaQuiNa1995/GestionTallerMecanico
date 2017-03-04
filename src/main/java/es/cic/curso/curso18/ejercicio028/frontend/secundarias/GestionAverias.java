@@ -8,6 +8,11 @@ import com.vaadin.ui.VerticalLayout;
 
 public class GestionAverias extends VerticalLayout {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1609217719853880929L;
+	
 	VerticalLayout panelTodo;
 	VerticalLayout panelDatos;
 	HorizontalLayout panelBotones;
