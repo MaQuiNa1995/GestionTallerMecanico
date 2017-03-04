@@ -76,6 +76,7 @@ public class GestionAverias extends VerticalLayout {
 	
 	private void agregarAPanelTodo(){
 		panelTodo.addComponents(panelBotones,panelDatos);
+		addComponent(panelTodo);
 	}
 	
 	

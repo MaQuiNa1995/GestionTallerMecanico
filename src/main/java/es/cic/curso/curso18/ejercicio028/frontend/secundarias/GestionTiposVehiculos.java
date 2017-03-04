@@ -78,6 +78,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	
 	private void agregarAPanelTodo(){
 		panelTodo.addComponents(panelBotones,panelDatos);
+		addComponent(panelTodo);
 	}
 	
 	private void refrescarComboBox(){
