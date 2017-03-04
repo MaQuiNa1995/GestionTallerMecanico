@@ -50,7 +50,7 @@ public class FormPrincipal extends UI {
 
 		VerticalLayout gestionTiposVehiculos = new GestionTiposVehiculos();
 		gestionTiposVehiculos.setSizeFull();
-		VerticalLayout gestionAverias = new GestionAverias();
+		HorizontalLayout gestionAverias = new GestionAverias();
 		gestionAverias.setSizeFull();
 
 		menu.addTab(gestionTiposVehiculos, "Gestión Tipos De Vehiculos");
