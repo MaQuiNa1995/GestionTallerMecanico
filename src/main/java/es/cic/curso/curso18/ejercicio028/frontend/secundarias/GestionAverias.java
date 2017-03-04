@@ -3,17 +3,18 @@ package es.cic.curso.curso18.ejercicio028.frontend.secundarias;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.context.ContextLoader;
+
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Averia;
+import es.cic.curso.curso18.ejercicio028.backend.service.AveriaService;
 
 public class GestionAverias extends HorizontalLayout {
 
@@ -29,6 +30,8 @@ public class GestionAverias extends HorizontalLayout {
 	HorizontalLayout panelGrid;
 	HorizontalLayout panelTodo;
 	
+	AveriaService averiaService;
+	
 	Grid maestro;
 	
 	List<Averia> averiaLista;
@@ -36,6 +39,9 @@ public class GestionAverias extends HorizontalLayout {
 	Averia averia;
 
 	public GestionAverias() {
+		generaBBDD();
+		
+		definirBean();
 		
 		definirPanelTodo();
 		
@@ -134,12 +140,10 @@ public class GestionAverias extends HorizontalLayout {
 	}
 
 	private void definirPanelGrid() {
+		averiaLista = new ArrayList<>();
 
 		panelGrid = new HorizontalLayout();
-
-		averiaLista = new ArrayList<>();
-		averiaLista.add(new Averia("Carburador En Mal Estado", "El carburador no carbura"));
-		averiaLista.add(new Averia("Tubo Escape Ilegal", "Expulsa Demasiado CO2"));
+		averiaLista = averiaService.obtenerAverias();
 
 		maestro = new Grid();
 		maestro.setColumns("nombre", "descripcion");
@@ -162,20 +166,33 @@ public class GestionAverias extends HorizontalLayout {
 
 	public void annadirAveria(Averia averia) {
 
-		averiaLista.add(averia);
+		averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
 
 		cargaGrid();
 	}
 
 	public void eliminarAveria(Averia averia) {
 
-		averiaLista.remove(averia);
+		averiaService.borrarAveria(averia.getId());
 
 		cargaGrid();
 	}
 
 	public void cargaGrid() {
-		maestro.setContainerDataSource(new BeanItemContainer<>(Averia.class, averiaLista));
+		maestro.setContainerDataSource(new BeanItemContainer<>(Averia.class, averiaService.obtenerAverias()));
+	}
+	
+	private void definirBean(){
+		averiaService = ContextLoader.getCurrentWebApplicationContext().getBean(AveriaService.class);
+	}
+	
+	private void generaBBDD(){
+		
+		Averia averia = new Averia("Tubo De Escape Ilegal","Expulsa Demasiado CO2");
+		averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
+		
+		averia = new Averia("Carburador Roto","No Carbura Bien");
+		averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
 	}
 
 }
