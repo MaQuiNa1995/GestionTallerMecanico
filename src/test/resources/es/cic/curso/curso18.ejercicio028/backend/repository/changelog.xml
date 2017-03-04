@@ -12,8 +12,8 @@
 			<column autoIncrement="true" name="pkidAveria" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
-			<column name="nombre" type="VARCHAR(60)" />
-			<column name="descripcion" type="VARCHAR(60)" />
+			<column name="nombre" type="VARCHAR(80)" />
+			<column name="descripcion" type="VARCHAR(80)" />
 		</createTable>
 
 		<!-- Tabla Marca -->
@@ -22,7 +22,7 @@
 			<column autoIncrement="true" name="pkidMarca" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
-			<column name="nombre" type="VARCHAR(30)" />
+			<column name="nombre" type="VARCHAR(80)" />
 		</createTable>
 
 		<!-- Tabla Vehiculo -->
@@ -31,9 +31,8 @@
 			<column autoIncrement="true" name="pkidVehiculo" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
-			<column name="nombre" type="VARCHAR(30)" />
-			<column name="marca" type="VARCHAR(30)" />
-			<column name="matricula" type="INT(10)" />
+			<column name="nombre" type="VARCHAR(80)" />
+			<column name="matricula" type="VARCHAR(80)" />
             <column name="fkidMarca" type="INT(10)"/>
 		</createTable>
 
@@ -43,8 +42,8 @@
 			<column autoIncrement="true" name="pkidTipoVehiculo" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
-			<column name="tipo" type="VARCHAR(30)" />
-			<column name="descripcion" type="VARCHAR(30)" />
+			<column name="tipo" type="VARCHAR(80)" />
+			<column name="descripcion" type="VARCHAR(80)" />
 			<column name="fkidVehiculo" type="INT(10)"/>
 		</createTable>
 
@@ -55,11 +54,11 @@
 		<addForeignKeyConstraint constraintName="fk_VEHICULO_TIPOVEHICULO"
 			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculo"
 			baseTableName="TIPOVEHICULO" referencedColumnNames="pkidVehiculo" />
- 
+
 		<addForeignKeyConstraint constraintName="fk_MARCA_VEHICULO"
-			referencedTableName="MARCA" baseColumnNames="fkiddMarca"
+			referencedTableName="MARCA" baseColumnNames="fkidMarca"
 			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
- 
+
 	</changeSet>
 
 </databaseChangeLog>

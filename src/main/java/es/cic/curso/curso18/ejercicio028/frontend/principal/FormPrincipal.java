@@ -10,6 +10,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionAverias;
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionTiposVehiculos;
@@ -29,7 +30,7 @@ public class FormPrincipal extends UI {
 	protected void init(VaadinRequest request) {
 		definirPanelTodo();
 		definirMenuPestanas();
-		setContent(panelTodo);
+		this.setContent(panelTodo);
 	}
 	
 	private void definirPanelTodo(){
@@ -42,6 +43,11 @@ public class FormPrincipal extends UI {
 	private void definirMenuPestanas(){
 		menu = new TabSheet();
         menu.setHeight(100.0f, Unit.PERCENTAGE);
+        
+        menu.setHeight(100.f, Unit.PERCENTAGE);
+        menu.addStyleName(ValoTheme.TABSHEET_FRAMED);
+        menu.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
+        
         
 		VerticalLayout gestionTiposVehiculos = new GestionTiposVehiculos();
 		VerticalLayout gestionAverias = new GestionAverias();

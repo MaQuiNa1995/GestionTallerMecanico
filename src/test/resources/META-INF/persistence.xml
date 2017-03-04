@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
                 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-	<persistence-unit name="persistenceUnitHSQL"
+	<persistence-unit name="persistenceUnitHSQL2"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<!-- Ruta de lo que va en el Dominio <class>es.cic.curso.curso18.ejercicio026.dominio.</class> -->

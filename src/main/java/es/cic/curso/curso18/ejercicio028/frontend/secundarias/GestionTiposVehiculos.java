@@ -86,13 +86,17 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	}
 	
 	private void refrescarComboBox(){
-		VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
 		
-		List<Vehiculo> listaVehiculos = vehiculoService.obtenerVehiculos();
+		comboVehiculos.addItem("Moto");
+		comboVehiculos.addItem("Coche");
 		
-		for (Vehiculo vehiculo : listaVehiculos) {
-			comboVehiculos.addItem(vehiculo.getNombre());
-		}
+//		VehiculoServiceImpl vehiculoService = new VehiculoServiceImpl();
+//		
+//		List<Vehiculo> listaVehiculos = vehiculoService.obtenerVehiculos();
+//		
+//		for (Vehiculo vehiculo : listaVehiculos) {
+//			comboVehiculos.addItem(vehiculo.getNombre());
+//		}
 	}
 	
 	
