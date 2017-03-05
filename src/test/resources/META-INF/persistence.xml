@@ -12,6 +12,8 @@
 		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo</class>
 		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo</class>
 		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.Marca</class>
+		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.VehiculosTienenAverias</class>
+		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.RegistroAverias</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
