@@ -66,6 +66,8 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		definirPanelBotones();
 
 		agregarAPanelTodo();
+		
+		limpiarCampos();
 	}
 
 	private void definirPanelBotones() {
@@ -74,10 +76,16 @@ public class GestionTiposVehiculos extends VerticalLayout {
 
 		// TODO Funcionalidad boton
 		anadir = new Button("Dar De Alta");
-
+		anadir.addClickListener(e -> {
+			controladorEstados(1);
+		});
+		
 		// TODO Funcionalidad boton
 		eliminar = new Button("Dar De Baja");
-
+		eliminar.addClickListener(e -> {
+			controladorEstados(2);
+		});
+		
 		panelBotones.addComponents(anadir, eliminar);
 	}
 
@@ -102,10 +110,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 
 		// TODO Los visibles
 		confirmar.addClickListener(e -> {
-			tipoVehiculoService.aniadirTipoVehiculo(tipo.getValue(), descripcion.getValue());
-			cargaGrid();
-
-			limpiarCampos();
+			//controladorEstados(1);
 		});
 
 		cancelar = new Button("Cancelar");
@@ -237,16 +242,32 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		// Agregar
 		case 1:
 			verPanelDatos();
+			
+			tipoVehiculoService.aniadirTipoVehiculo(tipo.getValue(), descripcion.getValue());
+			cargaGrid();
+			
 			limpiarCampos();
 			break;
 		//Eliminar
 		case 2:
 			verPanelDatos();
+			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+				if (tipoVehiculoSacado.getTipo().equals(tipo.getValue()) &&
+						(tipoVehiculoSacado.getDescripcion().equals(descripcion.getValue()))){
+					tipoVehiculoService.borrarTipoVehiculo(tipoVehiculoSacado.getId());
+				}
+			}
 			limpiarCampos();
 			break;
 			//Modificar
 		case 3:
 			verPanelDatos();
+			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+				if (tipoVehiculoSacado.getTipo().equals(tipo.getValue()) &&
+						(tipoVehiculoSacado.getDescripcion().equals(descripcion.getValue()))){
+					tipoVehiculoService.actualizarTipoVehiculo(tipoVehiculoSacado);
+				}
+			}
 			limpiarCampos();
 			break;
 		}
@@ -267,6 +288,8 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	}
 	
 	private void verPanelDatos(){
+		
+
 		
 		confirmar.setVisible(true);
 		cancelar.setVisible(true);
