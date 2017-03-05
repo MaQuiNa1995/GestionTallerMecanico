@@ -19,6 +19,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,6 +35,7 @@ public class VehiculoServiceImplTest {
 	private VehiculoService sut;
 	
 	private Marca marca1, marca2, marca3;
+	private TipoVehiculo tipoVehiculo1,tipoVehiculo2,tipoVehiculo3;
 
 	@Before
 	public void setUp() throws Exception {
@@ -42,14 +44,14 @@ public class VehiculoServiceImplTest {
 
 	@Test
 	public void testCrearVehiculo() {
-		Long idVehiculo = sut.aniadirVehiculo("Corolla", "0387-DCC", marca1);
+		Long idVehiculo = sut.aniadirVehiculo("Corolla", "0387-DCC",tipoVehiculo1, marca1);
 		
 		assertNotNull(idVehiculo);
 	}
 
 	@Test
 	public void testEditarVehiculo() {
-		Long idVehiculo = sut.aniadirVehiculo("Corolla", "0387-DCC", marca1);
+		Long idVehiculo = sut.aniadirVehiculo("Corolla", "0387-DCC",tipoVehiculo1, marca1);
 		
 		Vehiculo tipoVehiculo = sut.obtenerVehiculo(idVehiculo);
 		tipoVehiculo.setNombre("Prius");
@@ -59,7 +61,7 @@ public class VehiculoServiceImplTest {
 
 	@Test
 	public void testBorrarVehiculo() {
-		Long idVehiculo = sut.aniadirVehiculo("Corolla", "0387-DCC", marca1);
+		Long idVehiculo = sut.aniadirVehiculo("Corolla", "0387-DCC",tipoVehiculo1, marca1);
 		
 		sut.borrarVehiculo(idVehiculo);
 		List<Vehiculo> tipoVehiculos = sut.obtenerVehiculos();
@@ -83,6 +85,14 @@ public class VehiculoServiceImplTest {
 		entityManager.persist(marca1);
 		entityManager.persist(marca2);
 		entityManager.persist(marca3);
+
+    	tipoVehiculo1 = new TipoVehiculo("Coche","4 Ruedas");
+    	tipoVehiculo2 = new TipoVehiculo("Moto","2 Ruedas");
+    	tipoVehiculo3 = new TipoVehiculo("Sidecar","3 Ruedas");
+    	
+    	entityManager.persist(tipoVehiculo1);
+    	entityManager.persist(tipoVehiculo2);
+    	entityManager.persist(tipoVehiculo3);
 	}
 
 }

@@ -31,6 +31,10 @@ public class Vehiculo implements Identificable<Long> {
 	@Column(name = "matricula")
 	String matricula;
 
+	@JoinColumn(name = "fkidTipoVehiculo")
+	@ManyToOne(fetch = FetchType.LAZY)
+	TipoVehiculo tipoVehiculo;
+
 	@JoinColumn(name = "fkidMarca")
 	@ManyToOne(fetch = FetchType.LAZY)
 	Marca marca;
@@ -39,10 +43,11 @@ public class Vehiculo implements Identificable<Long> {
 		super();
 	}
 
-	public Vehiculo(String nombre, String matricula, Marca marca) {
+	public Vehiculo(String nombre, String matricula, TipoVehiculo tipoVehiculo, Marca marca) {
 		super();
 		this.nombre = nombre;
 		this.matricula = matricula;
+		this.tipoVehiculo = tipoVehiculo;
 		this.marca = marca;
 	}
 
@@ -60,6 +65,14 @@ public class Vehiculo implements Identificable<Long> {
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
+	}
+
+	public TipoVehiculo getTipoVehiculo() {
+		return tipoVehiculo;
+	}
+
+	public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
+		this.tipoVehiculo = tipoVehiculo;
 	}
 
 	public Marca getMarca() {

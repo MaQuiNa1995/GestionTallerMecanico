@@ -7,7 +7,7 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 public interface TipoVehiculoService {
 
-	Long aniadirTipoVehiculo(String tipo, String descripcion, Vehiculo vehiculo);
+	Long aniadirTipoVehiculo(String tipo, String descripcion);
 
 	TipoVehiculo actualizarTipoVehiculo(TipoVehiculo modificada);
 

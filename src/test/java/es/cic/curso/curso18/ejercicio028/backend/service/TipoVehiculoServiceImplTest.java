@@ -35,25 +35,21 @@ public class TipoVehiculoServiceImplTest {
     
 	@Autowired
 	private TipoVehiculoService sut;
-	
-	private Marca marca1, marca2, marca3;
-	private Vehiculo vehiculo1, vehiculo2, vehiculo3;
 
 	@Before
 	public void setUp() throws Exception {
-		generabaseDatos();
 	}
 
 	@Test
 	public void testCrearTipoVehiculo() {
-		Long idTipoVehiculo = sut.aniadirTipoVehiculo("Coche","Vehiculo De 4 Ruedas",vehiculo1);
+		Long idTipoVehiculo = sut.aniadirTipoVehiculo("Coche","Vehiculo De 4 Ruedas");
 		
 		assertNotNull(idTipoVehiculo);
 	}
 
 	@Test
 	public void testEditarTipoVehiculo() {
-		Long idTipoVehiculo = sut.aniadirTipoVehiculo("Coche","Vehiculo De 4 Ruedas",vehiculo1);
+		Long idTipoVehiculo = sut.aniadirTipoVehiculo("Coche","Vehiculo De 4 Ruedas");
 		
 		TipoVehiculo tipoVehiculo = sut.obtenerTipoVehiculo(idTipoVehiculo);
 		tipoVehiculo.setTipo("Camion");
@@ -63,7 +59,7 @@ public class TipoVehiculoServiceImplTest {
 
 	@Test
 	public void testBorrarTipoVehiculo() {
-		Long idTipoVehiculo = sut.aniadirTipoVehiculo("Coche","Vehiculo De 4 Ruedas",vehiculo1);
+		Long idTipoVehiculo = sut.aniadirTipoVehiculo("Coche","Vehiculo De 4 Ruedas");
 		
 		sut.borrarTipoVehiculo(idTipoVehiculo);
 		List<TipoVehiculo> tipoVehiculos = sut.obtenerTipoVehiculos();
@@ -77,24 +73,6 @@ public class TipoVehiculoServiceImplTest {
 			assertNotNull(tipoVehiculoSacada.getId());
 		}
 
-	}
-	
-	private void generabaseDatos() {
-		marca1 = new Marca("Toyota");
-		marca2 = new Marca("Peugeot");
-		marca3 = new Marca("Citroen");
-
-		entityManager.persist(marca1);
-		entityManager.persist(marca2);
-		entityManager.persist(marca3);
-		
-		vehiculo1 = new Vehiculo("Corolla", "0387-DCC", marca1);
-		vehiculo2 = new Vehiculo("Corolla", "8485-DCC", marca2);
-		vehiculo3 = new Vehiculo("Corolla", "5868-DCC", marca3);
-		
-		entityManager.persist(vehiculo1);
-		entityManager.persist(vehiculo2);
-		entityManager.persist(vehiculo3);
 	}
 
 }

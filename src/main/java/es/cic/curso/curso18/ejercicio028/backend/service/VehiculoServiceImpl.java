@@ -1,6 +1,7 @@
 package es.cic.curso.curso18.ejercicio028.backend.service;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.repository.VehiculoRepository;
 
@@ -17,12 +18,13 @@ public class VehiculoServiceImpl implements VehiculoService {
 	private VehiculoRepository claseVehiculoRepository;
 
 	@Override
-	public Long aniadirVehiculo(String nombre,String matricula,Marca marca) {
+	public Long aniadirVehiculo(String nombre,String matricula,TipoVehiculo tipoVehiculo,Marca marca) {
 
 		Vehiculo claseVehiculo = new Vehiculo();
 
 		claseVehiculo.setNombre(nombre);
 		claseVehiculo.setMatricula(matricula);
+		claseVehiculo.setTipoVehiculo(tipoVehiculo);
 		claseVehiculo.setMarca(marca);
 
 		Vehiculo nuevo = aniadirVehiculo(claseVehiculo);

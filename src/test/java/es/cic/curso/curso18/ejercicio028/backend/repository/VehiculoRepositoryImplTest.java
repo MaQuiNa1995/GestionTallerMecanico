@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 
@@ -21,6 +22,9 @@ public class VehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long,
 	private Marca marca1,
 					marca2,
 					marca3;
+	private TipoVehiculo tipoVehiculo1,
+						 tipoVehiculo2,
+						 tipoVehiculo3;
 	
     @Autowired
     private VehiculoRepository sut;
@@ -39,6 +43,7 @@ public class VehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long,
         
         claseVehiculo.setNombre("nombreVehiculo1");
         claseVehiculo.setMatricula("matricula1");
+        claseVehiculo.setTipoVehiculo(tipoVehiculo1);
         claseVehiculo.setMarca(marca1);
         
         return claseVehiculo;
@@ -51,6 +56,7 @@ public class VehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long,
         
         claseVehiculo.setNombre("nombreVehiculo1");
         claseVehiculo.setMatricula("matricula1");
+        claseVehiculo.setTipoVehiculo(tipoVehiculo1);
         claseVehiculo.setMarca(marca1);
 
         return claseVehiculo;
@@ -68,6 +74,7 @@ public class VehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long,
         claseVehiculo.setId(clave);
         claseVehiculo.setNombre("nombreVehiculo1");
         claseVehiculo.setMatricula("matricula1");
+        claseVehiculo.setTipoVehiculo(tipoVehiculo1);
         claseVehiculo.setMarca(marca1);
         
         return claseVehiculo;
@@ -92,6 +99,10 @@ public class VehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long,
 			return false;
 		}
 		
+		if (!t1.getTipoVehiculo().equals(t2.getTipoVehiculo())) {
+			return false;
+		}
+		
 		if (!t1.getMarca().equals(t2.getMarca())) {
 			return false;
 		}
@@ -100,6 +111,15 @@ public class VehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long,
     }
     
     private void generaBaseDatos(){
+    	
+    	tipoVehiculo1 = new TipoVehiculo("Coche","4 Ruedas");
+    	tipoVehiculo2 = new TipoVehiculo("Moto","2 Ruedas");
+    	tipoVehiculo3 = new TipoVehiculo("Sidecar","3 Ruedas");
+    	
+        em.persist(tipoVehiculo1);
+        em.persist(tipoVehiculo2);
+        em.persist(tipoVehiculo3);
+    	
         marca1 = new Marca("Toyota");
         marca2 = new Marca("Skoda");
         marca3 = new Marca("Seat");

@@ -16,6 +16,16 @@
 			<column name="descripcion" type="VARCHAR(80)" />
 		</createTable>
 
+		<!-- Tabla Tipo Vehiculo -->
+
+		<createTable catalogName="curso18" tableName="TIPOVEHICULO">
+			<column autoIncrement="true" name="pkidTipoVehiculo" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="tipo" type="VARCHAR(80)" />
+			<column name="descripcion" type="VARCHAR(80)" />
+		</createTable>
+
 		<!-- Tabla Marca -->
 
 		<createTable catalogName="curso18" tableName="MARCA">
@@ -33,32 +43,25 @@
 			</column>
 			<column name="nombre" type="VARCHAR(80)" />
 			<column name="matricula" type="VARCHAR(80)" />
-            <column name="fkidMarca" type="INT(10)"/>
+			<column name="fkidTipoVehiculo" type="INT(10)" />
+			<column name="fkidMarca" type="INT(10)" />
 		</createTable>
 
-		<!-- Tabla Tipo Vehiculo -->
 
-		<createTable catalogName="curso18" tableName="TIPOVEHICULO">
-			<column autoIncrement="true" name="pkidTipoVehiculo" type="INT(10)">
-				<constraints primaryKey="true" />
-			</column>
-			<column name="tipo" type="VARCHAR(80)" />
-			<column name="descripcion" type="VARCHAR(80)" />
-			<column name="fkidVehiculo" type="INT(10)"/>
-		</createTable>
 
 	</changeSet>
 
 	<changeSet author="usuario (generated)" id="1400847488682-1">
 
-		<addForeignKeyConstraint constraintName="fk_VEHICULO_TIPOVEHICULO"
-			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculo"
-			baseTableName="TIPOVEHICULO" referencedColumnNames="pkidVehiculo" />
-
 		<addForeignKeyConstraint constraintName="fk_MARCA_VEHICULO"
 			referencedTableName="MARCA" baseColumnNames="fkidMarca"
 			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
 
+	</changeSet>
+	<changeSet author="usuario (generated)" id="1400847488683-1">
+		<addForeignKeyConstraint constraintName="fk_TIPOVEHICULO_VEHICULO"
+			referencedTableName="TIPOVEHICULO" baseColumnNames="fkidTipoVehiculo"
+			baseTableName="VEHICULO" referencedColumnNames="pkidTipoVehiculo" />
 	</changeSet>
 
 </databaseChangeLog>

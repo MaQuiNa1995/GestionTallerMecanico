@@ -17,13 +17,12 @@ public class TipoVehiculoServiceImpl implements TipoVehiculoService {
 	private TipoVehiculoRepository claseTipoVehiculoRepository;
 
 	@Override
-	public Long aniadirTipoVehiculo(String tipo, String descripcion, Vehiculo vehiculo) {
+	public Long aniadirTipoVehiculo(String tipo, String descripcion) {
 
 		TipoVehiculo claseTipoVehiculo = new TipoVehiculo();
 
 		claseTipoVehiculo.setTipo(tipo);
 		claseTipoVehiculo.setDescripcion(descripcion);
-		claseTipoVehiculo.setVehiculo(vehiculo);
 
 		TipoVehiculo nuevo = aniadirTipoVehiculo(claseTipoVehiculo);
 

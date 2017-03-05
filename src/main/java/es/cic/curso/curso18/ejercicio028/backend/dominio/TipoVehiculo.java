@@ -31,19 +31,14 @@ public class TipoVehiculo implements Identificable<Long> {
 	@Column(name = "descripcion")
 	String descripcion;
 
-	@JoinColumn(name = "fkidVehiculo")
-	@ManyToOne(fetch = FetchType.LAZY)
-	Vehiculo vehiculo;
-
 	public TipoVehiculo() {
 		super();
 	}
 
-	public TipoVehiculo(String tipo, String descripcion, Vehiculo vehiculo) {
+	public TipoVehiculo(String tipo, String descripcion) {
 		super();
 		this.tipo = tipo;
 		this.descripcion = descripcion;
-		this.vehiculo = vehiculo;
 	}
 
 	public String getTipo() {
@@ -60,14 +55,6 @@ public class TipoVehiculo implements Identificable<Long> {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public Vehiculo getVehiculo() {
-		return vehiculo;
-	}
-
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
 	}
 
 	@Override

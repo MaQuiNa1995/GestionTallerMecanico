@@ -18,13 +18,6 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<Long, TipoVehiculo> {
 
-	private Vehiculo vehiculo1,
-						vehiculo2,
-						vehiculo3;
-	
-	private Marca marca1,
-					marca2,
-					marca3;
 	
     @Autowired
     private TipoVehiculoRepository sut;
@@ -33,7 +26,6 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        generaBaseDatos();
     }
 
     @Override
@@ -43,7 +35,6 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
         
         claseTipoVehiculo.setTipo("nombreTipoVehiculo");
         claseTipoVehiculo.setDescripcion("descripcion1");
-        claseTipoVehiculo.setVehiculo(vehiculo1);
         
         return claseTipoVehiculo;
     }
@@ -55,7 +46,6 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
         
         claseTipoVehiculo.setTipo("nombreTipoVehiculo");
         claseTipoVehiculo.setDescripcion("descripcion1");
-        claseTipoVehiculo.setVehiculo(vehiculo1);
 
         return claseTipoVehiculo;
     }
@@ -72,7 +62,6 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
         claseTipoVehiculo.setId(clave);
         claseTipoVehiculo.setTipo("nombreTipoVehiculo");
         claseTipoVehiculo.setDescripcion("descripcion1");
-        claseTipoVehiculo.setVehiculo(vehiculo1);
         
         return claseTipoVehiculo;
     }
@@ -95,30 +84,8 @@ public class TipoVehiculoRepositoryImplTest extends AbstractRepositoryImplTest<L
 		if (!t1.getDescripcion().equals(t2.getDescripcion())) {
 			return false;
 		}
-		
-		if (!t1.getVehiculo().equals(t2.getVehiculo())) {
-			return false;
-		}
         
         return true;
-    }
-    
-    private void generaBaseDatos(){
-        marca1 = new Marca("Toyota");
-        marca2 = new Marca("Skoda");
-        marca3 = new Marca("Seat");
-        
-        em.persist(marca1);
-        em.persist(marca2);
-        em.persist(marca3);
-        
-        vehiculo1 =new Vehiculo("Corola","0387-DCC",marca1);
-        vehiculo2 =new Vehiculo("Favia","0127-DRC",marca2);
-        vehiculo3 =new Vehiculo("Panda","0327-DOC",marca3);
-        
-        em.persist(vehiculo1);
-        em.persist(vehiculo2);
-        em.persist(vehiculo3);
     }
 }
 
