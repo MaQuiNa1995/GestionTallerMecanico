@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo;
-import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -8,16 +8,13 @@ import org.springframework.web.context.ContextLoader;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Averia;
 import es.cic.curso.curso18.ejercicio028.backend.service.AveriaService;
-import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoService;
 
 public class GestionAverias extends HorizontalLayout {
 
