@@ -47,7 +47,26 @@
 			<column name="fkidMarca" type="INT(10)" />
 		</createTable>
 
+		<!-- Tabla RegistroAverias -->
 
+		<createTable catalogName="curso18" tableName="REGISTROAVERIAS">
+			<column autoIncrement="true" name="pkidRegistroAverias" type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="fecha" type="VARCHAR(80)" />
+			<column name="fkidAveria" type="INT(10)" />
+		</createTable>
+
+		<!-- Tabla VehiculosTienenAverias -->
+
+		<createTable catalogName="curso18" tableName="VEHICULOSTIENENAVERIAS">
+			<column autoIncrement="true" name="pkidVehiculosTienenAverias"
+				type="INT(10)">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="fkidVehiculosRegistroAverias" type="INT(10)" />
+			<column name="fkidRegistroAveriasVehiculos" type="INT(10)" />
+		</createTable>
 
 	</changeSet>
 
@@ -57,11 +76,23 @@
 			referencedTableName="MARCA" baseColumnNames="fkidMarca"
 			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
 
-	</changeSet>
-	<changeSet author="usuario (generated)" id="1400847488683-1">
 		<addForeignKeyConstraint constraintName="fk_TIPOVEHICULO_VEHICULO"
 			referencedTableName="TIPOVEHICULO" baseColumnNames="fkidTipoVehiculo"
 			baseTableName="VEHICULO" referencedColumnNames="pkidTipoVehiculo" />
+
+		<addForeignKeyConstraint constraintName="fk_AVERIA_REGISTROAVERIAS"
+			referencedTableName="AVERIA" baseColumnNames="fkidAveria"
+			baseTableName="REGISTROAVERIAS" referencedColumnNames="pkidAveria" />
+
+		<addForeignKeyConstraint constraintName="fk_REGISTROAVERIAS_VEHICULOSTIENENAVERIAS"
+			referencedTableName="REGISTROAVERIAS" baseColumnNames="fkidRegistroAveriasVehiculosTienenAverias"
+			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidRegistroAverias" />
+
+		<addForeignKeyConstraint constraintName="fk_VEHICULO_VEHICULOSTIENENAVERIAS"
+			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculosVehiculosTienenAverias"
+			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidVehiculo" />
+
+
 	</changeSet>
 
 </databaseChangeLog>
