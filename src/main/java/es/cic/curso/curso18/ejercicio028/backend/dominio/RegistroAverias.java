@@ -16,7 +16,7 @@ import es.cic.curso.curso18.ejercicio028.backend.repository.Identificable;
 @Table(name = "REGISTROAVERIAS")
 public class RegistroAverias implements Identificable<Long>{
 
-		/**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1478940692428183893L;
@@ -63,12 +63,10 @@ public class RegistroAverias implements Identificable<Long>{
 			return pkidRegistroAverias;
 		}
 
+		@Override
 		public void setId(Long pkidRegistroAverias) {
 			this.pkidRegistroAverias = pkidRegistroAverias;
 		}
-		
-		
-
 	}
 	
 

@@ -206,12 +206,12 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		cargaGrid();
 
 		maestro.addSelectionListener(e -> {
-			TipoVehiculo tipoVehiculo = null;
+			TipoVehiculo tipoDeVehiculo = null;
 			if (!e.getSelected().isEmpty()) {
-				tipoVehiculo = (TipoVehiculo) e.getSelected().iterator().next();
+				tipoDeVehiculo = (TipoVehiculo) e.getSelected().iterator().next();
 				controladorPrimerosprimarios(3);
 			}
-			setTipoVehiculo(tipoVehiculo);
+			setTipoVehiculo(tipoDeVehiculo);
 		});
 
 		panelGrid.addComponent(maestro);

@@ -7,7 +7,7 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.RegistroAverias;
 
 public interface RegistroAveriasService {
 
-	Long aniadirRegistroAverias(String fecha,Averia Averia);
+	Long aniadirRegistroAverias(String fecha,Averia averia);
 
 	RegistroAverias actualizarRegistroAverias(RegistroAverias modificada);
 
