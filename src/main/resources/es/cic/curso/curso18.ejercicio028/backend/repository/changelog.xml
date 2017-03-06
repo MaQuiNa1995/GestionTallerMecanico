@@ -89,7 +89,7 @@
 			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidRegistroAverias" />
 
 		<addForeignKeyConstraint constraintName="fk_VEHICULO_VEHICULOSTIENENAVERIAS"
-			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculosVehiculosTienenAverias"
+			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculosRegistroAverias"
 			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidVehiculo" />
 
 
