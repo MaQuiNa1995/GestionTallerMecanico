@@ -14,7 +14,8 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Averia;
-import es.cic.curso.curso18.ejercicio028.backend.service.AveriaService;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
+import es.cic.curso.curso18.ejercicio028.backend.service.MarcaService;
 
 public class GestionMarcas extends HorizontalLayout {
 
@@ -30,11 +31,10 @@ public class GestionMarcas extends HorizontalLayout {
 	HorizontalLayout panelGrid;
 	HorizontalLayout panelTodo;
 
-	AveriaService averiaService;
+	MarcaService marcaService;
 
 	Button anadir;
-	TextField nombreAveria;
-	TextField descripcion;
+	TextField nombreMarca;
 	Button confirmarAnadir;
 	Button confirmarEliminar;
 	Button confirmarModificar;
@@ -43,14 +43,14 @@ public class GestionMarcas extends HorizontalLayout {
 
 	Grid maestro;
 
-	List<Averia> averiasLista;
+	List<Marca> marcasLista;
 
-	Averia averia;
+	Marca marca;
 
 	public GestionMarcas() {
 		super();
+		
 		definirBean();
-
 		generaBBDD();
 
 		definirPanelTodo();
@@ -88,13 +88,10 @@ public class GestionMarcas extends HorizontalLayout {
 		VerticalLayout panelIntroducirDatos = new VerticalLayout();
 		HorizontalLayout panelConfirmacion = new HorizontalLayout();
 
-		nombreAveria = new TextField("Introduce El Nombre De La Avería:");
-		nombreAveria.setSizeFull();
+		nombreMarca = new TextField("Introduce El Nombre De La Marca:");
+		nombreMarca.setSizeFull();
 
-		descripcion = new TextField("Introduce La Descripción:");
-		descripcion.setSizeFull();
-
-		panelIntroducirDatos.addComponents(nombreAveria, descripcion);
+		panelIntroducirDatos.addComponent(nombreMarca);
 
 		confirmarAnadir = new Button("Añadir");
 		confirmarEliminar = new Button("Eliminar");
@@ -103,17 +100,16 @@ public class GestionMarcas extends HorizontalLayout {
 		cancelar = new Button("Cancelar");
 
 		confirmarAnadir.addClickListener(e -> {
-			averiaService.aniadirAveria(nombreAveria.getValue(), descripcion.getValue());
+			marcaService.aniadirMarca(nombreMarca.getValue());
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
 		
 		confirmarEliminar.addClickListener(e -> {
-			for (Averia averiaSacado : averiaService.obtenerAverias()) {
-				if (averiaSacado.getNombre().equals(nombreAveria.getValue())
-						&& (averiaSacado.getDescripcion().equals(descripcion.getValue()))) {
-					averiaService.borrarAveria(averiaSacado.getId());
+			for (Marca marcaSacado : marcaService.obtenerMarcas()) {
+				if (marcaSacado.getNombre().equals(nombreMarca.getValue())){
+					marcaService.borrarMarca(marcaSacado.getId());
 				}
 			}
 			cargaGrid();
@@ -122,12 +118,11 @@ public class GestionMarcas extends HorizontalLayout {
 		});
 		
 		confirmarModificar.addClickListener(e -> {
-			for (Averia averiaSacado : averiaService.obtenerAverias()) {
-				if (averiaSacado.getNombre().equals(nombreAveria.getValue())
-						&& (averiaSacado.getDescripcion().equals(descripcion.getValue()))) {
+			for (Marca marcaSacado : marcaService.obtenerMarcas()) {
+				if (marcaSacado.getNombre().equals(nombreMarca.getValue())){
 					
-					Averia objetoModificado = new Averia(nombreAveria.getValue(),descripcion.getValue());
-					averiaService.actualizarAveria(objetoModificado);
+					Marca objetoModificado = new Marca(nombreMarca.getValue());
+					marcaService.actualizarMarca(objetoModificado);
 				}
 			}
 			cargaGrid();
@@ -178,40 +173,40 @@ public class GestionMarcas extends HorizontalLayout {
 		addComponent(panelTodo);
 	}
 
-	public Averia getAveria() {
-		return averia;
+	public Marca getMarca() {
+		return marca;
 	}
 
-	public void setAveria(Averia averia) {
-		this.averia = averia;
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 
-		if (averia != null) {
-			BeanFieldGroup.bindFieldsUnbuffered(averia, this);
+		if (marca != null) {
+			BeanFieldGroup.bindFieldsUnbuffered(marca, this);
 		} else {
-			BeanFieldGroup.bindFieldsUnbuffered(new Averia(), this);
+			BeanFieldGroup.bindFieldsUnbuffered(new Marca(), this);
 		}
 	}
 
 	private void definirPanelGrid() {
-		averiasLista = new ArrayList<>();
+		marcasLista = new ArrayList<>();
 
 		panelGrid = new HorizontalLayout();
-		averiasLista = averiaService.obtenerAverias();
+		marcasLista = marcaService.obtenerMarcas();
 
 		maestro = new Grid();
-		maestro.setColumns("nombre", "descripcion");
+		maestro.setColumns("nombre");
 
 		cargaGrid();
 
 		maestro.addSelectionListener(e -> {
-			Averia averia = null;
+			Marca marcaGrid = null;
 			if (!e.getSelected().isEmpty()) {
-				averia = (Averia) e.getSelected().iterator().next();
-				nombreAveria.setValue(averia.getNombre());
+				marcaGrid = (Marca) e.getSelected().iterator().next();
+				nombreMarca.setValue(marcaGrid.getNombre());
 				
 				controladorPrimerosprimarios(3);
 			}
-			setAveria(averia);
+			setMarca(marca);
 		});
 
 		panelGrid.addComponent(maestro);
@@ -220,41 +215,28 @@ public class GestionMarcas extends HorizontalLayout {
 
 	}
 
-	public void annadirAveria(Averia averia) {
+	public void annadirMarca(Marca marca) {
 
-		averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
+		marcaService.aniadirMarca(marca.getNombre());
 
 		cargaGrid();
 	}
 
-	public void eliminarAveria(Averia averia) {
+	public void eliminarMarca(Marca marca) {
 
-		averiaService.borrarAveria(averia.getId());
+		marcaService.borrarMarca(marca.getId());
 
 		cargaGrid();
 	}
 
 	public void cargaGrid() {
 		maestro.setContainerDataSource(
-				new BeanItemContainer<>(Averia.class, averiaService.obtenerAverias()));
+				new BeanItemContainer<>(Marca.class, marcaService.obtenerMarcas()));
 	}
 
 	private void definirBean() {
-		averiaService = ContextLoader.getCurrentWebApplicationContext().getBean(AveriaService.class);
+		marcaService = ContextLoader.getCurrentWebApplicationContext().getBean(MarcaService.class);
 	}
-
-	private void generaBBDD() {
-
-		if (averiaService.obtenerAverias().isEmpty()) {
-				
-				Averia averia = new Averia("Tubo De Escape Ilegal","Expulsa Demasiado CO2");
-				averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
-				
-				Averia averia2 = new Averia("Carburador Roto","No Carbura Bien");
-				averiaService.aniadirAveria(averia.getNombre(), averia2.getDescripcion());
-			}
-			
-		}
 
 	private void controladorPrimerosprimarios(int opcion) {
 		switch (opcion) {
@@ -288,23 +270,34 @@ public class GestionMarcas extends HorizontalLayout {
 
 	private void limpiarCampos() {
 
-		nombreAveria.setValue("");
-		descripcion.setValue("");
+		nombreMarca.setValue("");
 
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);
 		confirmarModificar.setVisible(false);
 		cancelar.setVisible(false);
-		nombreAveria.setVisible(false);
-		descripcion.setVisible(false);
+		nombreMarca.setVisible(false);
 
 		anadir.setEnabled(true);
 	}
 
 	private void verPanelDatos() {
-		nombreAveria.setVisible(true);
-		descripcion.setVisible(true);
+		nombreMarca.setVisible(true);
 	}
+	
+
+	private void generaBBDD() {
+
+		if (marcaService.obtenerMarcas().isEmpty()) {
+				
+				Marca marca1 = new Marca("Opel");
+				marcaService.aniadirMarca(marca1.getNombre());
+				
+				Marca marca2 = new Marca("Subaru");
+				marcaService.aniadirMarca(marca2.getNombre());
+			}
+			
+		}
 
 }
 
