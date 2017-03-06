@@ -31,6 +31,16 @@ public class VehiculosTienenAverias implements Identificable<Long> {
 	@JoinColumn(name = "fkidRegistroAveriasVehiculos")
 	@ManyToOne(fetch = FetchType.LAZY)
 	Vehiculo vehiculo;
+	
+	public VehiculosTienenAverias() {
+		super();
+	}
+
+	public VehiculosTienenAverias(RegistroAverias registroAverias, Vehiculo vehiculo) {
+		super();
+		this.registroAverias = registroAverias;
+		this.vehiculo = vehiculo;
+	}
 
 	public RegistroAverias getRegistroAverias() {
 		return registroAverias;

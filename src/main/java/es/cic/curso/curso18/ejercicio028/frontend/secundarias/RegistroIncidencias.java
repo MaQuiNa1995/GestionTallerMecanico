@@ -9,18 +9,25 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.DateField;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-import es.cic.curso.curso18.ejercicio028.backend.DTO.VehiculoDTO;
+import es.cic.curso.curso18.ejercicio028.backend.DTO.VehiculoAveriaDTO;
+import es.cic.curso.curso18.ejercicio028.backend.DTO.VehiculoAveriaDTO;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.Averia;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.RegistroAverias;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo;
+import es.cic.curso.curso18.ejercicio028.backend.service.AveriaService;
 import es.cic.curso.curso18.ejercicio028.backend.service.MarcaService;
+import es.cic.curso.curso18.ejercicio028.backend.service.RegistroAveriasService;
 import es.cic.curso.curso18.ejercicio028.backend.service.TipoVehiculoService;
 import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoService;
+import es.cic.curso.curso18.ejercicio028.backend.service.VehiculosTienenAveriasService;
 
 public class RegistroIncidencias extends HorizontalLayout {
 
@@ -36,27 +43,32 @@ public class RegistroIncidencias extends HorizontalLayout {
 	HorizontalLayout panelGrid;
 	HorizontalLayout panelTodo;
 
-	MarcaService marcaService;
-	TipoVehiculoService tipoVehiculoService;
 	VehiculoService vehiculoService;
+	RegistroIncidencias registroIncidencias;
+	RegistroAveriasService registroAveriasService;
+	AveriaService averiaService;
+	VehiculosTienenAveriasService vehiculosTienenAverias;
 
 	Button anadir;
+	
 	TextField nombreVehiculo;
 	TextField matricula;
+	
 	Button confirmarAnadir;
 	Button confirmarEliminar;
 	Button confirmarModificar;
 
-	ComboBox tipoVehiculo;
-	ComboBox marca;
+	ComboBox averiasCombo;
+	ComboBox vehiculosCombo;
+	ComboBox vehiculosMatriculaCombo;
 
 	Button cancelar;
 
 	Grid maestro;
 
-	List<VehiculoDTO> vehiculoDTOLista;
+	List<VehiculoAveriaDTO> vehiculoAveriaDTOLista;
 
-	VehiculoDTO vehiculo;
+	VehiculoAveriaDTO vehiculo;
 
 	public RegistroIncidencias() {
 		super();
@@ -96,26 +108,24 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 		VerticalLayout panelIntroducirDatos = new VerticalLayout();
 		HorizontalLayout panelConfirmacion = new HorizontalLayout();
-
-		nombreVehiculo = new TextField("Introduce El Nombre Del Vehículo:");
-		nombreVehiculo.setSizeFull();
-
-		matricula = new TextField("Introduce La Matrícula:");
-		matricula.setSizeFull();
 		
-		marca = new ComboBox();
+		averiasCombo = new ComboBox(); 
 		
-		for (Marca marcaSacada : marcaService.obtenerMarcas()) {
-			marca.addItem(marcaSacada.getNombre());
+		for (Averia averiaSacada : averiaService.obtenerAverias()) {
+			averiasCombo.addItem(averiaSacada.getNombre());
+		}
+
+		DateField fechaEscogida = new DateField();
+		
+		vehiculosCombo = new ComboBox();
+		vehiculosMatriculaCombo = new ComboBox();
+		
+		for (Vehiculo vehiculoSacada : vehiculoService.obtenerVehiculos()) {
+			vehiculosCombo.addItem(vehiculoSacada.getNombre());
+			vehiculosMatriculaCombo.addItem(vehiculoSacada.getMatricula());
 		}
 		
-		tipoVehiculo = new ComboBox(); 
-		
-		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-			tipoVehiculo.addItem(tipoVehiculoSacado.getTipo());
-		}
-		
-		panelIntroducirDatos.addComponents(nombreVehiculo, matricula,marca,tipoVehiculo);
+		panelIntroducirDatos.addComponents(averiasCombo,fechaEscogida,vehiculosCombo,vehiculosMatriculaCombo);
 
 		confirmarAnadir = new Button("Añadir");
 		confirmarEliminar = new Button("Eliminar");
@@ -124,30 +134,35 @@ public class RegistroIncidencias extends HorizontalLayout {
 		cancelar = new Button("Cancelar");
 
 		confirmarAnadir.addClickListener(e -> {
-			TipoVehiculo meterTipoVehiculo=null;
-			Marca meterMarca=null;
+			Averia meterAveria=null;
+			RegistroAverias meterRegistroAveria=null;
+			Vehiculo meterVehiculo=null;
 
-			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+			for (Averia averiaSacado : averiaService.obtenerAverias()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue()))
-					meterTipoVehiculo = tipoVehiculoSacado;
+				if (averiaSacado.getNombre().equals(averiasCombo.getValue()))
+					meterAveria = averiaSacado;
 			}
 			
-			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
+			for (RegistroAverias registroAveriaSacado : registroAveriasService.obtenerRegistroAveriass()) {
 
-				if (marcaSacada.getNombre().equals(marca.getValue()))
-					meterMarca = marcaSacada;
+				if (registroAveriaSacado.getFecha().equals(fechaEscogida.getValue().toString()))
+					meterRegistroAveria = registroAveriaSacado;
 			}
+			
+			for (Vehiculo registroAveriaSacado : vehiculoService.obtenerVehiculos()) {
 
-			vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(),meterTipoVehiculo,meterMarca);
+				if (registroAveriaSacado.getNombre().equals(vehiculosCombo.getValue()));
+				meterVehiculo = registroAveriaSacado;
+			}
 			
-			VehiculoDTO vehiculoDTO = new VehiculoDTO();
-			vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
-			vehiculoDTO.setMatricula(matricula.getValue());
-			vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
-			vehiculoDTO.setNombreMarca(meterMarca.getNombre());
+			VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
+			vehiculoDTO.setNombreAveria(meterAveria.getNombre());
+			vehiculoDTO.setFechaAveria(fechaEscogida.getValue().toString());
+			vehiculoDTO.setNombreVehiculo(meterVehiculo.getNombre());
 			
-			vehiculoDTOLista.add(vehiculoDTO);
+			
+			vehiculoAveriaDTOLista.add(vehiculoDTO);
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
@@ -155,52 +170,69 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 		confirmarEliminar.addClickListener(e -> {
 			
-			TipoVehiculo meterTipoVehiculo=null;
-			Marca meterMarca=null;
+			Averia meterAveria=null;
+			RegistroAverias meterRegistroAveria=null;
+			Vehiculo meterVehiculo=null;
 
-			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+			for (Averia averiaSacado : averiaService.obtenerAverias()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue().toString()))
-					meterTipoVehiculo = tipoVehiculoSacado;
+				if (averiaSacado.getNombre().equals(averiasCombo.getValue()))
+					meterAveria = averiaSacado;
 			}
 			
-			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
+			for (RegistroAverias registroAveriaSacado : registroAveriasService.obtenerRegistroAveriass()) {
 
-				if (marcaSacada.getNombre().equals(marca.getValue().toString()))
-					meterMarca = marcaSacada;
+				if (registroAveriaSacado.getFecha().equals(fechaEscogida.getValue().toString()))
+					meterRegistroAveria = registroAveriaSacado;
 			}
 			
-			for (Vehiculo vehiculoSacado : vehiculoService.obtenerVehiculos()) {
-				if (vehiculoSacado.getNombre().equals(nombreVehiculo.getValue())
-						&& (vehiculoSacado.getMatricula().equals(matricula.getValue()))
-						&& (vehiculoSacado.getTipoVehiculo().equals(meterTipoVehiculo))
-						&& (vehiculoSacado.getMarca().equals(meterMarca))
-						) {
-					vehiculoService.borrarVehiculo(vehiculoSacado.getId());
-				}
+			for (Vehiculo registroAveriaSacado : vehiculoService.obtenerVehiculos()) {
+
+				if (registroAveriaSacado.getNombre().equals(vehiculosCombo.getValue()));
+				meterVehiculo = registroAveriaSacado;
 			}
+			
+			VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
+			vehiculoDTO.setNombreAveria(meterAveria.getNombre());
+			vehiculoDTO.setFechaAveria(fechaEscogida.getValue().toString());
+			vehiculoDTO.setNombreVehiculo(meterVehiculo.getNombre());
+			
+			
+			vehiculoAveriaDTOLista.remove(vehiculoDTO);
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
 
 		confirmarModificar.addClickListener(e -> {
-			TipoVehiculo meterTipoVehiculo=null;
-			Marca meterMarca=null;
+			Averia meterAveria=null;
+			RegistroAverias meterRegistroAveria=null;
+			Vehiculo meterVehiculo=null;
 
-			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+			for (Averia averiaSacado : averiaService.obtenerAverias()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue().toString()))
-					meterTipoVehiculo = tipoVehiculoSacado;
+				if (averiaSacado.getNombre().equals(averiasCombo.getValue()))
+					meterAveria = averiaSacado;
 			}
 			
-			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
+			for (RegistroAverias registroAveriaSacado : registroAveriasService.obtenerRegistroAveriass()) {
 
-				if (marcaSacada.getNombre().equals(marca.getValue().toString()))
-					meterMarca = marcaSacada;
+				if (registroAveriaSacado.getFecha().equals(fechaEscogida.getValue().toString()))
+					meterRegistroAveria = registroAveriaSacado;
 			}
+			
+			for (Vehiculo registroAveriaSacado : vehiculoService.obtenerVehiculos()) {
 
-			vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(),meterTipoVehiculo,meterMarca);
+				if (registroAveriaSacado.getNombre().equals(vehiculosCombo.getValue()));
+				meterVehiculo = registroAveriaSacado;
+			}
+			
+			VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
+			vehiculoDTO.setNombreAveria(meterAveria.getNombre());
+			vehiculoDTO.setFechaAveria(fechaEscogida.getValue().toString());
+			vehiculoDTO.setNombreVehiculo(meterVehiculo.getNombre());
+			
+			vehiculoAveriaDTOLista.add(vehiculoDTO);
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
@@ -249,39 +281,38 @@ public class RegistroIncidencias extends HorizontalLayout {
 		addComponent(panelTodo);
 	}
 
-	public VehiculoDTO getVehiculo() {
+	public VehiculoAveriaDTO getVehiculo() {
 		return vehiculo;
 	}
 
-	public void setVehiculoDTO(VehiculoDTO vehiculo) {
+	public void setVehiculoAveriaDTO(VehiculoAveriaDTO vehiculo) {
 		this.vehiculo = vehiculo;
 
 		if (vehiculo != null) {
 			BeanFieldGroup.bindFieldsUnbuffered(vehiculo, this);
 		} else {
-			BeanFieldGroup.bindFieldsUnbuffered(new VehiculoDTO(), this);
+			BeanFieldGroup.bindFieldsUnbuffered(new VehiculoAveriaDTO(), this);
 		}
 	}
 
 	private void definirPanelGrid() {
-		vehiculoDTOLista = new ArrayList<>();
+		vehiculoAveriaDTOLista = new ArrayList<>();
 
 		panelGrid = new HorizontalLayout();
-
 		maestro = new Grid();
-		maestro.setColumns("nombreVehiculo", "matricula", "tipo", "nombreMarca");
+		maestro.setColumns("nombreAveria", "fechaAveria", "nombreVehiculo", "matriculaVehiculo");
 
 		cargaGrid();
 
 		maestro.addSelectionListener(e -> {
-			VehiculoDTO vehiculo = null;
+			VehiculoAveriaDTO vehiculo = null;
 			if (!e.getSelected().isEmpty()) {
-				vehiculo = (VehiculoDTO) e.getSelected().iterator().next();
-				nombreVehiculo.setValue(vehiculo.getTipo());
+				vehiculo = (VehiculoAveriaDTO) e.getSelected().iterator().next();
+				//nombreVehiculo.setValue(vehiculo.getTipo());
 				
 				controladorPrimerosprimarios(3);
 			}
-			setVehiculoDTO(vehiculo);
+			setVehiculoAveriaDTO(vehiculo);
 		});
 
 		panelGrid.addComponent(maestro);
@@ -306,13 +337,14 @@ public class RegistroIncidencias extends HorizontalLayout {
 	}
 
 	public void cargaGrid() {
-		maestro.setContainerDataSource(new BeanItemContainer<>(VehiculoDTO.class, vehiculoDTOLista));
+		maestro.setContainerDataSource(new BeanItemContainer<>(VehiculoAveriaDTO.class, vehiculoAveriaDTOLista));
 	}
 
 	private void definirBean() {
 		vehiculoService = ContextLoader.getCurrentWebApplicationContext().getBean(VehiculoService.class);
-		tipoVehiculoService = ContextLoader.getCurrentWebApplicationContext().getBean(TipoVehiculoService.class);
-		marcaService = ContextLoader.getCurrentWebApplicationContext().getBean(MarcaService.class);
+		averiaService = ContextLoader.getCurrentWebApplicationContext().getBean(AveriaService.class);
+		registroAveriasService = ContextLoader.getCurrentWebApplicationContext().getBean(RegistroAveriasService.class);
+		vehiculosTienenAverias = ContextLoader.getCurrentWebApplicationContext().getBean(VehiculosTienenAveriasService.class);
 	}
 
 	private void controladorPrimerosprimarios(int opcion) {

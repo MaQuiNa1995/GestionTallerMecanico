@@ -18,6 +18,7 @@ import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionAverias;
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionMarcas;
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionTiposVehiculos;
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionVehiculos;
+import es.cic.curso.curso18.ejercicio028.frontend.secundarias.RegistroIncidencias;
 
 @Title("Mechanic Manager")
 @Theme("mytheme")
@@ -58,13 +59,14 @@ public class FormPrincipal extends UI {
 		gestionMarcas.setSizeFull();
 		HorizontalLayout gestionVehiculos = new GestionVehiculos();
 		gestionMarcas.setSizeFull();
-
+		HorizontalLayout gestionIncidencias = new RegistroIncidencias();
+		gestionMarcas.setSizeFull();
+		
 		menu.addTab(gestionTiposVehiculos, "Tipos De Vehiculos");
 		menu.addTab(gestionAverias, "Averías");
 		menu.addTab(gestionMarcas, "Marcas");
 		menu.addTab(gestionVehiculos, "Vehículos");
-		// TODO Picar ultima Interfaz
-		// menu.addTab(registroIncidencias, "Registro De Incidencias");
+		menu.addTab(gestionIncidencias, "Registro De Incidencias");
 
 		panelTodo.addComponent(menu);
 	}
