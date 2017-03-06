@@ -68,10 +68,6 @@
 			<column name="fkidRegistroAveriasVehiculos" type="INT(10)" />
 		</createTable>
 
-	</changeSet>
-
-	<changeSet author="usuario (generated)" id="1400847488682-1">
-
 		<addForeignKeyConstraint constraintName="fk_MARCA_VEHICULO"
 			referencedTableName="MARCA" baseColumnNames="fkidMarca"
 			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
@@ -85,13 +81,12 @@
 			baseTableName="REGISTROAVERIAS" referencedColumnNames="pkidAveria" />
 
 		<addForeignKeyConstraint constraintName="fk_REGISTROAVERIAS_VEHICULOSTIENENAVERIAS"
-			referencedTableName="REGISTROAVERIAS" baseColumnNames="fkidRegistroAveriasVehiculosTienenAverias"
+			referencedTableName="REGISTROAVERIAS" baseColumnNames="fkidRegistroAveriasVehiculos"
 			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidRegistroAverias" />
 
 		<addForeignKeyConstraint constraintName="fk_VEHICULO_VEHICULOSTIENENAVERIAS"
 			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculosRegistroAverias"
 			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidVehiculo" />
-
 
 	</changeSet>
 

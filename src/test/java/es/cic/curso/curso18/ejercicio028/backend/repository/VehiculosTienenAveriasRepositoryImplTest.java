@@ -42,8 +42,9 @@ public class VehiculosTienenAveriasRepositoryImplTest extends AbstractRepository
     	
         VehiculosTienenAverias claseVehiculosTienenAverias = new VehiculosTienenAverias();
         
-        claseVehiculosTienenAverias.setVehiculo(vehiculo1);
         claseVehiculosTienenAverias.setRegistroAverias(registroAverias1);
+        claseVehiculosTienenAverias.setVehiculo(vehiculo1);
+
         
         return claseVehiculosTienenAverias;
     }
@@ -100,41 +101,41 @@ public class VehiculosTienenAveriasRepositoryImplTest extends AbstractRepository
     
     private void generaBaseDatos(){
     	
-    	tipoVehiculo1 = new TipoVehiculo("Coche","4 Ruedas");
-    	tipoVehiculo2 = new TipoVehiculo("Moto","2 Ruedas");
-    	tipoVehiculo3 = new TipoVehiculo("Sidecar","3 Ruedas");
+    	tipoVehiculo1 = new TipoVehiculo("Coche23","41 Ruedas");
+    	tipoVehiculo2 = new TipoVehiculo("Moto123","22 Ruedas");
+    	tipoVehiculo3 = new TipoVehiculo("Sidecar123","36 Ruedas");
     	
         em.persist(tipoVehiculo1);
         em.persist(tipoVehiculo2);
         em.persist(tipoVehiculo3);
     	
-        marca1 = new Marca("Opel");
-        marca2 = new Marca("Skoda");
-        marca3 = new Marca("Seat");
+        marca1 = new Marca("Opela");
+        marca2 = new Marca("Citroeeen");
+        marca3 = new Marca("Ferrari");
         
         em.persist(marca1);
         em.persist(marca2);
         em.persist(marca3);
         
-        vehiculo1 = new Vehiculo("Corsa","4574-DRR",tipoVehiculo1,marca1);
-        vehiculo2 = new Vehiculo("Corsa","4574-DRR",tipoVehiculo2,marca2);
-        vehiculo3 = new Vehiculo("Corsa","4574-DRR",tipoVehiculo3,marca3);
+        vehiculo1 = new Vehiculo("Ca","4444-DeR",tipoVehiculo1,marca1);
+        vehiculo2 = new Vehiculo("Talbot","4666-DuR",tipoVehiculo2,marca2);
+        vehiculo3 = new Vehiculo("Peugeot","2234-DtR",tipoVehiculo3,marca3);
         
         em.persist(vehiculo1);
         em.persist(vehiculo2);
         em.persist(vehiculo3);
         
-    	averia1 = new Averia("Tubo Mal", "Tubo Roto");
-    	averia2 = new Averia("Tubo Mal2", "Expulsa humo Negro");
-    	averia3 = new Averia("Tubo Mal3", "Se Cae a Pedazos");
+    	averia1 = new Averia("Tubo Mal45454", "sale humo blanco");
+    	averia2 = new Averia("Tubo Mal2313131", "expulsa");
+    	averia3 = new Averia("Tubo Mal1231312321", "arrastrandose por el suelo");
     	
     	em.persist(averia1);
     	em.persist(averia2);
     	em.persist(averia3);
     	
-    	registroAverias1 = new RegistroAverias("31/08/1995",averia1);
-    	registroAverias2 = new RegistroAverias("3/05/1994",averia2);
-    	registroAverias3 = new RegistroAverias("6/11/1999",averia3);
+    	registroAverias1 = new RegistroAverias("31/08/1965",averia1);
+    	registroAverias2 = new RegistroAverias("3/05/193424",averia2);
+    	registroAverias3 = new RegistroAverias("6/11/19129",averia3);
     	
     	em.persist(registroAverias1);
     	em.persist(registroAverias2);
