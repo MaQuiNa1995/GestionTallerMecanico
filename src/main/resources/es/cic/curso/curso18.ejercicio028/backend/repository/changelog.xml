@@ -80,13 +80,13 @@
 			referencedTableName="AVERIA" baseColumnNames="fkidAveria"
 			baseTableName="REGISTROAVERIAS" referencedColumnNames="pkidAveria" />
 
-		<addForeignKeyConstraint constraintName="fk_REGISTROAVERIAS_VEHICULOSTIENENAVERIAS"
-			referencedTableName="REGISTROAVERIAS" baseColumnNames="fkidRegistroAveriasVehiculos"
-			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidRegistroAverias" />
-
 		<addForeignKeyConstraint constraintName="fk_VEHICULO_VEHICULOSTIENENAVERIAS"
 			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculosRegistroAverias"
 			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidVehiculo" />
+			
+		<addForeignKeyConstraint constraintName="fk_REGISTROAVERIAS_VEHICULOSTIENENAVERIAS"
+			referencedTableName="REGISTROAVERIAS" baseColumnNames="fkidRegistroAveriasVehiculos"
+			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidRegistroAverias" />
 
 	</changeSet>
 
