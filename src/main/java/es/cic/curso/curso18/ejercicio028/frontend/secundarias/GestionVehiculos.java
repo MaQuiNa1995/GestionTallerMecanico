@@ -54,7 +54,7 @@ public class GestionVehiculos extends HorizontalLayout {
 
 	Grid maestro;
 
-	List<Vehiculo> vehiculoLista;
+	List<VehiculoDTO> vehiculoDTOLista;
 
 	VehiculoDTO vehiculo;
 
@@ -112,7 +112,7 @@ public class GestionVehiculos extends HorizontalLayout {
 		tipoVehiculo = new ComboBox(); 
 		
 		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-			marca.addItem(tipoVehiculoSacado.getTipo());
+			tipoVehiculo.addItem(tipoVehiculoSacado.getTipo());
 		}
 		
 		panelIntroducirDatos.addComponents(nombreVehiculo, matricula,marca,tipoVehiculo);
@@ -129,17 +129,25 @@ public class GestionVehiculos extends HorizontalLayout {
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue().toString()))
+				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue()))
 					meterTipoVehiculo = tipoVehiculoSacado;
 			}
 			
 			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
 
-				if (marcaSacada.getNombre().equals(marca.getValue().toString()))
+				if (marcaSacada.getNombre().equals(marca.getValue()))
 					meterMarca = marcaSacada;
 			}
 
 			vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(),meterTipoVehiculo,meterMarca);
+			
+			VehiculoDTO vehiculoDTO = new VehiculoDTO();
+			vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
+			vehiculoDTO.setMatricula(matricula.getValue());
+			vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
+			vehiculoDTO.setNombreMarca(meterMarca.getNombre());
+			
+			vehiculoDTOLista.add(vehiculoDTO);
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
@@ -256,10 +264,9 @@ public class GestionVehiculos extends HorizontalLayout {
 	}
 
 	private void definirPanelGrid() {
-		vehiculoLista = new ArrayList<>();
+		vehiculoDTOLista = new ArrayList<>();
 
 		panelGrid = new HorizontalLayout();
-		vehiculoLista = vehiculoService.obtenerVehiculos();
 
 		maestro = new Grid();
 		maestro.setColumns("nombreVehiculo", "matricula", "tipo", "nombreMarca");
@@ -271,7 +278,7 @@ public class GestionVehiculos extends HorizontalLayout {
 			if (!e.getSelected().isEmpty()) {
 				vehiculo = (VehiculoDTO) e.getSelected().iterator().next();
 				nombreVehiculo.setValue(vehiculo.getTipo());
-
+				
 				controladorPrimerosprimarios(3);
 			}
 			setVehiculoDTO(vehiculo);
@@ -299,7 +306,7 @@ public class GestionVehiculos extends HorizontalLayout {
 	}
 
 	public void cargaGrid() {
-		maestro.setContainerDataSource(new BeanItemContainer<>(Vehiculo.class, vehiculoService.obtenerVehiculos()));
+		maestro.setContainerDataSource(new BeanItemContainer<>(VehiculoDTO.class, vehiculoDTOLista));
 	}
 
 	private void definirBean() {

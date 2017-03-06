@@ -7,7 +7,7 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 
 @Component
-public class Converter {
+public class ConverterVehiculo {
 
 	
 

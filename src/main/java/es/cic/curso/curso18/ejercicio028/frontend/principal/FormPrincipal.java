@@ -17,6 +17,7 @@ import com.vaadin.ui.VerticalLayout;
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionAverias;
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionMarcas;
 import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionTiposVehiculos;
+import es.cic.curso.curso18.ejercicio028.frontend.secundarias.GestionVehiculos;
 
 @Title("Mechanic Manager")
 @Theme("mytheme")
@@ -55,10 +56,15 @@ public class FormPrincipal extends UI {
 		gestionAverias.setSizeFull();
 		HorizontalLayout gestionMarcas = new GestionMarcas();
 		gestionMarcas.setSizeFull();
+		HorizontalLayout gestionVehiculos = new GestionVehiculos();
+		gestionMarcas.setSizeFull();
 
-		menu.addTab(gestionTiposVehiculos, "Gestión Tipos De Vehiculos");
-		menu.addTab(gestionAverias, "Gestión De Averías");
-		menu.addTab(gestionMarcas, "Gestión De Marcas");
+		menu.addTab(gestionTiposVehiculos, "Tipos De Vehiculos");
+		menu.addTab(gestionAverias, "Averías");
+		menu.addTab(gestionMarcas, "Marcas");
+		menu.addTab(gestionVehiculos, "Vehículos");
+		// TODO Picar ultima Interfaz
+		// menu.addTab(registroIncidencias, "Registro De Incidencias");
 
 		panelTodo.addComponent(menu);
 	}
