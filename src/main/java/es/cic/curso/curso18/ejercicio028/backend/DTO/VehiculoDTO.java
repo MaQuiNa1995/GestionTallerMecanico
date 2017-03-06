@@ -1,29 +1,14 @@
 package es.cic.curso.curso18.ejercicio028.backend.DTO;
 
 public class VehiculoDTO {
-	String nombreAveria;
-	String fechaAveria;
+
 	String nombreVehiculo;
-	String matriculaVehiculo;
+	String matricula;
+	String tipo;
+	String nombreMarca;
 
 	public VehiculoDTO() {
 		super();
-	}
-
-	public String getNombreAveria() {
-		return nombreAveria;
-	}
-
-	public void setNombreAveria(String nombreAveria) {
-		this.nombreAveria = nombreAveria;
-	}
-
-	public String getFechaAveria() {
-		return fechaAveria;
-	}
-
-	public void setFechaAveria(String fechaAveria) {
-		this.fechaAveria = fechaAveria;
 	}
 
 	public String getNombreVehiculo() {
@@ -34,12 +19,28 @@ public class VehiculoDTO {
 		this.nombreVehiculo = nombreVehiculo;
 	}
 
-	public String getMatriculaVehiculo() {
-		return matriculaVehiculo;
+	public String getMatricula() {
+		return matricula;
 	}
 
-	public void setMatriculaVehiculo(String matriculaVehiculo) {
-		this.matriculaVehiculo = matriculaVehiculo;
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getNombreMarca() {
+		return nombreMarca;
+	}
+
+	public void setNombreMarca(String nombreMarca) {
+		this.nombreMarca = nombreMarca;
 	}
 
 }
