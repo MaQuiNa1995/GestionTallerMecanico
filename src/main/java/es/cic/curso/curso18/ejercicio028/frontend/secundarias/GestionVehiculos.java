@@ -124,8 +124,8 @@ public class GestionVehiculos extends HorizontalLayout {
 		cancelar = new Button("Cancelar");
 
 		confirmarAnadir.addClickListener(e -> {
-			TipoVehiculo meterTipoVehiculo;
-			Marca meterMarca;
+			TipoVehiculo meterTipoVehiculo=null;
+			Marca meterMarca=null;
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
@@ -147,8 +147,8 @@ public class GestionVehiculos extends HorizontalLayout {
 
 		confirmarEliminar.addClickListener(e -> {
 			
-			TipoVehiculo meterTipoVehiculo;
-			Marca meterMarca;
+			TipoVehiculo meterTipoVehiculo=null;
+			Marca meterMarca=null;
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
@@ -177,8 +177,8 @@ public class GestionVehiculos extends HorizontalLayout {
 		});
 
 		confirmarModificar.addClickListener(e -> {
-			TipoVehiculo meterTipoVehiculo;
-			Marca meterMarca;
+			TipoVehiculo meterTipoVehiculo=null;
+			Marca meterMarca=null;
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
