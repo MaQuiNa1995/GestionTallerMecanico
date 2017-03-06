@@ -376,17 +376,17 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 	private void limpiarCampos() {
 
-		nombreVehiculo.setValue("");
-		matricula.setValue("");
-
-		confirmarAnadir.setVisible(false);
-		confirmarEliminar.setVisible(false);
-		confirmarModificar.setVisible(false);
-		cancelar.setVisible(false);
-		nombreVehiculo.setVisible(false);
-		matricula.setVisible(false);
-
-		anadir.setEnabled(true);
+//		nombreVehiculo.setValue("");
+//		matricula.setValue("");
+//
+//		confirmarAnadir.setVisible(false);
+//		confirmarEliminar.setVisible(false);
+//		confirmarModificar.setVisible(false);
+//		cancelar.setVisible(false);
+//		nombreVehiculo.setVisible(false);
+//		matricula.setVisible(false);
+//
+//		anadir.setEnabled(true);
 	}
 
 	private void verPanelDatos() {
