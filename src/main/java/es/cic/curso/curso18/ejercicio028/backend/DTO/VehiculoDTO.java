@@ -5,8 +5,6 @@ public class VehiculoDTO {
 	String fechaAveria;
 	String nombreVehiculo;
 	String matriculaVehiculo;
-	String nombreMarca;
-	String tipoVehiculo;
 
 	public VehiculoDTO() {
 		super();
@@ -42,22 +40,6 @@ public class VehiculoDTO {
 
 	public void setMatriculaVehiculo(String matriculaVehiculo) {
 		this.matriculaVehiculo = matriculaVehiculo;
-	}
-
-	public String getNombreMarca() {
-		return nombreMarca;
-	}
-
-	public void setNombreMarca(String nombreMarca) {
-		this.nombreMarca = nombreMarca;
-	}
-
-	public String getTipoVehiculo() {
-		return tipoVehiculo;
-	}
-
-	public void setTipoVehiculo(String tipoVehiculo) {
-		this.tipoVehiculo = tipoVehiculo;
 	}
 
 }
