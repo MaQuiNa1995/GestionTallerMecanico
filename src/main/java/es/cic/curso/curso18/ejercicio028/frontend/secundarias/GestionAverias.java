@@ -217,18 +217,18 @@ public class GestionAverias extends HorizontalLayout {
 		cargaGrid();
 
 		maestro.addSelectionListener(e -> {
-			Averia averia = null;
+			Averia averiaGrid = null;
 			if (!e.getSelected().isEmpty()) {
-				averia = (Averia) e.getSelected().iterator().next();
-				nombreAveria.setValue(averia.getNombre());
+				averiaGrid = (Averia) e.getSelected().iterator().next();
+				nombreAveria.setValue(averiaGrid.getNombre());
 				
-				nombreAveriaSeleccionado=averia.getNombre();
-				descripcionAveriaSeleccionado=averia.getDescripcion();
+				nombreAveriaSeleccionado=averiaGrid.getNombre();
+				descripcionAveriaSeleccionado=averiaGrid.getDescripcion();
 				
 				
 				controladorPrimerosprimarios(3);
 			}
-			setAveria(averia);
+			setAveria(averiaGrid);
 		});
 
 		panelGrid.addComponent(maestro);

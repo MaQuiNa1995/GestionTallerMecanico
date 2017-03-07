@@ -108,49 +108,16 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		cancelar = new Button("Cancelar");
 
 		confirmarAnadir.addClickListener(e -> {
-			tipoVehiculoService.aniadirTipoVehiculo(tipo.getValue(), descripcion.getValue());
-			cargaGrid();
-			controladorPrimerosprimarios(3);
-			limpiarCampos();
+			anadirConfirmarMetodo();
 		});
 		
 		confirmarEliminar.addClickListener(e -> {
-			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-				if (tipoVehiculoSacado.getTipo().equals(tipo.getValue())
-						&& (tipoVehiculoSacado.getDescripcion().equals(descripcion.getValue()))) {
-					tipoVehiculoService.borrarTipoVehiculo(tipoVehiculoSacado.getId());
-				}
-			}
-			cargaGrid();
-			controladorPrimerosprimarios(3);
-			limpiarCampos();
+			eliminarConfirmarMetodo();
 		});
 		
 		confirmarModificar.addClickListener(e -> {
-			TipoVehiculo objetoModificado=null;
 			
-			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-				
-				if (tipoVehiculoSacado.getTipo().equals(nombreVehiculoSeleccionado)
-						&& (tipoVehiculoSacado.getDescripcion().equals(descripcionVehiculoSeleccionado))) {
-					
-					
-					TipoVehiculo tipoVehiculo = tipoVehiculoService.obtenerTipoVehiculo(tipoVehiculoSacado.getId());
-					tipoVehiculo.setTipo(tipo.getValue());
-					tipoVehiculo.setDescripcion(descripcion.getValue());
-
-					modificarTipoVehiculo(tipoVehiculo);
-					
-					
-					nombreVehiculoSeleccionado="";
-					descripcionVehiculoSeleccionado="";
-				}
-			}
-			
-			
-			cargaGrid();
-			controladorPrimerosprimarios(3);
-			limpiarCampos();
+			confirmarModificarMetodo();
 		});
 
 		cancelar.addClickListener(e -> {
@@ -273,11 +240,11 @@ public class GestionTiposVehiculos extends VerticalLayout {
 
 		if (tipoVehiculoService.obtenerTipoVehiculos().isEmpty()) {
 
-			TipoVehiculo tipoVehiculo = new TipoVehiculo("Moto", "Vehiculo de 2 Ruedas");
-			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculo.getTipo(), tipoVehiculo.getDescripcion());
+			TipoVehiculo tipoVehiculoPorDefecto = new TipoVehiculo("Moto", "Vehiculo de 2 Ruedas");
+			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculoPorDefecto.getTipo(), tipoVehiculoPorDefecto.getDescripcion());
 
-			TipoVehiculo tipoVehiculo2 = new TipoVehiculo("Coche", "Vehiculo de 4 Ruedas");
-			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculo2.getTipo(), tipoVehiculo2.getDescripcion());
+			TipoVehiculo tipoVehiculoPorDefecto2 = new TipoVehiculo("Coche", "Vehiculo de 4 Ruedas");
+			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculoPorDefecto2.getTipo(), tipoVehiculoPorDefecto2.getDescripcion());
 		}
 	}
 
@@ -328,5 +295,49 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		tipo.setVisible(true);
 		descripcion.setVisible(true);
 	}
+	
+	private void confirmarModificarMetodo(){
+		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+			
+			if (tipoVehiculoSacado.getTipo().equals(nombreVehiculoSeleccionado)
+					&& (tipoVehiculoSacado.getDescripcion().equals(descripcionVehiculoSeleccionado))) {
+				
+				
+				TipoVehiculo tipoVehiculoModificar = tipoVehiculoService.obtenerTipoVehiculo(tipoVehiculoSacado.getId());
+				tipoVehiculoModificar.setTipo(tipo.getValue());
+				tipoVehiculoModificar.setDescripcion(descripcion.getValue());
 
+				modificarTipoVehiculo(tipoVehiculoModificar);
+				
+				
+				nombreVehiculoSeleccionado="";
+				descripcionVehiculoSeleccionado="";
+			}
+		}
+		
+		
+		cargaGrid();
+		controladorPrimerosprimarios(3);
+		limpiarCampos();
+	}
+	
+	private void eliminarConfirmarMetodo(){
+		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+			if (tipoVehiculoSacado.getTipo().equals(tipo.getValue())
+					&& (tipoVehiculoSacado.getDescripcion().equals(descripcion.getValue()))) {
+				tipoVehiculoService.borrarTipoVehiculo(tipoVehiculoSacado.getId());
+			}
+		}
+		cargaGrid();
+		controladorPrimerosprimarios(3);
+		limpiarCampos();
+	}
+
+	private void anadirConfirmarMetodo(){
+		tipoVehiculoService.aniadirTipoVehiculo(tipo.getValue(), descripcion.getValue());
+		cargaGrid();
+		controladorPrimerosprimarios(3);
+		limpiarCampos();
+	}
+	
 }

@@ -1,4 +1,4 @@
-package es.cic.curso.curso18.ejercicio028.backend.DTO;
+package es.cic.curso.curso18.ejercicio028.backend.dto;
 
 public class VehiculoAveriaDTO {
 	String nombreAveria;

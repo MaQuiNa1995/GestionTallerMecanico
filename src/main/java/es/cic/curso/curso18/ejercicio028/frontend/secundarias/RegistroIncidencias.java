@@ -17,10 +17,10 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-import es.cic.curso.curso18.ejercicio028.backend.DTO.VehiculoAveriaDTO;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Averia;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.RegistroAverias;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
+import es.cic.curso.curso18.ejercicio028.backend.dto.VehiculoAveriaDTO;
 import es.cic.curso.curso18.ejercicio028.backend.service.AveriaService;
 import es.cic.curso.curso18.ejercicio028.backend.service.RegistroAveriasService;
 import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoService;
