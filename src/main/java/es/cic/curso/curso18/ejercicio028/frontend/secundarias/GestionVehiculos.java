@@ -221,15 +221,17 @@ public class GestionVehiculos extends HorizontalLayout {
 			int contador = 0;
 			for (Vehiculo vehiculoParaModificar : vehiculoService.obtenerVehiculos()) {
 				
-				if (vehiculoParaModificar.getNombre().equals(nombrevehiculoSeleccionado)
-						&& (vehiculoParaModificar.getMatricula().equals(matriculaSeleccionada))) {
+				if (vehiculoParaModificar.getNombre().equals(nombreVehiculo.getValue())
+						&& (vehiculoParaModificar.getMatricula().equals(matricula.getValue()))) {
 
 					VehiculoDTO vehiculoDTO = new VehiculoDTO();
-					vehiculoDTO.setNombreVehiculo(nombrevehiculoSeleccionado);
-					vehiculoDTO.setMatricula(matriculaSeleccionada);
-					vehiculoDTO.setTipo(tipoVehiculoSeleccionado);
-					vehiculoDTO.setNombreMarca(marcaVehiculoSeleccionado);
+					vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
+					vehiculoDTO.setMatricula(matricula.getValue());
+					vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
+					vehiculoDTO.setNombreMarca(meterMarca.getNombre());
 
+					setVehiculoDTO(vehiculoDTO);
+					
 					vehiculoDTOLista.set(contador, vehiculoDTO);
 					cargaGrid();
 					
@@ -239,7 +241,7 @@ public class GestionVehiculos extends HorizontalLayout {
 					vehiculoMeter.setMatricula(matricula.getValue());
 					vehiculoMeter.setTipoVehiculo(meterTipoVehiculo);
 					vehiculoMeter.setMarca(meterMarca);
-
+					
 					modificarVehiculo(vehiculoMeter);
 
 					nombrevehiculoSeleccionado = "";
@@ -343,7 +345,6 @@ public class GestionVehiculos extends HorizontalLayout {
 				marcasCombo.select(vehiculo.getNombreMarca());
 
 				matriculaSeleccionada = matricula.getValue();
-				System.out.println("DIOS YA:"+nombrevehiculoSeleccionado);
 				nombrevehiculoSeleccionado = vehiculo.getNombreVehiculo();
 				
 				matriculaSeleccionada = vehiculo.getMatricula();
