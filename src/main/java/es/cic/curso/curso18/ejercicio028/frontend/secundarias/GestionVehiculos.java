@@ -129,40 +129,38 @@ public class GestionVehiculos extends HorizontalLayout {
 		});
 
 		confirmarAnadir.addClickListener(e -> {
-			
-			if(!nombreVehiculo.getValue().isEmpty() && !matricula.getValue().isEmpty()){
-				
-			
 
-			TipoVehiculo meterTipoVehiculo = null;
-			Marca meterMarca = null;
+			if (!nombreVehiculo.getValue().isEmpty() && !matricula.getValue().isEmpty()) {
 
-			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+				TipoVehiculo meterTipoVehiculo = null;
+				Marca meterMarca = null;
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue()))
-					meterTipoVehiculo = tipoVehiculoSacado;
-			}
+				for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
-			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
+					if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue()))
+						meterTipoVehiculo = tipoVehiculoSacado;
+				}
 
-				if (marcaSacada.getNombre().equals(marcasCombo.getValue()))
-					meterMarca = marcaSacada;
-			}
+				for (Marca marcaSacada : marcaService.obtenerMarcas()) {
 
-			vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(), meterTipoVehiculo,
-					meterMarca);
+					if (marcaSacada.getNombre().equals(marcasCombo.getValue()))
+						meterMarca = marcaSacada;
+				}
 
-			VehiculoDTO vehiculoDTO = new VehiculoDTO();
-			vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
-			vehiculoDTO.setMatricula(matricula.getValue());
-			vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
-			vehiculoDTO.setNombreMarca(meterMarca.getNombre());
+				vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(), meterTipoVehiculo,
+						meterMarca);
 
-			vehiculoDTOLista.add(vehiculoDTO);
-			cargaGrid();
-			controladorPrimerosprimarios(3);
-			limpiarCampos();
-			}else{
+				VehiculoDTO vehiculoDTO = new VehiculoDTO();
+				vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
+				vehiculoDTO.setMatricula(matricula.getValue());
+				vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
+				vehiculoDTO.setNombreMarca(meterMarca.getNombre());
+
+				vehiculoDTOLista.add(vehiculoDTO);
+				cargaGrid();
+				controladorPrimerosprimarios(3);
+				limpiarCampos();
+			} else {
 				mostrarNotificacion("Rellene Todos Los Campos");
 			}
 		});
@@ -171,6 +169,8 @@ public class GestionVehiculos extends HorizontalLayout {
 
 			TipoVehiculo meterTipoVehiculo = null;
 			Marca meterMarca = null;
+
+			int contador = 0;
 
 			for (Vehiculo vehiculoParaModificar : vehiculoService.obtenerVehiculos()) {
 
@@ -183,7 +183,7 @@ public class GestionVehiculos extends HorizontalLayout {
 					vehiculoDTO.setTipo(tipoVehiculoSeleccionado);
 					vehiculoDTO.setNombreMarca(marcaVehiculoSeleccionado);
 
-					vehiculoDTOLista.remove(vehiculoDTO);
+					vehiculoDTOLista.remove(contador);
 
 					eliminarVehiculo(vehiculoParaModificar);
 
@@ -192,6 +192,8 @@ public class GestionVehiculos extends HorizontalLayout {
 					tipoVehiculoSeleccionado = "";
 					marcaVehiculoSeleccionado = "";
 				}
+
+				contador = contador++;
 
 			}
 			cargaGrid();
@@ -216,8 +218,9 @@ public class GestionVehiculos extends HorizontalLayout {
 					meterMarca = marcaSacada;
 			}
 
+			int contador = 0;
 			for (Vehiculo vehiculoParaModificar : vehiculoService.obtenerVehiculos()) {
-
+				
 				if (vehiculoParaModificar.getNombre().equals(nombrevehiculoSeleccionado)
 						&& (vehiculoParaModificar.getMatricula().equals(matriculaSeleccionada))) {
 
@@ -227,16 +230,15 @@ public class GestionVehiculos extends HorizontalLayout {
 					vehiculoDTO.setTipo(tipoVehiculoSeleccionado);
 					vehiculoDTO.setNombreMarca(marcaVehiculoSeleccionado);
 
-					vehiculoDTOLista.remove(vehiculoDTO);
-
-					VehiculoDTO vehiculoDTO2 = new VehiculoDTO();
-					vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
-					vehiculoDTO.setMatricula(matricula.getValue());
-					vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
-					vehiculoDTO.setNombreMarca(meterMarca.getNombre());
-
-					vehiculoDTOLista.add(vehiculoDTO2);
+					vehiculoDTOLista.set(contador, vehiculoDTO);
+					cargaGrid();
+					
 					Vehiculo vehiculoMeter = vehiculoService.obtenerVehiculo(vehiculoParaModificar.getId());
+					
+					vehiculoMeter.setNombre(nombreVehiculo.getValue());
+					vehiculoMeter.setMatricula(matricula.getValue());
+					vehiculoMeter.setTipoVehiculo(meterTipoVehiculo);
+					vehiculoMeter.setMarca(meterMarca);
 
 					modificarVehiculo(vehiculoMeter);
 
@@ -244,11 +246,14 @@ public class GestionVehiculos extends HorizontalLayout {
 					matriculaSeleccionada = "";
 					tipoVehiculoSeleccionado = "";
 					marcaVehiculoSeleccionado = "";
+
 				}
+				contador++;
 
 			}
 
 			cargaGrid();
+			
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
@@ -312,10 +317,10 @@ public class GestionVehiculos extends HorizontalLayout {
 			BeanFieldGroup.bindFieldsUnbuffered(new VehiculoDTO(), this);
 		}
 	}
-	
-	private void mostrarNotificacion(String mostrarCadena){
+
+	private void mostrarNotificacion(String mostrarCadena) {
 		Notification notificacion = new Notification(mostrarCadena);
-		notificacion.show(mostrarCadena);	
+		notificacion.show(mostrarCadena);
 	}
 
 	private void definirPanelGrid() {
@@ -338,8 +343,9 @@ public class GestionVehiculos extends HorizontalLayout {
 				marcasCombo.select(vehiculo.getNombreMarca());
 
 				matriculaSeleccionada = matricula.getValue();
-
+				System.out.println("DIOS YA:"+nombrevehiculoSeleccionado);
 				nombrevehiculoSeleccionado = vehiculo.getNombreVehiculo();
+				
 				matriculaSeleccionada = vehiculo.getMatricula();
 				marcaVehiculoSeleccionado = vehiculo.getNombreMarca();
 				tipoVehiculoSeleccionado = vehiculo.getTipo();

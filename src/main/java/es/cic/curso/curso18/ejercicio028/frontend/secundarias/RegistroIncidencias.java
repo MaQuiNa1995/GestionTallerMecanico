@@ -23,6 +23,7 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.RegistroAverias;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.VehiculosTienenAverias;
 import es.cic.curso.curso18.ejercicio028.backend.dto.VehiculoAveriaDTO;
+import es.cic.curso.curso18.ejercicio028.backend.dto.VehiculoDTO;
 import es.cic.curso.curso18.ejercicio028.backend.service.AveriaService;
 import es.cic.curso.curso18.ejercicio028.backend.service.RegistroAveriasService;
 import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoService;
@@ -120,7 +121,7 @@ public class RegistroIncidencias extends HorizontalLayout {
 		matriculasVehiculosCombo = new ComboBox("Introduce La Matrícula:");
 
 		rellenarCombos();
-		
+
 		panelIntroducirDatos.addComponents(averiasCombo, fechaEscogida, fechaParaModificar, matriculasVehiculosCombo);
 
 		confirmarAnadir = new Button("Añadir");
@@ -128,53 +129,53 @@ public class RegistroIncidencias extends HorizontalLayout {
 		confirmarModificar = new Button("Modificar");
 
 		cancelar = new Button("Cancelar");
-		
+
 		cancelar.addClickListener(e -> {
 			controladorPrimerosprimarios(2);
 		});
 
 		confirmarAnadir.addClickListener(e -> {
-			
-			if (averiasCombo.getValue()!=null && matriculasVehiculosCombo.getValue()!=null){
-			
-			Averia meterAveria = null;
-			RegistroAverias meterRegistroAveria = null;
-			Vehiculo meterVehiculo = null;
-			
-			for (Averia averiaSacado : averiaService.obtenerAverias()) {
 
-				if (averiaSacado.getNombre().equals(averiasCombo.getValue()))
-					meterAveria = averiaSacado;
-			}
+			if (averiasCombo.getValue() != null && matriculasVehiculosCombo.getValue() != null) {
 
-			fechaHora = new SimpleDateFormat("yyyy-MM-dd ");
-			convertido = fechaHora.format(fechaEscogida.getValue());
+				Averia meterAveria = null;
+				RegistroAverias meterRegistroAveria = null;
+				Vehiculo meterVehiculo = null;
 
-			for (RegistroAverias registroAveriaSacado : registroAveriasService.obtenerRegistroAveriass()) {
+				for (Averia averiaSacado : averiaService.obtenerAverias()) {
 
-				if (registroAveriaSacado.getFecha().equals(convertido))
-					meterRegistroAveria = registroAveriaSacado;
-			}
+					if (averiaSacado.getNombre().equals(averiasCombo.getValue()))
+						meterAveria = averiaSacado;
+				}
 
-			for (Vehiculo vehiculoAveriaSacado : vehiculoService.obtenerVehiculos()) {
+				fechaHora = new SimpleDateFormat("yyyy-MM-dd ");
+				convertido = fechaHora.format(fechaEscogida.getValue());
 
-				if (vehiculoAveriaSacado.getMatricula().equals(matriculasVehiculosCombo.getValue()))
-					meterVehiculo = vehiculoAveriaSacado;
-			}
-			registroAveriasService.aniadirRegistroAverias(convertido, meterAveria);
-			vehiculosTienenAveriasService.aniadirVehiculosTienenAverias(meterRegistroAveria, meterVehiculo);
+				for (RegistroAverias registroAveriaSacado : registroAveriasService.obtenerRegistroAveriass()) {
 
-			VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
+					if (registroAveriaSacado.getFecha().equals(convertido))
+						meterRegistroAveria = registroAveriaSacado;
+				}
 
-			vehiculoDTO.setFechaAveria(convertido);
-			vehiculoDTO.setMatriculaVehiculo(meterVehiculo.getMatricula());
-			vehiculoDTO.setNombreAveria(meterAveria.getNombre());
+				for (Vehiculo vehiculoAveriaSacado : vehiculoService.obtenerVehiculos()) {
 
-			vehiculoAveriaDTOLista.add(vehiculoDTO);
-			cargaGrid();
-			controladorPrimerosprimarios(3);
-			limpiarCampos();
-			}else{
+					if (vehiculoAveriaSacado.getMatricula().equals(matriculasVehiculosCombo.getValue()))
+						meterVehiculo = vehiculoAveriaSacado;
+				}
+				registroAveriasService.aniadirRegistroAverias(convertido, meterAveria);
+				vehiculosTienenAveriasService.aniadirVehiculosTienenAverias(meterRegistroAveria, meterVehiculo);
+
+				VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
+
+				vehiculoDTO.setFechaAveria(convertido);
+				vehiculoDTO.setMatriculaVehiculo(meterVehiculo.getMatricula());
+				vehiculoDTO.setNombreAveria(meterAveria.getNombre());
+
+				vehiculoAveriaDTOLista.add(vehiculoDTO);
+				cargaGrid();
+				controladorPrimerosprimarios(3);
+				limpiarCampos();
+			} else {
 				mostrarNotificacion("Rellene Todos Los Campos");
 			}
 		});
@@ -198,13 +199,13 @@ public class RegistroIncidencias extends HorizontalLayout {
 				if (vehiculoAveriaSacado.getNombre().equals(matriculasVehiculosCombo.getValue()))
 					meterVehiculo = vehiculoAveriaSacado;
 			}
-			
+
 			for (VehiculosTienenAverias objetoSacado : vehiculosTienenAveriasService.obtenerVehiculosTienenAverias()) {
-				
-				//VehiculosTienenAverias objetoBorrar = vehiculosTienenAveriasService.obtenerVehiculosTienenAveria(objetoSacado.getId());
+
+				// VehiculosTienenAverias objetoBorrar =
+				// vehiculosTienenAveriasService.obtenerVehiculosTienenAveria(objetoSacado.getId());
 				vehiculosTienenAveriasService.borrarVehiculosTienenAverias(objetoSacado.getId());
 			}
-			
 
 			VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
 			vehiculoDTO.setNombreAveria(meterAveria.getNombre());
@@ -215,7 +216,7 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 			vehiculoAveriaDTOLista.remove(vehiculoDTO);
 			cargaGrid();
-			
+
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
@@ -231,9 +232,6 @@ public class RegistroIncidencias extends HorizontalLayout {
 					meterAveria = averiaSacado;
 			}
 
-//			fechaHora = new SimpleDateFormat("dd-MM-yyyy");
-//			convertido = fechaHora.format(fechaEscogida.getValue());
-
 			for (RegistroAverias registroAveriaSacado : registroAveriasService.obtenerRegistroAveriass()) {
 
 				if (registroAveriaSacado.getFecha().equals(convertido))
@@ -241,20 +239,36 @@ public class RegistroIncidencias extends HorizontalLayout {
 			}
 
 			for (Vehiculo vehiculoAveriaSacado : vehiculoService.obtenerVehiculos()) {
-
 				if (vehiculoAveriaSacado.getMatricula().equals(matriculasVehiculosCombo.getValue()))
 					meterVehiculo = vehiculoAveriaSacado;
 			}
 			
-			vehiculosTienenAveriasService.actualizarVehiculosTienenAverias(new VehiculosTienenAverias(meterRegistroAveria,meterVehiculo));
+			int contador = 0;
+			for (VehiculosTienenAverias vehiculoParaModificar : vehiculosTienenAveriasService.obtenerVehiculosTienenAverias()) {
 
-			VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
+				
+				if (vehiculoParaModificar.getVehiculo().equals(meterVehiculo)) {
 
-			vehiculoDTO.setFechaAveria(convertido);
-			vehiculoDTO.setMatriculaVehiculo(meterVehiculo.getMatricula());
-			vehiculoDTO.setNombreAveria(meterAveria.getNombre());
+					VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
 
-			vehiculoAveriaDTOLista.add(vehiculoDTO);
+					vehiculoDTO.setFechaAveria(convertido);
+					vehiculoDTO.setMatriculaVehiculo(meterVehiculo.getMatricula());
+					vehiculoDTO.setNombreAveria(meterAveria.getNombre());
+
+					vehiculoAveriaDTOLista.remove(contador);
+					vehiculoAveriaDTOLista.add(contador, vehiculoDTO);
+					VehiculosTienenAverias vehiculoObtenido = vehiculosTienenAveriasService.obtenerVehiculosTienenAveria(vehiculoParaModificar.getId());
+					
+					vehiculoObtenido.setRegistroAverias(meterRegistroAveria);
+					vehiculoObtenido.setVehiculo(meterVehiculo);
+
+					modificarVehiculo(vehiculoObtenido);
+
+				}
+				contador++;
+
+			}
+			
 			cargaGrid();
 			controladorPrimerosprimarios(4);
 			limpiarCampos();
@@ -265,10 +279,10 @@ public class RegistroIncidencias extends HorizontalLayout {
 		panelDatos.addComponents(panelIntroducirDatos, panelConfirmacion);
 
 	}
-	
-	private void mostrarNotificacion(String mostrarCadena){
+
+	private void mostrarNotificacion(String mostrarCadena) {
 		Notification notificacion = new Notification(mostrarCadena);
-		notificacion.show(mostrarCadena);	
+		notificacion.show(mostrarCadena);
 	}
 
 	private void definirPanelDerecha() {
@@ -327,12 +341,12 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 		maestro.addSelectionListener(e -> {
 			VehiculoAveriaDTO vehiculo = null;
-			
+
 			if (!e.getSelected().isEmpty()) {
 				vehiculo = (VehiculoAveriaDTO) e.getSelected().iterator().next();
-				
+
 				controladorPrimerosprimarios(4);
-				
+
 				matriculasVehiculosCombo.select(vehiculo.getMatriculaVehiculo());
 				averiasCombo.select(vehiculo.getNombreAveria());
 				fechaParaModificar.setValue(vehiculo.getFechaAveria());
@@ -346,17 +360,23 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 	}
 
-	public void annadirVehiculo(Vehiculo vehiculo) {
+	public void annadirVehiculo(VehiculosTienenAverias vehiculo) {
 
-		vehiculoService.aniadirVehiculo(vehiculo.getNombre(), vehiculo.getMatricula(), vehiculo.getTipoVehiculo(),
-				vehiculo.getMarca());
+		vehiculosTienenAveriasService.aniadirVehiculosTienenAverias(vehiculo.getRegistroAverias(), vehiculo.getVehiculo());
+
+		cargaGrid();
+	}
+	
+	public void modificarVehiculo(VehiculosTienenAverias vehiculo) {
+
+		vehiculosTienenAveriasService.actualizarVehiculosTienenAverias(vehiculo);
 
 		cargaGrid();
 	}
 
-	public void eliminarVehiculo(Vehiculo vehiculo) {
+	public void eliminarVehiculo(VehiculosTienenAverias vehiculo) {
 
-		vehiculoService.borrarVehiculo(vehiculo.getId());
+		vehiculosTienenAveriasService.borrarVehiculosTienenAverias(vehiculo.getId());
 
 		cargaGrid();
 	}
@@ -369,7 +389,8 @@ public class RegistroIncidencias extends HorizontalLayout {
 		vehiculoService = ContextLoader.getCurrentWebApplicationContext().getBean(VehiculoService.class);
 		averiaService = ContextLoader.getCurrentWebApplicationContext().getBean(AveriaService.class);
 		registroAveriasService = ContextLoader.getCurrentWebApplicationContext().getBean(RegistroAveriasService.class);
-		vehiculosTienenAveriasService = ContextLoader.getCurrentWebApplicationContext().getBean(VehiculosTienenAveriasService.class);
+		vehiculosTienenAveriasService = ContextLoader.getCurrentWebApplicationContext()
+				.getBean(VehiculosTienenAveriasService.class);
 	}
 
 	private void controladorPrimerosprimarios(int opcion) {
@@ -379,7 +400,7 @@ public class RegistroIncidencias extends HorizontalLayout {
 		case 1:
 
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
 
 			confirmarAnadir.setVisible(true);
@@ -387,15 +408,13 @@ public class RegistroIncidencias extends HorizontalLayout {
 			confirmarModificar.setVisible(false);
 
 			break;
-			
-			
-			
+
 		case 2:
 			limpiarCampos();
 			break;
 		case 3:
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
 			verPanelDatos(false);
 
@@ -404,16 +423,17 @@ public class RegistroIncidencias extends HorizontalLayout {
 			confirmarModificar.setVisible(true);
 
 			break;
-			//Modificar
+		// Modificar
 		case 4:
 			anadir.setEnabled(false);
-			
+
 			fechaEscogida.setVisible(false);
-			
+
 			cancelar.setVisible(true);
 			verPanelDatos(true);
-			
+
 			confirmarModificar.setVisible(true);
+			confirmarEliminar.setVisible(true);
 			break;
 		}
 
@@ -426,19 +446,18 @@ public class RegistroIncidencias extends HorizontalLayout {
 		}
 
 		for (Vehiculo vehiculoSacado : vehiculoService.obtenerVehiculos()) {
-			
+
 			matriculasVehiculosCombo.addItem(vehiculoSacado.getMatricula());
 		}
 	}
 
 	private void limpiarCampos() {
 
-		
 		averiasCombo.setValue(null);
 		fechaEscogida.clear();
 		fechaParaModificar.setValue("");
 		matriculasVehiculosCombo.setValue(null);
-		
+
 		averiasCombo.setVisible(false);
 		fechaEscogida.setVisible(false);
 		fechaParaModificar.setVisible(false);
@@ -447,9 +466,9 @@ public class RegistroIncidencias extends HorizontalLayout {
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);
 		confirmarModificar.setVisible(false);
-		
+
 		cancelar.setVisible(false);
-		
+
 		anadir.setEnabled(true);
 	}
 
