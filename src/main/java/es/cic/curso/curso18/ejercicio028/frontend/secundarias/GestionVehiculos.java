@@ -174,7 +174,7 @@ public class GestionVehiculos extends HorizontalLayout {
 
 			for (Vehiculo vehiculoParaModificar : vehiculoService.obtenerVehiculos()) {
 
-				if (vehiculoParaModificar.getNombre().equals(nombrevehiculoSeleccionado)
+				if (vehiculoParaModificar.getNombre().equals(nombreVehiculo.getValue())
 						&& (vehiculoParaModificar.getMatricula().equals(matriculaSeleccionada))) {
 
 					VehiculoDTO vehiculoDTO = new VehiculoDTO();
