@@ -11,6 +11,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -46,9 +47,14 @@ public class GestionVehiculos extends HorizontalLayout {
 	Button confirmarAnadir;
 	Button confirmarEliminar;
 	Button confirmarModificar;
-	
+
 	ComboBox tipoVehiculoCombo;
 	ComboBox marcasCombo;
+
+	String nombrevehiculoSeleccionado = "";
+	String matriculaSeleccionada = "";
+	String tipoVehiculoSeleccionado = "";
+	String marcaVehiculoSeleccionado = "";
 
 	Button cancelar;
 
@@ -86,7 +92,7 @@ public class GestionVehiculos extends HorizontalLayout {
 			controladorPrimerosprimarios(1);
 			rellenarCombos();
 			verPanelDatos();
-			
+
 		});
 
 		panelBotones.addComponent(anadir);
@@ -104,14 +110,14 @@ public class GestionVehiculos extends HorizontalLayout {
 
 		matricula = new TextField("Introduce La Matrícula:");
 		matricula.setSizeFull();
-		
-		marcasCombo = new ComboBox();	
+
+		marcasCombo = new ComboBox("Selecciona La Marca:");
 		marcasCombo.setVisible(false);
-		tipoVehiculoCombo = new ComboBox();
+		tipoVehiculoCombo = new ComboBox("Selecciona El Tipo De Vehículo");
 		tipoVehiculoCombo.setVisible(false);
 		rellenarCombos();
-		
-		panelIntroducirDatos.addComponents(nombreVehiculo, matricula,marcasCombo,tipoVehiculoCombo);
+
+		panelIntroducirDatos.addComponents(nombreVehiculo, matricula, marcasCombo, tipoVehiculoCombo);
 
 		confirmarAnadir = new Button("Añadir");
 		confirmarEliminar = new Button("Eliminar");
@@ -124,60 +130,69 @@ public class GestionVehiculos extends HorizontalLayout {
 
 		confirmarAnadir.addClickListener(e -> {
 			
-			TipoVehiculo meterTipoVehiculo=null;
-			Marca meterMarca=null;
+			if(!nombreVehiculo.getValue().isEmpty() && !matricula.getValue().isEmpty()){
+				
+			
+
+			TipoVehiculo meterTipoVehiculo = null;
+			Marca meterMarca = null;
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
 				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue()))
 					meterTipoVehiculo = tipoVehiculoSacado;
 			}
-			
+
 			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
 
 				if (marcaSacada.getNombre().equals(marcasCombo.getValue()))
 					meterMarca = marcaSacada;
 			}
 
-			vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(),meterTipoVehiculo,meterMarca);
-			
+			vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(), meterTipoVehiculo,
+					meterMarca);
+
 			VehiculoDTO vehiculoDTO = new VehiculoDTO();
 			vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
 			vehiculoDTO.setMatricula(matricula.getValue());
 			vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
 			vehiculoDTO.setNombreMarca(meterMarca.getNombre());
-			
+
 			vehiculoDTOLista.add(vehiculoDTO);
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
+			}else{
+				mostrarNotificacion("Rellene Todos Los Campos");
+			}
 		});
 
 		confirmarEliminar.addClickListener(e -> {
-			
-			TipoVehiculo meterTipoVehiculo=null;
-			Marca meterMarca=null;
 
-			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+			TipoVehiculo meterTipoVehiculo = null;
+			Marca meterMarca = null;
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue().toString()))
-					meterTipoVehiculo = tipoVehiculoSacado;
-			}
-			
-			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
+			for (Vehiculo vehiculoParaModificar : vehiculoService.obtenerVehiculos()) {
 
-				if (marcaSacada.getNombre().equals(marcasCombo.getValue().toString()))
-					meterMarca = marcaSacada;
-			}
-			
-			for (Vehiculo vehiculoSacado : vehiculoService.obtenerVehiculos()) {
-				if (vehiculoSacado.getNombre().equals(nombreVehiculo.getValue())
-						&& (vehiculoSacado.getMatricula().equals(matricula.getValue()))
-						&& (vehiculoSacado.getTipoVehiculo().equals(meterTipoVehiculo))
-						&& (vehiculoSacado.getMarca().equals(meterMarca))
-						) {
-					vehiculoService.borrarVehiculo(vehiculoSacado.getId());
+				if (vehiculoParaModificar.getNombre().equals(nombrevehiculoSeleccionado)
+						&& (vehiculoParaModificar.getMatricula().equals(matriculaSeleccionada))) {
+
+					VehiculoDTO vehiculoDTO = new VehiculoDTO();
+					vehiculoDTO.setNombreVehiculo(nombrevehiculoSeleccionado);
+					vehiculoDTO.setMatricula(matriculaSeleccionada);
+					vehiculoDTO.setTipo(tipoVehiculoSeleccionado);
+					vehiculoDTO.setNombreMarca(marcaVehiculoSeleccionado);
+
+					vehiculoDTOLista.remove(vehiculoDTO);
+
+					eliminarVehiculo(vehiculoParaModificar);
+
+					nombrevehiculoSeleccionado = "";
+					matriculaSeleccionada = "";
+					tipoVehiculoSeleccionado = "";
+					marcaVehiculoSeleccionado = "";
 				}
+
 			}
 			cargaGrid();
 			controladorPrimerosprimarios(3);
@@ -185,22 +200,54 @@ public class GestionVehiculos extends HorizontalLayout {
 		});
 
 		confirmarModificar.addClickListener(e -> {
-			TipoVehiculo meterTipoVehiculo=null;
-			Marca meterMarca=null;
+
+			TipoVehiculo meterTipoVehiculo = null;
+			Marca meterMarca = null;
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue().toString()))
+				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue()))
 					meterTipoVehiculo = tipoVehiculoSacado;
 			}
-			
+
 			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
 
-				if (marcaSacada.getNombre().equals(marcasCombo.getValue().toString()))
+				if (marcaSacada.getNombre().equals(marcasCombo.getValue()))
 					meterMarca = marcaSacada;
 			}
 
-			vehiculoService.aniadirVehiculo(nombreVehiculo.getValue(), matricula.getValue(),meterTipoVehiculo,meterMarca);
+			for (Vehiculo vehiculoParaModificar : vehiculoService.obtenerVehiculos()) {
+
+				if (vehiculoParaModificar.getNombre().equals(nombrevehiculoSeleccionado)
+						&& (vehiculoParaModificar.getMatricula().equals(matriculaSeleccionada))) {
+
+					VehiculoDTO vehiculoDTO = new VehiculoDTO();
+					vehiculoDTO.setNombreVehiculo(nombrevehiculoSeleccionado);
+					vehiculoDTO.setMatricula(matriculaSeleccionada);
+					vehiculoDTO.setTipo(tipoVehiculoSeleccionado);
+					vehiculoDTO.setNombreMarca(marcaVehiculoSeleccionado);
+
+					vehiculoDTOLista.remove(vehiculoDTO);
+
+					VehiculoDTO vehiculoDTO2 = new VehiculoDTO();
+					vehiculoDTO.setNombreVehiculo(nombreVehiculo.getValue());
+					vehiculoDTO.setMatricula(matricula.getValue());
+					vehiculoDTO.setTipo(meterTipoVehiculo.getTipo());
+					vehiculoDTO.setNombreMarca(meterMarca.getNombre());
+
+					vehiculoDTOLista.add(vehiculoDTO2);
+					Vehiculo vehiculoMeter = vehiculoService.obtenerVehiculo(vehiculoParaModificar.getId());
+
+					modificarVehiculo(vehiculoMeter);
+
+					nombrevehiculoSeleccionado = "";
+					matriculaSeleccionada = "";
+					tipoVehiculoSeleccionado = "";
+					marcaVehiculoSeleccionado = "";
+				}
+
+			}
+
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
@@ -213,6 +260,11 @@ public class GestionVehiculos extends HorizontalLayout {
 		panelConfirmacion.addComponents(confirmarAnadir, confirmarEliminar, confirmarModificar, cancelar);
 
 		panelDatos.addComponents(panelIntroducirDatos, panelConfirmacion);
+
+	}
+
+	private void modificarVehiculo(Vehiculo modificada) {
+		vehiculoService.actualizarVehiculo(modificada);
 
 	}
 
@@ -260,6 +312,11 @@ public class GestionVehiculos extends HorizontalLayout {
 			BeanFieldGroup.bindFieldsUnbuffered(new VehiculoDTO(), this);
 		}
 	}
+	
+	private void mostrarNotificacion(String mostrarCadena){
+		Notification notificacion = new Notification(mostrarCadena);
+		notificacion.show(mostrarCadena);	
+	}
 
 	private void definirPanelGrid() {
 		vehiculoDTOLista = new ArrayList<>();
@@ -276,7 +333,17 @@ public class GestionVehiculos extends HorizontalLayout {
 			if (!e.getSelected().isEmpty()) {
 				vehiculo = (VehiculoDTO) e.getSelected().iterator().next();
 				nombreVehiculo.setValue(vehiculo.getTipo());
-				
+
+				tipoVehiculoCombo.select(vehiculo.getTipo());
+				marcasCombo.select(vehiculo.getNombreMarca());
+
+				matriculaSeleccionada = matricula.getValue();
+
+				nombrevehiculoSeleccionado = vehiculo.getNombreVehiculo();
+				matriculaSeleccionada = vehiculo.getMatricula();
+				marcaVehiculoSeleccionado = vehiculo.getNombreMarca();
+				tipoVehiculoSeleccionado = vehiculo.getTipo();
+
 				controladorPrimerosprimarios(3);
 			}
 			setVehiculoDTO(vehiculo);
@@ -320,7 +387,7 @@ public class GestionVehiculos extends HorizontalLayout {
 		case 1:
 
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
 
 			confirmarAnadir.setVisible(true);
@@ -334,7 +401,7 @@ public class GestionVehiculos extends HorizontalLayout {
 			break;
 		case 3:
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
 
 			confirmarAnadir.setVisible(false);
@@ -346,15 +413,15 @@ public class GestionVehiculos extends HorizontalLayout {
 		}
 
 	}
-	
+
 	private void rellenarCombos() {
 		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-			
+
 			tipoVehiculoCombo.addItem(tipoVehiculoSacado.getTipo());
 		}
 
 		for (Marca vehiculoSacado : marcaService.obtenerMarcas()) {
-			
+
 			marcasCombo.addItem(vehiculoSacado.getNombre());
 		}
 	}
@@ -363,28 +430,28 @@ public class GestionVehiculos extends HorizontalLayout {
 
 		nombreVehiculo.setValue("");
 		matricula.setValue("");
-		
+
 		nombreVehiculo.setVisible(false);
 		matricula.setVisible(false);
-		
+
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);
 		confirmarModificar.setVisible(false);
 		cancelar.setVisible(false);
 		nombreVehiculo.setVisible(false);
 		matricula.setVisible(false);
-		
+
 		tipoVehiculoCombo.setVisible(false);
 		tipoVehiculoCombo.select(null);
-		
+
 		marcasCombo.setVisible(false);
 		marcasCombo.select(null);
-		
+
 		anadir.setEnabled(true);
 	}
 
 	private void verPanelDatos() {
-		
+
 		tipoVehiculoCombo.setVisible(true);
 		marcasCombo.setVisible(true);
 		nombreVehiculo.setVisible(true);

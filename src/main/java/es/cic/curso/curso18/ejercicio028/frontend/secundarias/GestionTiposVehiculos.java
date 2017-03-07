@@ -10,6 +10,7 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -344,10 +345,21 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	}
 
 	private void anadirConfirmarMetodo(){
+		
+		if(!tipo.getValue().isEmpty() && !descripcion.getValue().isEmpty()){
+		
 		tipoVehiculoService.aniadirTipoVehiculo(tipo.getValue(), descripcion.getValue());
 		cargaGrid();
 		controladorPrimerosprimarios(3);
 		limpiarCampos();
+		}else{
+			mostrarNotificacion("Rellene Todos Los Campos");
+		}
+	}
+	
+	private void mostrarNotificacion(String mostrarCadena){
+		Notification notificacion = new Notification(mostrarCadena);
+		notificacion.show(mostrarCadena);	
 	}
 	
 }

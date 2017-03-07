@@ -10,6 +10,7 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -37,7 +38,7 @@ public class GestionMarcas extends HorizontalLayout {
 	Button confirmarAnadir;
 	Button confirmarEliminar;
 	Button confirmarModificar;
-	
+
 	Button cancelar;
 
 	Grid maestro;
@@ -45,12 +46,12 @@ public class GestionMarcas extends HorizontalLayout {
 	List<Marca> marcasLista;
 
 	Marca marca;
-	
-	String nombreMarcaSeleccionado="";
+
+	String nombreMarcaSeleccionado = "";
 
 	public GestionMarcas() {
 		super();
-		
+
 		definirBean();
 		generaBBDD();
 
@@ -96,24 +97,32 @@ public class GestionMarcas extends HorizontalLayout {
 
 		confirmarAnadir = new Button("Añadir");
 		confirmarEliminar = new Button("Eliminar");
-		confirmarModificar= new Button("Modificar");
-		
+		confirmarModificar = new Button("Modificar");
+
 		cancelar = new Button("Cancelar");
-		
+
 		cancelar.addClickListener(e -> {
 			controladorPrimerosprimarios(2);
-		});
-		
-		confirmarAnadir.addClickListener(e -> {
-			marcaService.aniadirMarca(nombreMarca.getValue());
-			cargaGrid();
-			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
-		
+
+		confirmarAnadir.addClickListener(e -> {
+
+			if (!nombreMarca.getValue().isEmpty()) {
+
+				marcaService.aniadirMarca(nombreMarca.getValue());
+				cargaGrid();
+				controladorPrimerosprimarios(3);
+				limpiarCampos();
+			
+			} else {
+				mostrarNotificacion("Rellena Todos Los Campos");
+			}
+		});
+
 		confirmarEliminar.addClickListener(e -> {
 			for (Marca marcaSacado : marcaService.obtenerMarcas()) {
-				if (marcaSacado.getNombre().equals(nombreMarca.getValue())){
+				if (marcaSacado.getNombre().equals(nombreMarca.getValue())) {
 					marcaService.borrarMarca(marcaSacado.getId());
 				}
 			}
@@ -121,12 +130,11 @@ public class GestionMarcas extends HorizontalLayout {
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
-		
+
 		confirmarModificar.addClickListener(e -> {
-			
+
 			for (Marca marcaSacado : marcaService.obtenerMarcas()) {
 
-				
 				if (marcaSacado.getNombre().equals(nombreMarcaSeleccionado)) {
 
 					Marca averiaMeter = marcaService.obtenerMarca(marcaSacado.getId());
@@ -142,13 +150,7 @@ public class GestionMarcas extends HorizontalLayout {
 			limpiarCampos();
 		});
 
-		cancelar.addClickListener(e -> {
-			limpiarCampos();
-
-			controladorPrimerosprimarios(2);
-		});
-
-		panelConfirmacion.addComponents(confirmarAnadir,confirmarEliminar,confirmarModificar, cancelar);
+		panelConfirmacion.addComponents(confirmarAnadir, confirmarEliminar, confirmarModificar, cancelar);
 
 		panelDatos.addComponents(panelIntroducirDatos, panelConfirmacion);
 
@@ -215,9 +217,9 @@ public class GestionMarcas extends HorizontalLayout {
 			if (!e.getSelected().isEmpty()) {
 				marcaGrid = (Marca) e.getSelected().iterator().next();
 				nombreMarca.setValue(marcaGrid.getNombre());
-				
-				nombreMarcaSeleccionado=marcaGrid.getNombre();
-				
+
+				nombreMarcaSeleccionado = marcaGrid.getNombre();
+
 				controladorPrimerosprimarios(3);
 			}
 			setMarca(marca);
@@ -242,7 +244,7 @@ public class GestionMarcas extends HorizontalLayout {
 
 		cargaGrid();
 	}
-	
+
 	public void eliminarMarca(Marca marca) {
 
 		marcaService.borrarMarca(marca.getId());
@@ -251,8 +253,7 @@ public class GestionMarcas extends HorizontalLayout {
 	}
 
 	public void cargaGrid() {
-		maestro.setContainerDataSource(
-				new BeanItemContainer<>(Marca.class, marcaService.obtenerMarcas()));
+		maestro.setContainerDataSource(new BeanItemContainer<>(Marca.class, marcaService.obtenerMarcas()));
 	}
 
 	private void definirBean() {
@@ -266,41 +267,39 @@ public class GestionMarcas extends HorizontalLayout {
 		case 1:
 
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
-			
+
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
 			confirmarModificar.setVisible(false);
-			
+
 			verPanelDatos();
 			break;
-			
-			//Cancelar
+
+		// Cancelar
 		case 2:
 			limpiarCampos();
 			break;
 		case 3:
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
-			
+
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
 			confirmarModificar.setVisible(true);
-			
+
 			verPanelDatos();
 			break;
 		}
-		
-	}
 
+	}
 
 	private void limpiarCampos() {
 
-		
 		nombreMarca.setValue("");
-		
+
 		nombreMarca.setVisible(false);
 
 		confirmarAnadir.setVisible(false);
@@ -315,20 +314,22 @@ public class GestionMarcas extends HorizontalLayout {
 	private void verPanelDatos() {
 		nombreMarca.setVisible(true);
 	}
-	
 
 	private void generaBBDD() {
 
 		if (marcaService.obtenerMarcas().isEmpty()) {
-				
-				Marca marca1 = new Marca("Opel");
-				marcaService.aniadirMarca(marca1.getNombre());
-				
-				Marca marca2 = new Marca("Subaru");
-				marcaService.aniadirMarca(marca2.getNombre());
-			}
-			
+
+			Marca marca1 = new Marca("Opel");
+			marcaService.aniadirMarca(marca1.getNombre());
+
+			Marca marca2 = new Marca("Subaru");
+			marcaService.aniadirMarca(marca2.getNombre());
 		}
 
-}
+	}
 
+	private void mostrarNotificacion(String mostrarCadena) {
+		Notification notificacion = new Notification(mostrarCadena);
+		notificacion.show(mostrarCadena);
+	}
+}

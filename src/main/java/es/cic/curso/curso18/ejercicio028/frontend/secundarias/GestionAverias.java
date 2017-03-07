@@ -10,6 +10,7 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -107,13 +108,19 @@ public class GestionAverias extends HorizontalLayout {
 		cancelar.addClickListener(e -> {
 			controladorPrimerosprimarios(2);
 		});
-		
-		
+
 		confirmarAnadir.addClickListener(e -> {
-			averiaService.aniadirAveria(nombreAveria.getValue(), descripcion.getValue());
-			cargaGrid();
-			controladorPrimerosprimarios(3);
-			limpiarCampos();
+
+			if (!nombreAveria.getValue().isEmpty() && !descripcion.getValue().isEmpty()) {
+
+				averiaService.aniadirAveria(nombreAveria.getValue(), descripcion.getValue());
+				cargaGrid();
+				mostrarNotificacion("Avería Agregada:" +nombreAveria.getValue()+" "+descripcion.getValue());
+				controladorPrimerosprimarios(3);
+				limpiarCampos();
+			} else{
+				mostrarNotificacion("Rellene Todos Los Campos");
+			}
 		});
 
 		confirmarEliminar.addClickListener(e -> {
@@ -121,6 +128,8 @@ public class GestionAverias extends HorizontalLayout {
 				if (averiaSacado.getNombre().equals(nombreAveria.getValue())
 						&& (averiaSacado.getDescripcion().equals(descripcion.getValue()))) {
 					averiaService.borrarAveria(averiaSacado.getId());
+					
+					mostrarNotificacion("Avería Borrada:" +nombreAveria.getValue()+" "+descripcion.getValue());
 				}
 			}
 			cargaGrid();
@@ -129,11 +138,9 @@ public class GestionAverias extends HorizontalLayout {
 		});
 
 		confirmarModificar.addClickListener(e -> {
-			
-
 
 			for (Averia averiaSacado : averiaService.obtenerAverias()) {
-				
+
 				if (averiaSacado.getNombre().equals(nombreAveriaSeleccionado)
 						&& (averiaSacado.getDescripcion().equals(descripcionAveriaSeleccionado))) {
 
@@ -143,6 +150,8 @@ public class GestionAverias extends HorizontalLayout {
 
 					modificarAveria(averiaMeter);
 
+					mostrarNotificacion("Avería Modificada:" +nombreAveria.getValue()+" "+descripcion.getValue());
+					
 					nombreAveriaSeleccionado = "";
 					descripcionAveriaSeleccionado = "";
 				}
@@ -223,11 +232,10 @@ public class GestionAverias extends HorizontalLayout {
 			if (!e.getSelected().isEmpty()) {
 				averiaGrid = (Averia) e.getSelected().iterator().next();
 				nombreAveria.setValue(averiaGrid.getNombre());
-				
-				nombreAveriaSeleccionado=averiaGrid.getNombre();
-				descripcionAveriaSeleccionado=averiaGrid.getDescripcion();
-				
-				
+
+				nombreAveriaSeleccionado = averiaGrid.getNombre();
+				descripcionAveriaSeleccionado = averiaGrid.getDescripcion();
+
 				controladorPrimerosprimarios(3);
 			}
 			setAveria(averiaGrid);
@@ -277,7 +285,7 @@ public class GestionAverias extends HorizontalLayout {
 
 			Averia averia2 = new Averia("Carburador Roto", "No Carbura Bien");
 			averiaService.aniadirAveria(averia2.getNombre(), averia2.getDescripcion());
-			
+
 			Averia averia3 = new Averia("Cristal Frontal Roto", "Llamar a Carglass");
 			averiaService.aniadirAveria(averia3.getNombre(), averia3.getDescripcion());
 		}
@@ -292,16 +300,15 @@ public class GestionAverias extends HorizontalLayout {
 
 			anadir.setEnabled(false);
 			cancelar.setVisible(true);
-			
+
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
 			confirmarModificar.setVisible(false);
 
-			
 			verPanelDatos();
 			break;
-			
-			//Cancelar
+
+		// Cancelar
 		case 2:
 			limpiarCampos();
 			break;
@@ -323,7 +330,7 @@ public class GestionAverias extends HorizontalLayout {
 
 		nombreAveria.setValue("");
 		descripcion.setValue("");
-		
+
 		nombreAveria.setVisible(false);
 		descripcion.setVisible(false);
 
@@ -335,6 +342,11 @@ public class GestionAverias extends HorizontalLayout {
 		descripcion.setVisible(false);
 
 		anadir.setEnabled(true);
+	}
+	
+	private void mostrarNotificacion(String mostrarCadena){
+		Notification notificacion = new Notification(mostrarCadena);
+		notificacion.show(mostrarCadena);	
 	}
 
 	private void verPanelDatos() {
