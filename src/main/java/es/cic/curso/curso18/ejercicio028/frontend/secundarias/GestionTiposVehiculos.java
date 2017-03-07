@@ -41,6 +41,9 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	Button confirmarEliminar;
 	Button confirmarModificar;
 	
+	String nombreVehiculoSeleccionado="";
+	String descripcionVehiculoSeleccionado="";
+	
 	Button cancelar;
 
 	Grid maestro;
@@ -124,14 +127,25 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		});
 		
 		confirmarModificar.addClickListener(e -> {
+			
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-				if (tipoVehiculoSacado.getTipo().equals(tipo.getValue())
-						&& (tipoVehiculoSacado.getDescripcion().equals(descripcion.getValue()))) {
+				
+				if (tipoVehiculoSacado.getTipo().equals(nombreVehiculoSeleccionado)
+						&& (tipoVehiculoSacado.getDescripcion().equals(descripcionVehiculoSeleccionado))) {
 					
-					TipoVehiculo objetoModificado = new TipoVehiculo(tipo.getValue(),descripcion.getValue());
-					tipoVehiculoService.actualizarTipoVehiculo(objetoModificado);
+					
+					TipoVehiculo tipoVehiculo = tipoVehiculoService.obtenerTipoVehiculo(tipoVehiculoSacado.getId());
+					tipoVehiculo.setTipo(tipo.getValue());
+					tipoVehiculo.setDescripcion(descripcion.getValue());
+
+					modificarTipoVehiculo(tipoVehiculo);
+					
+					nombreVehiculoSeleccionado="";
+					descripcionVehiculoSeleccionado="";
 				}
 			}
+			
+			
 			cargaGrid();
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
@@ -209,6 +223,10 @@ public class GestionTiposVehiculos extends VerticalLayout {
 			TipoVehiculo tipoDeVehiculo = null;
 			if (!e.getSelected().isEmpty()) {
 				tipoDeVehiculo = (TipoVehiculo) e.getSelected().iterator().next();
+				
+				nombreVehiculoSeleccionado=tipoDeVehiculo.getTipo();
+				descripcionVehiculoSeleccionado=tipoDeVehiculo.getDescripcion();
+				
 				controladorPrimerosprimarios(3);
 			}
 			setTipoVehiculo(tipoDeVehiculo);
@@ -218,6 +236,12 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		panelGrid.setMargin(true);
 		panelGrid.setSpacing(true);
 
+	}
+	
+	private void modificarTipoVehiculo(TipoVehiculo objetoModificado){
+		tipoVehiculoService.actualizarTipoVehiculo(objetoModificado);
+		
+		cargaGrid();
 	}
 
 	public void annadirTipoVehiculo(TipoVehiculo tipoVehiculo) {
