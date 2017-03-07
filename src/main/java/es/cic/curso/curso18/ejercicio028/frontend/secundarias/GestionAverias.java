@@ -38,7 +38,7 @@ public class GestionAverias extends HorizontalLayout {
 	Button confirmarAnadir;
 	Button confirmarEliminar;
 	Button confirmarModificar;
-	
+
 	Button cancelar;
 
 	Grid maestro;
@@ -46,6 +46,9 @@ public class GestionAverias extends HorizontalLayout {
 	List<Averia> averiasLista;
 
 	Averia averia;
+
+	String nombreAveriaSeleccionado = "";
+	String descripcionAveriaSeleccionado = "";
 
 	public GestionAverias() {
 		super();
@@ -98,8 +101,8 @@ public class GestionAverias extends HorizontalLayout {
 
 		confirmarAnadir = new Button("Añadir");
 		confirmarEliminar = new Button("Eliminar");
-		confirmarModificar= new Button("Modificar");
-		
+		confirmarModificar = new Button("Modificar");
+
 		cancelar = new Button("Cancelar");
 
 		confirmarAnadir.addClickListener(e -> {
@@ -108,7 +111,7 @@ public class GestionAverias extends HorizontalLayout {
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
-		
+
 		confirmarEliminar.addClickListener(e -> {
 			for (Averia averiaSacado : averiaService.obtenerAverias()) {
 				if (averiaSacado.getNombre().equals(nombreAveria.getValue())
@@ -120,14 +123,24 @@ public class GestionAverias extends HorizontalLayout {
 			controladorPrimerosprimarios(3);
 			limpiarCampos();
 		});
-		
+
 		confirmarModificar.addClickListener(e -> {
+			
+
+
 			for (Averia averiaSacado : averiaService.obtenerAverias()) {
-				if (averiaSacado.getNombre().equals(nombreAveria.getValue())
-						&& (averiaSacado.getDescripcion().equals(descripcion.getValue()))) {
-					
-					Averia objetoModificado = new Averia(nombreAveria.getValue(),descripcion.getValue());
-					averiaService.actualizarAveria(objetoModificado);
+				
+				if (averiaSacado.getNombre().equals(nombreAveriaSeleccionado)
+						&& (averiaSacado.getDescripcion().equals(descripcionAveriaSeleccionado))) {
+
+					Averia averiaMeter = averiaService.obtenerAveria(averiaSacado.getId());
+					averiaMeter.setNombre(nombreAveria.getValue());
+					averiaMeter.setDescripcion(descripcion.getValue());
+
+					modificarAveria(averiaMeter);
+
+					nombreAveriaSeleccionado = "";
+					descripcionAveriaSeleccionado = "";
 				}
 			}
 			cargaGrid();
@@ -141,7 +154,7 @@ public class GestionAverias extends HorizontalLayout {
 			controladorPrimerosprimarios(3);
 		});
 
-		panelConfirmacion.addComponents(confirmarAnadir,confirmarEliminar,confirmarModificar, cancelar);
+		panelConfirmacion.addComponents(confirmarAnadir, confirmarEliminar, confirmarModificar, cancelar);
 
 		panelDatos.addComponents(panelIntroducirDatos, panelConfirmacion);
 
@@ -209,6 +222,10 @@ public class GestionAverias extends HorizontalLayout {
 				averia = (Averia) e.getSelected().iterator().next();
 				nombreAveria.setValue(averia.getNombre());
 				
+				nombreAveriaSeleccionado=averia.getNombre();
+				descripcionAveriaSeleccionado=averia.getDescripcion();
+				
+				
 				controladorPrimerosprimarios(3);
 			}
 			setAveria(averia);
@@ -227,6 +244,13 @@ public class GestionAverias extends HorizontalLayout {
 		cargaGrid();
 	}
 
+	public void modificarAveria(Averia modificada) {
+
+		averiaService.actualizarAveria(modificada);
+
+		cargaGrid();
+	}
+
 	public void eliminarAveria(Averia averia) {
 
 		averiaService.borrarAveria(averia.getId());
@@ -235,8 +259,7 @@ public class GestionAverias extends HorizontalLayout {
 	}
 
 	public void cargaGrid() {
-		maestro.setContainerDataSource(
-				new BeanItemContainer<>(Averia.class, averiaService.obtenerAverias()));
+		maestro.setContainerDataSource(new BeanItemContainer<>(Averia.class, averiaService.obtenerAverias()));
 	}
 
 	private void definirBean() {
@@ -246,15 +269,15 @@ public class GestionAverias extends HorizontalLayout {
 	private void generaBBDD() {
 
 		if (averiaService.obtenerAverias().isEmpty()) {
-				
-				Averia averia = new Averia("Tubo De Escape Ilegal","Expulsa Demasiado CO2");
-				averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
-				
-				Averia averia2 = new Averia("Carburador Roto","No Carbura Bien");
-				averiaService.aniadirAveria(averia.getNombre(), averia2.getDescripcion());
-			}
-			
+
+			Averia averia = new Averia("Tubo De Escape Ilegal", "Expulsa Demasiado CO2");
+			averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
+
+			Averia averia2 = new Averia("Carburador Roto", "No Carbura Bien");
+			averiaService.aniadirAveria(averia.getNombre(), averia2.getDescripcion());
 		}
+
+	}
 
 	private void controladorPrimerosprimarios(int opcion) {
 		switch (opcion) {
@@ -263,28 +286,25 @@ public class GestionAverias extends HorizontalLayout {
 		case 1:
 
 			anadir.setEnabled(true);
-			
+
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
 			confirmarModificar.setVisible(false);
-			
+
 			verPanelDatos();
 			break;
 		case 3:
 			anadir.setEnabled(false);
-			
-			
-			
+
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
 			confirmarModificar.setVisible(true);
-			
+
 			verPanelDatos();
 			break;
 		}
-		
-	}
 
+	}
 
 	private void limpiarCampos() {
 
@@ -307,4 +327,3 @@ public class GestionAverias extends HorizontalLayout {
 	}
 
 }
-

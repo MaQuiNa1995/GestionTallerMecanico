@@ -227,7 +227,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 				nombreVehiculoSeleccionado=tipoDeVehiculo.getTipo();
 				descripcionVehiculoSeleccionado=tipoDeVehiculo.getDescripcion();
 				
-				controladorPrimerosprimarios(3);
+				controladorPrimerosprimarios(2);
 			}
 			setTipoVehiculo(tipoDeVehiculo);
 		});
@@ -293,12 +293,32 @@ public class GestionTiposVehiculos extends VerticalLayout {
 			
 			verPanelDatos();
 			break;
+			
+		// Modificar
+		case 2:
+			anadir.setEnabled(false);
+			
+			confirmarAnadir.setVisible(false);
+			confirmarEliminar.setVisible(true);
+			confirmarModificar.setVisible(true);
+			
+			tipo.setVisible(true);
+			descripcion.setVisible(true);
+			
+			tipo.setEnabled(false);
+			descripcion.setEnabled(false);
+			break;
+			
+			// Eliminar
 		case 3:
 			anadir.setEnabled(false);
 			
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
 			confirmarModificar.setVisible(true);
+			
+			tipo.setEnabled(false);
+			descripcion.setEnabled(false);
 			
 			verPanelDatos();
 			break;

@@ -45,6 +45,8 @@ public class GestionMarcas extends HorizontalLayout {
 	List<Marca> marcasLista;
 
 	Marca marca;
+	
+	String nombreMarcaSeleccionado="";
 
 	public GestionMarcas() {
 		super();
@@ -117,11 +119,18 @@ public class GestionMarcas extends HorizontalLayout {
 		});
 		
 		confirmarModificar.addClickListener(e -> {
+			
 			for (Marca marcaSacado : marcaService.obtenerMarcas()) {
-				if (marcaSacado.getNombre().equals(nombreMarca.getValue())){
-					
-					Marca objetoModificado = new Marca(nombreMarca.getValue());
-					marcaService.actualizarMarca(objetoModificado);
+
+				
+				if (marcaSacado.getNombre().equals(nombreMarcaSeleccionado)) {
+
+					Marca averiaMeter = marcaService.obtenerMarca(marcaSacado.getId());
+					averiaMeter.setNombre(nombreMarca.getValue());
+
+					modificarMarca(averiaMeter);
+
+					nombreMarcaSeleccionado = "";
 				}
 			}
 			cargaGrid();
@@ -203,6 +212,8 @@ public class GestionMarcas extends HorizontalLayout {
 				marcaGrid = (Marca) e.getSelected().iterator().next();
 				nombreMarca.setValue(marcaGrid.getNombre());
 				
+				nombreMarcaSeleccionado=marcaGrid.getNombre();
+				
 				controladorPrimerosprimarios(3);
 			}
 			setMarca(marca);
@@ -221,6 +232,13 @@ public class GestionMarcas extends HorizontalLayout {
 		cargaGrid();
 	}
 
+	public void modificarMarca(Marca marca) {
+
+		marcaService.actualizarMarca(marca);
+
+		cargaGrid();
+	}
+	
 	public void eliminarMarca(Marca marca) {
 
 		marcaService.borrarMarca(marca.getId());
