@@ -104,7 +104,11 @@ public class GestionAverias extends HorizontalLayout {
 		confirmarModificar = new Button("Modificar");
 
 		cancelar = new Button("Cancelar");
-
+		cancelar.addClickListener(e -> {
+			controladorPrimerosprimarios(2);
+		});
+		
+		
 		confirmarAnadir.addClickListener(e -> {
 			averiaService.aniadirAveria(nombreAveria.getValue(), descripcion.getValue());
 			cargaGrid();
@@ -149,9 +153,7 @@ public class GestionAverias extends HorizontalLayout {
 		});
 
 		cancelar.addClickListener(e -> {
-			limpiarCampos();
-
-			controladorPrimerosprimarios(3);
+			controladorPrimerosprimarios(2);
 		});
 
 		panelConfirmacion.addComponents(confirmarAnadir, confirmarEliminar, confirmarModificar, cancelar);
@@ -288,16 +290,24 @@ public class GestionAverias extends HorizontalLayout {
 		// Dar Alta
 		case 1:
 
-			anadir.setEnabled(true);
-
+			anadir.setEnabled(false);
+			cancelar.setVisible(true);
+			
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
 			confirmarModificar.setVisible(false);
 
+			
 			verPanelDatos();
+			break;
+			
+			//Cancelar
+		case 2:
+			limpiarCampos();
 			break;
 		case 3:
 			anadir.setEnabled(false);
+			cancelar.setVisible(true);
 
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
@@ -313,6 +323,9 @@ public class GestionAverias extends HorizontalLayout {
 
 		nombreAveria.setValue("");
 		descripcion.setValue("");
+		
+		nombreAveria.setVisible(false);
+		descripcion.setVisible(false);
 
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);

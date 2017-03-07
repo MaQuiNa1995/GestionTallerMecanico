@@ -121,9 +121,8 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		});
 
 		cancelar.addClickListener(e -> {
-			limpiarCampos();
 
-			controladorPrimerosprimarios(3);
+			controladorPrimerosprimarios(2);
 		});
 
 		panelConfirmacion.addComponents(confirmarAnadir,confirmarEliminar,confirmarModificar, cancelar);
@@ -254,7 +253,9 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		// Dar Alta
 		case 1:
 
-			anadir.setEnabled(true);
+			anadir.setEnabled(false);
+			
+			cancelar.setVisible(true);
 			
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
@@ -262,8 +263,16 @@ public class GestionTiposVehiculos extends VerticalLayout {
 			
 			verPanelDatos();
 			break;
+			
+			//Cancelar
+		case 2:
+			limpiarCampos();
+			break;
+			
 		case 3:
 			anadir.setEnabled(false);
+			
+			cancelar.setVisible(true);
 			
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
@@ -284,6 +293,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);
 		confirmarModificar.setVisible(false);
+		
 		cancelar.setVisible(false);
 		tipo.setVisible(false);
 		descripcion.setVisible(false);

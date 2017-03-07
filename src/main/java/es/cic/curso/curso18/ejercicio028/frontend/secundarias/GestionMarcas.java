@@ -99,7 +99,11 @@ public class GestionMarcas extends HorizontalLayout {
 		confirmarModificar= new Button("Modificar");
 		
 		cancelar = new Button("Cancelar");
-
+		
+		cancelar.addClickListener(e -> {
+			controladorPrimerosprimarios(2);
+		});
+		
 		confirmarAnadir.addClickListener(e -> {
 			marcaService.aniadirMarca(nombreMarca.getValue());
 			cargaGrid();
@@ -141,7 +145,7 @@ public class GestionMarcas extends HorizontalLayout {
 		cancelar.addClickListener(e -> {
 			limpiarCampos();
 
-			controladorPrimerosprimarios(3);
+			controladorPrimerosprimarios(2);
 		});
 
 		panelConfirmacion.addComponents(confirmarAnadir,confirmarEliminar,confirmarModificar, cancelar);
@@ -261,7 +265,9 @@ public class GestionMarcas extends HorizontalLayout {
 		// Dar Alta
 		case 1:
 
-			anadir.setEnabled(true);
+			anadir.setEnabled(false);
+			
+			cancelar.setVisible(true);
 			
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
@@ -269,10 +275,15 @@ public class GestionMarcas extends HorizontalLayout {
 			
 			verPanelDatos();
 			break;
+			
+			//Cancelar
+		case 2:
+			limpiarCampos();
+			break;
 		case 3:
 			anadir.setEnabled(false);
 			
-			
+			cancelar.setVisible(true);
 			
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
@@ -287,7 +298,10 @@ public class GestionMarcas extends HorizontalLayout {
 
 	private void limpiarCampos() {
 
+		
 		nombreMarca.setValue("");
+		
+		nombreMarca.setVisible(false);
 
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);

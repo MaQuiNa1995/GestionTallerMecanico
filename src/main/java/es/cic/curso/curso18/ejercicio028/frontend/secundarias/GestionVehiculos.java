@@ -118,6 +118,9 @@ public class GestionVehiculos extends HorizontalLayout {
 		confirmarModificar = new Button("Modificar");
 
 		cancelar = new Button("Cancelar");
+		cancelar.addClickListener(e -> {
+			controladorPrimerosprimarios(2);
+		});
 
 		confirmarAnadir.addClickListener(e -> {
 			
@@ -204,9 +207,7 @@ public class GestionVehiculos extends HorizontalLayout {
 		});
 
 		cancelar.addClickListener(e -> {
-			limpiarCampos();
-
-			controladorPrimerosprimarios(3);
+			controladorPrimerosprimarios(2);
 		});
 
 		panelConfirmacion.addComponents(confirmarAnadir, confirmarEliminar, confirmarModificar, cancelar);
@@ -318,7 +319,9 @@ public class GestionVehiculos extends HorizontalLayout {
 		// Dar Alta
 		case 1:
 
-			anadir.setEnabled(true);
+			anadir.setEnabled(false);
+			
+			cancelar.setVisible(true);
 
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
@@ -326,8 +329,13 @@ public class GestionVehiculos extends HorizontalLayout {
 
 			verPanelDatos();
 			break;
+		case 2:
+			limpiarCampos();
+			break;
 		case 3:
 			anadir.setEnabled(false);
+			
+			cancelar.setVisible(true);
 
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
@@ -355,7 +363,10 @@ public class GestionVehiculos extends HorizontalLayout {
 
 		nombreVehiculo.setValue("");
 		matricula.setValue("");
-
+		
+		nombreVehiculo.setVisible(false);
+		matricula.setVisible(false);
+		
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);
 		confirmarModificar.setVisible(false);
@@ -364,8 +375,11 @@ public class GestionVehiculos extends HorizontalLayout {
 		matricula.setVisible(false);
 		
 		tipoVehiculoCombo.setVisible(false);
+		tipoVehiculoCombo.select(null);
+		
 		marcasCombo.setVisible(false);
-
+		marcasCombo.select(null);
+		
 		anadir.setEnabled(true);
 	}
 

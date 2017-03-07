@@ -95,7 +95,7 @@ public class RegistroIncidencias extends HorizontalLayout {
 		anadir = new Button("Dar De Alta");
 		anadir.addClickListener(e -> {
 			controladorPrimerosprimarios(1);
-			
+			rellenarCombos();
 			verPanelDatos(false);
 		});
 
@@ -116,8 +116,6 @@ public class RegistroIncidencias extends HorizontalLayout {
 		fechaParaModificar.setVisible(false);
 
 		matriculasVehiculosCombo = new ComboBox();
-
-		rellenarCombos();
 
 		panelIntroducirDatos.addComponents(averiasCombo, fechaEscogida, fechaParaModificar, matriculasVehiculosCombo);
 
@@ -221,9 +219,7 @@ public class RegistroIncidencias extends HorizontalLayout {
 		});
 
 		cancelar.addClickListener(e -> {
-			limpiarCampos();
-
-			controladorPrimerosprimarios(3);
+			controladorPrimerosprimarios(2);
 		});
 
 		panelConfirmacion.addComponents(confirmarAnadir, confirmarEliminar, confirmarModificar, cancelar);
