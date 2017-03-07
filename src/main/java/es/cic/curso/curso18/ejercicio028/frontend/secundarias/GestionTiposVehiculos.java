@@ -127,6 +127,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		});
 		
 		confirmarModificar.addClickListener(e -> {
+			TipoVehiculo objetoModificado=null;
 			
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 				
@@ -139,6 +140,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 					tipoVehiculo.setDescripcion(descripcion.getValue());
 
 					modificarTipoVehiculo(tipoVehiculo);
+					
 					
 					nombreVehiculoSeleccionado="";
 					descripcionVehiculoSeleccionado="";
@@ -227,7 +229,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 				nombreVehiculoSeleccionado=tipoDeVehiculo.getTipo();
 				descripcionVehiculoSeleccionado=tipoDeVehiculo.getDescripcion();
 				
-				controladorPrimerosprimarios(2);
+				controladorPrimerosprimarios(3);
 			}
 			setTipoVehiculo(tipoDeVehiculo);
 		});
@@ -293,32 +295,12 @@ public class GestionTiposVehiculos extends VerticalLayout {
 			
 			verPanelDatos();
 			break;
-			
-		// Modificar
-		case 2:
-			anadir.setEnabled(false);
-			
-			confirmarAnadir.setVisible(false);
-			confirmarEliminar.setVisible(true);
-			confirmarModificar.setVisible(true);
-			
-			tipo.setVisible(true);
-			descripcion.setVisible(true);
-			
-			tipo.setEnabled(false);
-			descripcion.setEnabled(false);
-			break;
-			
-			// Eliminar
 		case 3:
 			anadir.setEnabled(false);
 			
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
 			confirmarModificar.setVisible(true);
-			
-			tipo.setEnabled(false);
-			descripcion.setEnabled(false);
 			
 			verPanelDatos();
 			break;

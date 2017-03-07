@@ -15,9 +15,9 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 import es.cic.curso.curso18.ejercicio028.backend.DTO.VehiculoDTO;
-import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Marca;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo;
+import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.service.MarcaService;
 import es.cic.curso.curso18.ejercicio028.backend.service.TipoVehiculoService;
 import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoService;
@@ -46,9 +46,9 @@ public class GestionVehiculos extends HorizontalLayout {
 	Button confirmarAnadir;
 	Button confirmarEliminar;
 	Button confirmarModificar;
-
-	ComboBox tipoVehiculo;
-	ComboBox marca;
+	
+	ComboBox tipoVehiculoCombo;
+	ComboBox marcasCombo;
 
 	Button cancelar;
 
@@ -84,7 +84,9 @@ public class GestionVehiculos extends HorizontalLayout {
 		anadir = new Button("Dar De Alta");
 		anadir.addClickListener(e -> {
 			controladorPrimerosprimarios(1);
+			rellenarCombos();
 			verPanelDatos();
+			
 		});
 
 		panelBotones.addComponent(anadir);
@@ -103,19 +105,13 @@ public class GestionVehiculos extends HorizontalLayout {
 		matricula = new TextField("Introduce La Matrícula:");
 		matricula.setSizeFull();
 		
-		marca = new ComboBox();
+		marcasCombo = new ComboBox();	
+		marcasCombo.setVisible(false);
+		tipoVehiculoCombo = new ComboBox();
+		tipoVehiculoCombo.setVisible(false);
+		rellenarCombos();
 		
-		for (Marca marcaSacada : marcaService.obtenerMarcas()) {
-			marca.addItem(marcaSacada.getNombre());
-		}
-		
-		tipoVehiculo = new ComboBox(); 
-		
-		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-			tipoVehiculo.addItem(tipoVehiculoSacado.getTipo());
-		}
-		
-		panelIntroducirDatos.addComponents(nombreVehiculo, matricula,marca,tipoVehiculo);
+		panelIntroducirDatos.addComponents(nombreVehiculo, matricula,marcasCombo,tipoVehiculoCombo);
 
 		confirmarAnadir = new Button("Añadir");
 		confirmarEliminar = new Button("Eliminar");
@@ -124,18 +120,19 @@ public class GestionVehiculos extends HorizontalLayout {
 		cancelar = new Button("Cancelar");
 
 		confirmarAnadir.addClickListener(e -> {
+			
 			TipoVehiculo meterTipoVehiculo=null;
 			Marca meterMarca=null;
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue()))
+				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue()))
 					meterTipoVehiculo = tipoVehiculoSacado;
 			}
 			
 			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
 
-				if (marcaSacada.getNombre().equals(marca.getValue()))
+				if (marcaSacada.getNombre().equals(marcasCombo.getValue()))
 					meterMarca = marcaSacada;
 			}
 
@@ -160,13 +157,13 @@ public class GestionVehiculos extends HorizontalLayout {
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue().toString()))
+				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue().toString()))
 					meterTipoVehiculo = tipoVehiculoSacado;
 			}
 			
 			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
 
-				if (marcaSacada.getNombre().equals(marca.getValue().toString()))
+				if (marcaSacada.getNombre().equals(marcasCombo.getValue().toString()))
 					meterMarca = marcaSacada;
 			}
 			
@@ -190,13 +187,13 @@ public class GestionVehiculos extends HorizontalLayout {
 
 			for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 
-				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculo.getValue().toString()))
+				if (tipoVehiculoSacado.getTipo().equals(tipoVehiculoCombo.getValue().toString()))
 					meterTipoVehiculo = tipoVehiculoSacado;
 			}
 			
 			for (Marca marcaSacada : marcaService.obtenerMarcas()) {
 
-				if (marcaSacada.getNombre().equals(marca.getValue().toString()))
+				if (marcaSacada.getNombre().equals(marcasCombo.getValue().toString()))
 					meterMarca = marcaSacada;
 			}
 
@@ -341,6 +338,18 @@ public class GestionVehiculos extends HorizontalLayout {
 		}
 
 	}
+	
+	private void rellenarCombos() {
+		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
+			
+			tipoVehiculoCombo.addItem(tipoVehiculoSacado.getTipo());
+		}
+
+		for (Marca vehiculoSacado : marcaService.obtenerMarcas()) {
+			
+			marcasCombo.addItem(vehiculoSacado.getNombre());
+		}
+	}
 
 	private void limpiarCampos() {
 
@@ -353,11 +362,17 @@ public class GestionVehiculos extends HorizontalLayout {
 		cancelar.setVisible(false);
 		nombreVehiculo.setVisible(false);
 		matricula.setVisible(false);
+		
+		tipoVehiculoCombo.setVisible(false);
+		marcasCombo.setVisible(false);
 
 		anadir.setEnabled(true);
 	}
 
 	private void verPanelDatos() {
+		
+		tipoVehiculoCombo.setVisible(true);
+		marcasCombo.setVisible(true);
 		nombreVehiculo.setVisible(true);
 		matricula.setVisible(true);
 	}

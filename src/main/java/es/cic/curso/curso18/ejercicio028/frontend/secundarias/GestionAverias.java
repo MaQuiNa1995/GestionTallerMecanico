@@ -274,7 +274,10 @@ public class GestionAverias extends HorizontalLayout {
 			averiaService.aniadirAveria(averia.getNombre(), averia.getDescripcion());
 
 			Averia averia2 = new Averia("Carburador Roto", "No Carbura Bien");
-			averiaService.aniadirAveria(averia.getNombre(), averia2.getDescripcion());
+			averiaService.aniadirAveria(averia2.getNombre(), averia2.getDescripcion());
+			
+			Averia averia3 = new Averia("Cristal Frontal Roto", "Llamar a Carglass");
+			averiaService.aniadirAveria(averia3.getNombre(), averia3.getDescripcion());
 		}
 
 	}

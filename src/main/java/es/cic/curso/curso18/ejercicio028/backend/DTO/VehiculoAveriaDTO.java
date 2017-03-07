@@ -3,7 +3,6 @@ package es.cic.curso.curso18.ejercicio028.backend.DTO;
 public class VehiculoAveriaDTO {
 	String nombreAveria;
 	String fechaAveria;
-	String nombreVehiculo;
 	String matriculaVehiculo;
 
 	public VehiculoAveriaDTO() {
@@ -26,13 +25,6 @@ public class VehiculoAveriaDTO {
 		this.fechaAveria = fechaAveria;
 	}
 
-	public String getNombreVehiculo() {
-		return nombreVehiculo;
-	}
-
-	public void setNombreVehiculo(String nombreVehiculo) {
-		this.nombreVehiculo = nombreVehiculo;
-	}
 
 	public String getMatriculaVehiculo() {
 		return matriculaVehiculo;
