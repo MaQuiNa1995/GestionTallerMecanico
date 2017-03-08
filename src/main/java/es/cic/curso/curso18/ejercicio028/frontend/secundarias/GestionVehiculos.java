@@ -22,6 +22,7 @@ import es.cic.curso.curso18.ejercicio028.backend.dto.VehiculoDTO;
 import es.cic.curso.curso18.ejercicio028.backend.service.MarcaService;
 import es.cic.curso.curso18.ejercicio028.backend.service.TipoVehiculoService;
 import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoService;
+import es.cic.curso.curso18.ejercicio028.frontend.utilities.Validador;
 
 public class GestionVehiculos extends HorizontalLayout {
 
@@ -130,7 +131,9 @@ public class GestionVehiculos extends HorizontalLayout {
 
 		confirmarAnadir.addClickListener(e -> {
 
-			if (!nombreVehiculo.getValue().isEmpty() && !matricula.getValue().isEmpty()) {
+			Validador validar= new Validador();
+			
+			if (!nombreVehiculo.getValue().isEmpty() && !matricula.getValue().isEmpty() && validar.validarMatricula(matricula.getValue())) {
 
 				TipoVehiculo meterTipoVehiculo = null;
 				Marca meterMarca = null;
@@ -161,7 +164,11 @@ public class GestionVehiculos extends HorizontalLayout {
 				controladorPrimerosprimarios(3);
 				limpiarCampos();
 			} else {
-				mostrarNotificacion("Rellene Todos Los Campos");
+				String mostrarMensaje="";
+				if(!validar.validarMatricula(matricula.getValue())){
+					mostrarMensaje="Introduce una matrícula Valida ";
+				}
+				mostrarNotificacion("Rellene Todos Los Campos: "+mostrarMensaje);
 			}
 		});
 
