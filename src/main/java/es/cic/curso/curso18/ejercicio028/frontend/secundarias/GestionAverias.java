@@ -345,8 +345,7 @@ public class GestionAverias extends HorizontalLayout {
 	}
 	
 	private void mostrarNotificacion(String mostrarCadena){
-		Notification notificacion = new Notification(mostrarCadena);
-		notificacion.show(mostrarCadena);	
+		Notification.show(mostrarCadena);	
 	}
 
 	private void verPanelDatos() {

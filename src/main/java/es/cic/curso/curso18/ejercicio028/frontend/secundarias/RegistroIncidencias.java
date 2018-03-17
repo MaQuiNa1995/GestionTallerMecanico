@@ -23,7 +23,6 @@ import es.cic.curso.curso18.ejercicio028.backend.dominio.RegistroAverias;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo;
 import es.cic.curso.curso18.ejercicio028.backend.dominio.VehiculosTienenAverias;
 import es.cic.curso.curso18.ejercicio028.backend.dto.VehiculoAveriaDTO;
-import es.cic.curso.curso18.ejercicio028.backend.dto.VehiculoDTO;
 import es.cic.curso.curso18.ejercicio028.backend.service.AveriaService;
 import es.cic.curso.curso18.ejercicio028.backend.service.RegistroAveriasService;
 import es.cic.curso.curso18.ejercicio028.backend.service.VehiculoService;
@@ -281,8 +280,7 @@ public class RegistroIncidencias extends HorizontalLayout {
 	}
 
 	private void mostrarNotificacion(String mostrarCadena) {
-		Notification notificacion = new Notification(mostrarCadena);
-		notificacion.show(mostrarCadena);
+		Notification.show(mostrarCadena);
 	}
 
 	private void definirPanelDerecha() {

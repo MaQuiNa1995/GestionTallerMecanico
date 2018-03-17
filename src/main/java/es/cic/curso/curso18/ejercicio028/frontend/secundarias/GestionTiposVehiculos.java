@@ -358,8 +358,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	}
 	
 	private void mostrarNotificacion(String mostrarCadena){
-		Notification notificacion = new Notification(mostrarCadena);
-		notificacion.show(mostrarCadena);	
+		Notification.show(mostrarCadena);	
 	}
 	
 }

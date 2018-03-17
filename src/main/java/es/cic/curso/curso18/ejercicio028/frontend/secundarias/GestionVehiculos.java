@@ -173,10 +173,6 @@ public class GestionVehiculos extends HorizontalLayout {
 		});
 
 		confirmarEliminar.addClickListener(e -> {
-
-			TipoVehiculo meterTipoVehiculo = null;
-			Marca meterMarca = null;
-
 			int contador = 0;
 
 			for (Vehiculo vehiculoParaModificar : vehiculoService.obtenerVehiculos()) {
@@ -328,8 +324,7 @@ public class GestionVehiculos extends HorizontalLayout {
 	}
 
 	private void mostrarNotificacion(String mostrarCadena) {
-		Notification notificacion = new Notification(mostrarCadena);
-		notificacion.show(mostrarCadena);
+		Notification.show(mostrarCadena);
 	}
 
 	private void definirPanelGrid() {

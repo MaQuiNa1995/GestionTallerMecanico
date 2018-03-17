@@ -329,7 +329,6 @@ public class GestionMarcas extends HorizontalLayout {
 	}
 
 	private void mostrarNotificacion(String mostrarCadena) {
-		Notification notificacion = new Notification(mostrarCadena);
-		notificacion.show(mostrarCadena);
+		Notification.show(mostrarCadena);
 	}
 }
