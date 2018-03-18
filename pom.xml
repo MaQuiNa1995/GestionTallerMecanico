@@ -6,13 +6,11 @@
 	<groupId>es.cic.curso</groupId>
 	<artifactId>curso18.ejercicio028</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>curso18.ejercicio028</name>
-
-	<!-- <prerequisites> -->
-	<!-- <maven>3</maven> -->
-	<!-- </prerequisites> -->
-
+	<version>1</version>
+	<name>taller</name>
+	<prerequisites>
+		<maven>3</maven>
+	</prerequisites>
 	<properties>
 		<vaadin.version>7.7.7</vaadin.version>
 		<vaadin.plugin.version>7.7.7</vaadin.plugin.version>
@@ -93,8 +91,6 @@
 			<artifactId>spring-aspects</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-server</artifactId>
@@ -111,26 +107,34 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
-
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 			<version>${liquibase.version}</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.dbunit</groupId> <artifactId>dbunit</artifactId> 
-			<version>2.4.9</version> <scope>test</scope> </dependency> <dependency> <groupId>org.slf4j</groupId> 
-			<artifactId>jcl-over-slf4j</artifactId> <version>1.5.6</version> <scope>test</scope> 
-			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
-			<version>1.5.6</version> </dependency> -->
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.4.9</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.5.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.6</version>
+		</dependency>
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -161,9 +165,6 @@
 				<executions>
 					<execution>
 						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
 						<configuration>
 							<artifactItems>
 								<artifactItem>
