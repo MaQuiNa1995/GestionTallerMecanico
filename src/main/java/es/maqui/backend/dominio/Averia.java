@@ -16,17 +16,17 @@ public class Averia implements Identificable<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4583881797217483524L;
+	private static final long serialVersionUID = 31216841126896644L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long pkidAveria;
+	private Long pkidAveria;
 
 	@Column(name = "nombre")
-	String nombre;
+	private String nombre;
 
 	@Column(name = "descripcion")
-	String descripcion;
+	private String descripcion;
 
 	public Averia() {
 		super();

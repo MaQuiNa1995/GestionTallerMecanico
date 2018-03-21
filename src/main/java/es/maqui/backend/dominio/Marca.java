@@ -16,7 +16,7 @@ public class Marca implements Identificable<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6007890223503488331L;
+	private static final long serialVersionUID = 6099747245103508351L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

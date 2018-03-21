@@ -7,8 +7,7 @@
 	<changeSet author="usuario (generated)" id="1400847488681-1">
 
 		<!-- Tabla Averia -->
-
-		<createTable catalogName="curso18" tableName="AVERIA">
+		<createTable catalogName="maqui" tableName="AVERIA">
 			<column autoIncrement="true" name="pkidAveria" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
@@ -17,8 +16,7 @@
 		</createTable>
 
 		<!-- Tabla Tipo Vehiculo -->
-
-		<createTable catalogName="curso18" tableName="TIPOVEHICULO">
+		<createTable catalogName="maqui" tableName="TIPO_VEHICULO">
 			<column autoIncrement="true" name="pkidTipoVehiculo" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
@@ -27,8 +25,7 @@
 		</createTable>
 
 		<!-- Tabla Marca -->
-
-		<createTable catalogName="curso18" tableName="MARCA">
+		<createTable catalogName="maqui" tableName="MARCA">
 			<column autoIncrement="true" name="pkidMarca" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
@@ -36,8 +33,7 @@
 		</createTable>
 
 		<!-- Tabla Vehiculo -->
-
-		<createTable catalogName="curso18" tableName="VEHICULO">
+		<createTable catalogName="maqui" tableName="VEHICULO">
 			<column autoIncrement="true" name="pkidVehiculo" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
@@ -49,7 +45,7 @@
 
 		<!-- Tabla RegistroAverias -->
 
-		<createTable catalogName="curso18" tableName="REGISTROAVERIAS">
+		<createTable catalogName="maqui" tableName="REGISTRO_AVERIAS">
 			<column autoIncrement="true" name="pkidRegistroAverias" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
@@ -59,7 +55,7 @@
 
 		<!-- Tabla VehiculosTienenAverias -->
 
-		<createTable catalogName="curso18" tableName="VEHICULOSTIENENAVERIAS">
+		<createTable catalogName="maqui" tableName="VEHICULOS_TIENEN_AVERIAS">
 			<column autoIncrement="true" name="pkidVehiculosTienenAverias"
 				type="INT(10)">
 				<constraints primaryKey="true" />
@@ -73,20 +69,20 @@
 			baseTableName="VEHICULO" referencedColumnNames="pkidMarca" />
 
 		<addForeignKeyConstraint constraintName="fk_TIPOVEHICULO_VEHICULO"
-			referencedTableName="TIPOVEHICULO" baseColumnNames="fkidTipoVehiculo"
+			referencedTableName="TIPO_VEHICULO" baseColumnNames="fkidTipoVehiculo"
 			baseTableName="VEHICULO" referencedColumnNames="pkidTipoVehiculo" />
 
 		<addForeignKeyConstraint constraintName="fk_AVERIA_REGISTROAVERIAS"
 			referencedTableName="AVERIA" baseColumnNames="fkidAveria"
-			baseTableName="REGISTROAVERIAS" referencedColumnNames="pkidAveria" />
+			baseTableName="REGISTRO_AVERIAS" referencedColumnNames="pkidAveria" />
 
 		<addForeignKeyConstraint constraintName="fk_VEHICULO_VEHICULOSTIENENAVERIAS"
 			referencedTableName="VEHICULO" baseColumnNames="fkidVehiculosRegistroAverias"
-			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidVehiculo" />
-			
+			baseTableName="VEHICULOS_TIENEN_AVERIAS" referencedColumnNames="pkidVehiculo" />
+
 		<addForeignKeyConstraint constraintName="fk_REGISTROAVERIAS_VEHICULOSTIENENAVERIAS"
-			referencedTableName="REGISTROAVERIAS" baseColumnNames="fkidRegistroAveriasVehiculos"
-			baseTableName="VEHICULOSTIENENAVERIAS" referencedColumnNames="pkidRegistroAverias" />
+			referencedTableName="REGISTRO_AVERIAS" baseColumnNames="fkidRegistroAveriasVehiculos"
+			baseTableName="VEHICULOS_TIENEN_AVERIAS" referencedColumnNames="pkidRegistroAverias" />
 
 	</changeSet>
 

@@ -19,7 +19,7 @@ public class Vehiculo implements Identificable<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4582114734221516816L;
+	private static final long serialVersionUID = 1982196828951192944L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

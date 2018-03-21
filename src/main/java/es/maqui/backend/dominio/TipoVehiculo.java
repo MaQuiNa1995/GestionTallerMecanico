@@ -10,13 +10,13 @@ import javax.persistence.Table;
 import es.maqui.backend.repository.Identificable;
 
 @Entity
-@Table(name = "TIPOVEHICULO")
+@Table(name = "TIPO_VEHICULO")
 public class TipoVehiculo implements Identificable<Long> {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8513598203876189283L;
+	private static final long serialVersionUID = -236007345030468080L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

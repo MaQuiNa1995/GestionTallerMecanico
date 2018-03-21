@@ -12,13 +12,13 @@ import javax.persistence.Table;
 import es.maqui.backend.repository.Identificable;
 
 @Entity
-@Table(name = "VEHICULOSTIENENAVERIAS")
+@Table(name = "VEHICULOS_TIENEN_AVERIAS")
 public class VehiculosTienenAverias implements Identificable<Long> {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4297447102360376912L;
+	private static final long serialVersionUID = 5633469589639032676L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class VehiculosTienenAverias implements Identificable<Long> {
 	@JoinColumn(name = "fkidRegistroAveriasVehiculos")
 	@ManyToOne(fetch = FetchType.LAZY)
 	Vehiculo vehiculo;
-	
+
 	public VehiculosTienenAverias() {
 		super();
 	}
