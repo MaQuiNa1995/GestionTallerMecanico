@@ -22,7 +22,7 @@ public class RegistroAverias implements Identificable<Long>{
 	private static final long serialVersionUID = 1478940692428183893L;
 
 		@Id
-		@GeneratedValue(strategy = GenerationType.AUTO)
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		Long pkidRegistroAverias;
 
 		@Column(name = "fecha")

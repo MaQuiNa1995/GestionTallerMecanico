@@ -19,7 +19,7 @@ public class Marca implements Identificable<Long> {
 	private static final long serialVersionUID = -6007890223503488331L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long pkidMarca;
 
 	@Column(name = "nombre")

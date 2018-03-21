@@ -22,7 +22,7 @@ public class Vehiculo implements Identificable<Long> {
 	private static final long serialVersionUID = -4582114734221516816L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long pkidVehiculo;
 
 	@Column(name = "nombre")

@@ -19,7 +19,7 @@ public class Averia implements Identificable<Long> {
 	private static final long serialVersionUID = -4583881797217483524L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long pkidAveria;
 
 	@Column(name = "nombre")

@@ -15,7 +15,7 @@ public class ValidadorTest {
 	}
 
 	@Test
-	public void validarEmailTest() {
+	public void validarMatriculaTest() {
 		
 		String matricula= "0387-DCC";
 		assertTrue(sut.validarMatricula(matricula));

@@ -25,15 +25,11 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.hsqldb.jdbcDriver"/> 
         <property name="url" value="jdbc:hsqldb:mem:curso18"/>
         <property name="username" value="sa"/>
-        <property name="password" value=""/>
-        <property name="initialSize" value="5"/>
-        <property name="maxActive" value="10"/>
-        <property name="poolPreparedStatements" value="true"/>
-        <property name="maxOpenPreparedStatements" value="10"/>
+        <property name="password" value="sa"/>
     </bean>
 	
     <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">

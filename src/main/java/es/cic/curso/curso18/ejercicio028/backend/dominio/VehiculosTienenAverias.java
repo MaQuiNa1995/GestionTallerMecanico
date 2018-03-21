@@ -21,7 +21,7 @@ public class VehiculosTienenAverias implements Identificable<Long> {
 	private static final long serialVersionUID = -4297447102360376912L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long pkidVehiculosTienenAverias;
 
 	@JoinColumn(name = "fkidVehiculosRegistroAverias")
