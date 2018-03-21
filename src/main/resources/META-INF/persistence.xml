@@ -7,13 +7,12 @@
 	<persistence-unit name="persistenceUnitHSQL"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<!-- Ruta de lo que va en el Dominio <class>es.cic.curso.curso18.ejercicio026.dominio.</class> -->
-		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.Averia</class>
-		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.Vehiculo</class>
-		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.TipoVehiculo</class>
-		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.Marca</class>
-		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.VehiculosTienenAverias</class>
-		<class>es.cic.curso.curso18.ejercicio028.backend.dominio.RegistroAverias</class>
+		<class>es.maqui.backend.dominio.Averia</class>
+		<class>es.maqui.backend.dominio.Vehiculo</class>
+		<class>es.maqui.backend.dominio.TipoVehiculo</class>
+		<class>es.maqui.backend.dominio.Marca</class>
+		<class>es.maqui.backend.dominio.VehiculosTienenAverias</class>
+		<class>es.maqui.backend.dominio.RegistroAverias</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
