@@ -35,41 +35,40 @@ public class RegistroIncidencias extends HorizontalLayout {
 	 */
 	private static final long serialVersionUID = -2370949761559912513L;
 
-	VerticalLayout panelDerecha;
-	VerticalLayout panelIzquierda;
-	VerticalLayout panelDatos;
-	HorizontalLayout panelBotones;
-	HorizontalLayout panelGrid;
-	HorizontalLayout panelTodo;
+	private VerticalLayout panelDerecha;
+	private VerticalLayout panelIzquierda;
+	private VerticalLayout panelDatos;
+	private HorizontalLayout panelBotones;
+	private HorizontalLayout panelGrid;
+	private HorizontalLayout panelTodo;
 
-	VehiculoService vehiculoService;
-	RegistroIncidencias registroIncidencias;
-	RegistroAveriasService registroAveriasService;
-	AveriaService averiaService;
-	VehiculosTienenAveriasService vehiculosTienenAveriasService;
+	private VehiculoService vehiculoService;
+	private RegistroAveriasService registroAveriasService;
+	private AveriaService averiaService;
+	private VehiculosTienenAveriasService vehiculosTienenAveriasService;
 
-	DateField fechaEscogida;
+	private DateField fechaEscogida;
 
-	Button anadir;
-	Button confirmarAnadir;
-	Button confirmarEliminar;
-	Button confirmarModificar;
+	private Button anadir;
+	private Button confirmarAnadir;
+	private Button confirmarEliminar;
+	private Button confirmarModificar;
+	private Button cancelar;
 
-	ComboBox averiasCombo;
-	ComboBox matriculasVehiculosCombo;
+	private ComboBox averiasCombo;
+	private ComboBox matriculasVehiculosCombo;
 
-	Button cancelar;
+	private Grid maestro;
 
-	Grid maestro;
+	private DateFormat fechaHora;
 
-	DateFormat fechaHora;
-	TextField fechaParaModificar;
+	private TextField fechaParaModificar;
 
-	String convertido;
+	private String convertido;
 
-	List<VehiculoAveriaDTO> vehiculoAveriaDTOLista;
+	private List<VehiculoAveriaDTO> vehiculoAveriaDTOLista;
 
-	VehiculoAveriaDTO vehiculo;
+	private VehiculoAveriaDTO vehiculo;
 
 	public RegistroIncidencias() {
 		super();
@@ -241,11 +240,11 @@ public class RegistroIncidencias extends HorizontalLayout {
 				if (vehiculoAveriaSacado.getMatricula().equals(matriculasVehiculosCombo.getValue()))
 					meterVehiculo = vehiculoAveriaSacado;
 			}
-			
-			int contador = 0;
-			for (VehiculosTienenAverias vehiculoParaModificar : vehiculosTienenAveriasService.obtenerVehiculosTienenAverias()) {
 
-				
+			int contador = 0;
+			for (VehiculosTienenAverias vehiculoParaModificar : vehiculosTienenAveriasService
+					.obtenerVehiculosTienenAverias()) {
+
 				if (vehiculoParaModificar.getVehiculo().equals(meterVehiculo)) {
 
 					VehiculoAveriaDTO vehiculoDTO = new VehiculoAveriaDTO();
@@ -256,8 +255,9 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 					vehiculoAveriaDTOLista.remove(contador);
 					vehiculoAveriaDTOLista.add(contador, vehiculoDTO);
-					VehiculosTienenAverias vehiculoObtenido = vehiculosTienenAveriasService.obtenerVehiculosTienenAveria(vehiculoParaModificar.getId());
-					
+					VehiculosTienenAverias vehiculoObtenido = vehiculosTienenAveriasService
+							.obtenerVehiculosTienenAveria(vehiculoParaModificar.getId());
+
 					vehiculoObtenido.setRegistroAverias(meterRegistroAveria);
 					vehiculoObtenido.setVehiculo(meterVehiculo);
 
@@ -267,7 +267,7 @@ public class RegistroIncidencias extends HorizontalLayout {
 				contador++;
 
 			}
-			
+
 			cargaGrid();
 			controladorPrimerosprimarios(4);
 			limpiarCampos();
@@ -360,11 +360,12 @@ public class RegistroIncidencias extends HorizontalLayout {
 
 	public void annadirVehiculo(VehiculosTienenAverias vehiculo) {
 
-		vehiculosTienenAveriasService.aniadirVehiculosTienenAverias(vehiculo.getRegistroAverias(), vehiculo.getVehiculo());
+		vehiculosTienenAveriasService.aniadirVehiculosTienenAverias(vehiculo.getRegistroAverias(),
+				vehiculo.getVehiculo());
 
 		cargaGrid();
 	}
-	
+
 	public void modificarVehiculo(VehiculosTienenAverias vehiculo) {
 
 		vehiculosTienenAveriasService.actualizarVehiculosTienenAverias(vehiculo);

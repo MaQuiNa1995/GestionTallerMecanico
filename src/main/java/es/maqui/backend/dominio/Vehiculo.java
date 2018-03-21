@@ -23,21 +23,21 @@ public class Vehiculo implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long pkidVehiculo;
+	private Long pkidVehiculo;
 
 	@Column(name = "nombre")
-	String nombre;
+	private String nombre;
 
 	@Column(name = "matricula")
-	String matricula;
+	private String matricula;
 
 	@JoinColumn(name = "fkidTipoVehiculo")
 	@ManyToOne(fetch = FetchType.LAZY)
-	TipoVehiculo tipoVehiculo;
+	private TipoVehiculo tipoVehiculo;
 
 	@JoinColumn(name = "fkidMarca")
 	@ManyToOne(fetch = FetchType.LAZY)
-	Marca marca;
+	private Marca marca;
 
 	public Vehiculo() {
 		super();

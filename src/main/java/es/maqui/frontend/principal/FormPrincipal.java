@@ -29,8 +29,8 @@ public class FormPrincipal extends UI {
 	 */
 	private static final long serialVersionUID = -1598331557630407298L;
 
-	HorizontalLayout panelTodo = null;
-	TabSheet menu = null;
+	private HorizontalLayout panelTodo = null;
+	private TabSheet menu = null;
 
 	@Override
 	protected void init(VaadinRequest request) {

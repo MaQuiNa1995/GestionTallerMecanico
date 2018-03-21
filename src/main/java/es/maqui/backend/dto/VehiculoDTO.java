@@ -2,10 +2,10 @@ package es.maqui.backend.dto;
 
 public class VehiculoDTO {
 
-	String nombreVehiculo;
-	String matricula;
-	String tipo;
-	String nombreMarca;
+	private String nombreVehiculo;
+	private String matricula;
+	private String tipo;
+	private String nombreMarca;
 
 	public VehiculoDTO() {
 		super();

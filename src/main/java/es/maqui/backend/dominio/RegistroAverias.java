@@ -23,14 +23,14 @@ public class RegistroAverias implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long pkidRegistroAverias;
+	private Long pkidRegistroAverias;
 
 	@Column(name = "fecha")
-	String fecha;
+	private String fecha;
 
 	@JoinColumn(name = "fkidAveria")
 	@ManyToOne(fetch = FetchType.LAZY)
-	Averia averia;
+	private Averia averia;
 
 	public RegistroAverias() {
 		super();

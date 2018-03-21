@@ -22,15 +22,15 @@ public class VehiculosTienenAverias implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long pkidVehiculosTienenAverias;
+	private Long pkidVehiculosTienenAverias;
 
 	@JoinColumn(name = "fkidVehiculosRegistroAverias")
 	@ManyToOne(fetch = FetchType.LAZY)
-	RegistroAverias registroAverias;
+	private RegistroAverias registroAverias;
 
 	@JoinColumn(name = "fkidRegistroAveriasVehiculos")
 	@ManyToOne(fetch = FetchType.LAZY)
-	Vehiculo vehiculo;
+	private Vehiculo vehiculo;
 
 	public VehiculosTienenAverias() {
 		super();

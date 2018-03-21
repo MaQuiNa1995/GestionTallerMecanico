@@ -1,9 +1,9 @@
 package es.maqui.backend.dto;
 
 public class VehiculoAveriaDTO {
-	String nombreAveria;
-	String fechaAveria;
-	String matriculaVehiculo;
+	private String nombreAveria;
+	private String fechaAveria;
+	private String matriculaVehiculo;
 
 	public VehiculoAveriaDTO() {
 		super();

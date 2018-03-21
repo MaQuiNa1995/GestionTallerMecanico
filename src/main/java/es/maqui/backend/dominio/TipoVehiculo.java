@@ -20,13 +20,13 @@ public class TipoVehiculo implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long pkidTipoVehiculo;
+	private Long pkidTipoVehiculo;
 
 	@Column(name = "tipo")
-	String tipo;
+	private String tipo;
 
 	@Column(name = "descripcion")
-	String descripcion;
+	private String descripcion;
 
 	public TipoVehiculo() {
 		super();

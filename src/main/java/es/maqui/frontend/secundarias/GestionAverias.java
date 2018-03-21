@@ -1,8 +1,5 @@
 package es.maqui.frontend.secundarias;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.web.context.ContextLoader;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -24,32 +21,30 @@ public class GestionAverias extends HorizontalLayout {
 	 */
 	private static final long serialVersionUID = -2370949761559912513L;
 
-	VerticalLayout panelDerecha;
-	VerticalLayout panelIzquierda;
-	VerticalLayout panelDatos;
-	HorizontalLayout panelBotones;
-	HorizontalLayout panelGrid;
-	HorizontalLayout panelTodo;
+	private VerticalLayout panelDerecha;
+	private VerticalLayout panelIzquierda;
+	private VerticalLayout panelDatos;
+	private HorizontalLayout panelBotones;
+	private HorizontalLayout panelGrid;
+	private HorizontalLayout panelTodo;
 
-	AveriaService averiaService;
+	private AveriaService averiaService;
 
-	Button anadir;
-	TextField nombreAveria;
-	TextField descripcion;
-	Button confirmarAnadir;
-	Button confirmarEliminar;
-	Button confirmarModificar;
+	private TextField nombreAveria;
+	private TextField descripcion;
+	
+	private Button anadir;
+	private Button confirmarAnadir;
+	private Button confirmarEliminar;
+	private Button confirmarModificar;
+	private Button cancelar;
 
-	Button cancelar;
+	private Grid maestro;
 
-	Grid maestro;
+	private Averia averia;
 
-	List<Averia> averiasLista;
-
-	Averia averia;
-
-	String nombreAveriaSeleccionado = "";
-	String descripcionAveriaSeleccionado = "";
+	private String nombreAveriaSeleccionado = "";
+	private String descripcionAveriaSeleccionado = "";
 
 	public GestionAverias() {
 		super();
@@ -217,10 +212,8 @@ public class GestionAverias extends HorizontalLayout {
 	}
 
 	private void definirPanelGrid() {
-		averiasLista = new ArrayList<>();
 
 		panelGrid = new HorizontalLayout();
-		averiasLista = averiaService.obtenerAverias();
 
 		maestro = new Grid();
 		maestro.setColumns("nombre", "descripcion");

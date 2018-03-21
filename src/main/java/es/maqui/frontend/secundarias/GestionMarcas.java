@@ -1,8 +1,5 @@
 package es.maqui.frontend.secundarias;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.web.context.ContextLoader;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -24,30 +21,29 @@ public class GestionMarcas extends HorizontalLayout {
 	 */
 	private static final long serialVersionUID = -2370949761559912513L;
 
-	VerticalLayout panelDerecha;
-	VerticalLayout panelIzquierda;
-	VerticalLayout panelDatos;
-	HorizontalLayout panelBotones;
-	HorizontalLayout panelGrid;
-	HorizontalLayout panelTodo;
+	private VerticalLayout panelDerecha;
+	private VerticalLayout panelIzquierda;
+	private VerticalLayout panelDatos;
+	private HorizontalLayout panelBotones;
+	private HorizontalLayout panelGrid;
+	private HorizontalLayout panelTodo;
 
-	MarcaService marcaService;
+	private MarcaService marcaService;
 
-	Button anadir;
-	TextField nombreMarca;
-	Button confirmarAnadir;
-	Button confirmarEliminar;
-	Button confirmarModificar;
+	private TextField nombreMarca;
+	
+	private Button anadir;
+	private Button confirmarAnadir;
+	private Button confirmarEliminar;
+	private Button confirmarModificar;
 
-	Button cancelar;
+	private Button cancelar;
 
-	Grid maestro;
+	private Grid maestro;
 
-	List<Marca> marcasLista;
+	private Marca marca;
 
-	Marca marca;
-
-	String nombreMarcaSeleccionado = "";
+	private String nombreMarcaSeleccionado = "";
 
 	public GestionMarcas() {
 		super();
@@ -202,10 +198,8 @@ public class GestionMarcas extends HorizontalLayout {
 	}
 
 	private void definirPanelGrid() {
-		marcasLista = new ArrayList<>();
 
 		panelGrid = new HorizontalLayout();
-		marcasLista = marcaService.obtenerMarcas();
 
 		maestro = new Grid();
 		maestro.setColumns("nombre");

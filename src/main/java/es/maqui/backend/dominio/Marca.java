@@ -20,10 +20,10 @@ public class Marca implements Identificable<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long pkidMarca;
+	private Long pkidMarca;
 
 	@Column(name = "nombre")
-	String nombre;
+	private String nombre;
 
 	public Marca() {
 		super();

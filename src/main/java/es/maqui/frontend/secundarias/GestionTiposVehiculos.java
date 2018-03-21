@@ -1,8 +1,5 @@
 package es.maqui.frontend.secundarias;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.web.context.ContextLoader;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -16,7 +13,6 @@ import com.vaadin.ui.VerticalLayout;
 
 import es.maqui.backend.dominio.TipoVehiculo;
 import es.maqui.backend.service.TipoVehiculoService;
-import es.maqui.backend.service.VehiculoService;
 
 public class GestionTiposVehiculos extends VerticalLayout {
 
@@ -25,33 +21,30 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	 */
 	private static final long serialVersionUID = -2370949761559912513L;
 
-	VerticalLayout panelDerecha;
-	VerticalLayout panelIzquierda;
-	VerticalLayout panelDatos;
-	HorizontalLayout panelBotones;
-	HorizontalLayout panelGrid;
-	HorizontalLayout panelTodo;
+	private VerticalLayout panelDerecha;
+	private VerticalLayout panelIzquierda;
+	private VerticalLayout panelDatos;
+	private HorizontalLayout panelBotones;
+	private HorizontalLayout panelGrid;
+	private HorizontalLayout panelTodo;
 
-	TipoVehiculoService tipoVehiculoService;
-	VehiculoService vehiculoService;
+	private TipoVehiculoService tipoVehiculoService;
 
-	Button anadir;
-	TextField tipo;
-	TextField descripcion;
-	Button confirmarAnadir;
-	Button confirmarEliminar;
-	Button confirmarModificar;
+	private TextField tipo;
+	private TextField descripcion;
 	
-	String nombreVehiculoSeleccionado="";
-	String descripcionVehiculoSeleccionado="";
+	private Button anadir;
+	private Button confirmarAnadir;
+	private Button confirmarEliminar;
+	private Button confirmarModificar;
+	private Button cancelar;
 	
-	Button cancelar;
+	private String nombreVehiculoSeleccionado = "";
+	private String descripcionVehiculoSeleccionado = "";
 
-	Grid maestro;
+	private Grid maestro;
 
-	List<TipoVehiculo> tipoVehiculoLista;
-
-	TipoVehiculo tipoVehiculo;
+	private TipoVehiculo tipoVehiculo;
 
 	public GestionTiposVehiculos() {
 		super();
@@ -104,20 +97,20 @@ public class GestionTiposVehiculos extends VerticalLayout {
 
 		confirmarAnadir = new Button("Añadir");
 		confirmarEliminar = new Button("Eliminar");
-		confirmarModificar= new Button("Modificar");
-		
+		confirmarModificar = new Button("Modificar");
+
 		cancelar = new Button("Cancelar");
 
 		confirmarAnadir.addClickListener(e -> {
 			anadirConfirmarMetodo();
 		});
-		
+
 		confirmarEliminar.addClickListener(e -> {
 			eliminarConfirmarMetodo();
 		});
-		
+
 		confirmarModificar.addClickListener(e -> {
-			
+
 			confirmarModificarMetodo();
 		});
 
@@ -126,7 +119,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 			controladorPrimerosprimarios(2);
 		});
 
-		panelConfirmacion.addComponents(confirmarAnadir,confirmarEliminar,confirmarModificar, cancelar);
+		panelConfirmacion.addComponents(confirmarAnadir, confirmarEliminar, confirmarModificar, cancelar);
 
 		panelDatos.addComponents(panelIntroducirDatos, panelConfirmacion);
 
@@ -178,10 +171,8 @@ public class GestionTiposVehiculos extends VerticalLayout {
 	}
 
 	private void definirPanelGrid() {
-		tipoVehiculoLista = new ArrayList<>();
 
 		panelGrid = new HorizontalLayout();
-		tipoVehiculoLista = tipoVehiculoService.obtenerTipoVehiculos();
 
 		maestro = new Grid();
 		maestro.setColumns("tipo", "descripcion");
@@ -192,10 +183,10 @@ public class GestionTiposVehiculos extends VerticalLayout {
 			TipoVehiculo tipoDeVehiculo = null;
 			if (!e.getSelected().isEmpty()) {
 				tipoDeVehiculo = (TipoVehiculo) e.getSelected().iterator().next();
-				
-				nombreVehiculoSeleccionado=tipoDeVehiculo.getTipo();
-				descripcionVehiculoSeleccionado=tipoDeVehiculo.getDescripcion();
-				
+
+				nombreVehiculoSeleccionado = tipoDeVehiculo.getTipo();
+				descripcionVehiculoSeleccionado = tipoDeVehiculo.getDescripcion();
+
 				controladorPrimerosprimarios(3);
 			}
 			setTipoVehiculo(tipoDeVehiculo);
@@ -206,10 +197,10 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		panelGrid.setSpacing(true);
 
 	}
-	
-	private void modificarTipoVehiculo(TipoVehiculo objetoModificado){
+
+	private void modificarTipoVehiculo(TipoVehiculo objetoModificado) {
 		tipoVehiculoService.actualizarTipoVehiculo(objetoModificado);
-		
+
 		cargaGrid();
 	}
 
@@ -241,10 +232,12 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		if (tipoVehiculoService.obtenerTipoVehiculos().isEmpty()) {
 
 			TipoVehiculo tipoVehiculoPorDefecto = new TipoVehiculo("Moto", "Vehiculo de 2 Ruedas");
-			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculoPorDefecto.getTipo(), tipoVehiculoPorDefecto.getDescripcion());
+			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculoPorDefecto.getTipo(),
+					tipoVehiculoPorDefecto.getDescripcion());
 
 			TipoVehiculo tipoVehiculoPorDefecto2 = new TipoVehiculo("Coche", "Vehiculo de 4 Ruedas");
-			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculoPorDefecto2.getTipo(), tipoVehiculoPorDefecto2.getDescripcion());
+			tipoVehiculoService.aniadirTipoVehiculo(tipoVehiculoPorDefecto2.getTipo(),
+					tipoVehiculoPorDefecto2.getDescripcion());
 		}
 	}
 
@@ -255,36 +248,35 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		case 1:
 
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
-			
+
 			confirmarAnadir.setVisible(true);
 			confirmarEliminar.setVisible(false);
 			confirmarModificar.setVisible(false);
-			
+
 			verPanelDatos();
 			break;
-			
-			//Cancelar
+
+		// Cancelar
 		case 2:
 			limpiarCampos();
 			break;
-			
+
 		case 3:
 			anadir.setEnabled(false);
-			
+
 			cancelar.setVisible(true);
-			
+
 			confirmarAnadir.setVisible(false);
 			confirmarEliminar.setVisible(true);
 			confirmarModificar.setVisible(true);
-			
+
 			verPanelDatos();
 			break;
 		}
-		
-	}
 
+	}
 
 	private void limpiarCampos() {
 
@@ -294,7 +286,7 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		confirmarAnadir.setVisible(false);
 		confirmarEliminar.setVisible(false);
 		confirmarModificar.setVisible(false);
-		
+
 		cancelar.setVisible(false);
 		tipo.setVisible(false);
 		descripcion.setVisible(false);
@@ -306,33 +298,31 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		tipo.setVisible(true);
 		descripcion.setVisible(true);
 	}
-	
-	private void confirmarModificarMetodo(){
+
+	private void confirmarModificarMetodo() {
 		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
-			
+
 			if (tipoVehiculoSacado.getTipo().equals(nombreVehiculoSeleccionado)
 					&& (tipoVehiculoSacado.getDescripcion().equals(descripcionVehiculoSeleccionado))) {
-				
-				
-				TipoVehiculo tipoVehiculoModificar = tipoVehiculoService.obtenerTipoVehiculo(tipoVehiculoSacado.getId());
+
+				TipoVehiculo tipoVehiculoModificar = tipoVehiculoService
+						.obtenerTipoVehiculo(tipoVehiculoSacado.getId());
 				tipoVehiculoModificar.setTipo(tipo.getValue());
 				tipoVehiculoModificar.setDescripcion(descripcion.getValue());
 
 				modificarTipoVehiculo(tipoVehiculoModificar);
-				
-				
-				nombreVehiculoSeleccionado="";
-				descripcionVehiculoSeleccionado="";
+
+				nombreVehiculoSeleccionado = "";
+				descripcionVehiculoSeleccionado = "";
 			}
 		}
-		
-		
+
 		cargaGrid();
 		controladorPrimerosprimarios(3);
 		limpiarCampos();
 	}
-	
-	private void eliminarConfirmarMetodo(){
+
+	private void eliminarConfirmarMetodo() {
 		for (TipoVehiculo tipoVehiculoSacado : tipoVehiculoService.obtenerTipoVehiculos()) {
 			if (tipoVehiculoSacado.getTipo().equals(tipo.getValue())
 					&& (tipoVehiculoSacado.getDescripcion().equals(descripcion.getValue()))) {
@@ -344,21 +334,21 @@ public class GestionTiposVehiculos extends VerticalLayout {
 		limpiarCampos();
 	}
 
-	private void anadirConfirmarMetodo(){
-		
-		if(!tipo.getValue().isEmpty() && !descripcion.getValue().isEmpty()){
-		
-		tipoVehiculoService.aniadirTipoVehiculo(tipo.getValue(), descripcion.getValue());
-		cargaGrid();
-		controladorPrimerosprimarios(3);
-		limpiarCampos();
-		}else{
+	private void anadirConfirmarMetodo() {
+
+		if (!tipo.getValue().isEmpty() && !descripcion.getValue().isEmpty()) {
+
+			tipoVehiculoService.aniadirTipoVehiculo(tipo.getValue(), descripcion.getValue());
+			cargaGrid();
+			controladorPrimerosprimarios(3);
+			limpiarCampos();
+		} else {
 			mostrarNotificacion("Rellene Todos Los Campos");
 		}
 	}
-	
-	private void mostrarNotificacion(String mostrarCadena){
-		Notification.show(mostrarCadena);	
+
+	private void mostrarNotificacion(String mostrarCadena) {
+		Notification.show(mostrarCadena);
 	}
-	
+
 }

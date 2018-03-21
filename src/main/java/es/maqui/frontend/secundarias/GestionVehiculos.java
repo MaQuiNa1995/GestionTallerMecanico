@@ -31,39 +31,39 @@ public class GestionVehiculos extends HorizontalLayout {
 	 */
 	private static final long serialVersionUID = -2370949761559912513L;
 
-	VerticalLayout panelDerecha;
-	VerticalLayout panelIzquierda;
-	VerticalLayout panelDatos;
-	HorizontalLayout panelBotones;
-	HorizontalLayout panelGrid;
-	HorizontalLayout panelTodo;
+	private VerticalLayout panelDerecha;
+	private VerticalLayout panelIzquierda;
+	private VerticalLayout panelDatos;
+	private HorizontalLayout panelBotones;
+	private HorizontalLayout panelGrid;
+	private HorizontalLayout panelTodo;
 
-	MarcaService marcaService;
-	TipoVehiculoService tipoVehiculoService;
-	VehiculoService vehiculoService;
+	private MarcaService marcaService;
+	private TipoVehiculoService tipoVehiculoService;
+	private VehiculoService vehiculoService;
 
-	Button anadir;
-	TextField nombreVehiculo;
-	TextField matricula;
-	Button confirmarAnadir;
-	Button confirmarEliminar;
-	Button confirmarModificar;
+	private TextField nombreVehiculo;
+	private TextField matricula;
+	
+	private Button anadir;
+	private Button confirmarAnadir;
+	private Button confirmarEliminar;
+	private Button confirmarModificar;
+	private Button cancelar;
 
-	ComboBox tipoVehiculoCombo;
-	ComboBox marcasCombo;
+	private ComboBox tipoVehiculoCombo;
+	private ComboBox marcasCombo;
 
-	String nombrevehiculoSeleccionado = "";
-	String matriculaSeleccionada = "";
-	String tipoVehiculoSeleccionado = "";
-	String marcaVehiculoSeleccionado = "";
+	private String nombrevehiculoSeleccionado = "";
+	private String matriculaSeleccionada = "";
+	private String tipoVehiculoSeleccionado = "";
+	private String marcaVehiculoSeleccionado = "";
 
-	Button cancelar;
+	private Grid maestro;
 
-	Grid maestro;
+	private List<VehiculoDTO> vehiculoDTOLista;
 
-	List<VehiculoDTO> vehiculoDTOLista;
-
-	VehiculoDTO vehiculo;
+	private VehiculoDTO vehiculo;
 
 	public GestionVehiculos() {
 		super();
