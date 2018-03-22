@@ -1,4 +1,7 @@
 # GestionTallerMecanico
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a1a41fe2cd0748c9913e4d8113f3478b)](https://app.codacy.com/app/MaQuiNa1995/GestionTallerMecanico?utm_source=github.com&utm_medium=referral&utm_content=MaQuiNa1995/GestionTallerMecanico&utm_campaign=badger)
+
 proyecto para la gestion de un taller mecánico
 
 Para ejecutar este proyecto en local necesitas:
