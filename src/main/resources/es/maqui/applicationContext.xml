@@ -37,7 +37,7 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 		p:dataSource-ref="dataSource">
-		<property name="persistenceUnitName" value="persistenceUnitHSQL" />
+		<property name="persistenceUnitName" value="persistenceUnitHSQL2" />
 
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 		<property name="jpaDialect">
