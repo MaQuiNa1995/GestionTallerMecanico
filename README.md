@@ -1,5 +1,5 @@
 # GestionTallerMecanico
-proyecto para la gestion de un taller mecánico
+proyecto para la gestion de un taller mecánico 
 
 Para ejecutar este proyecto en local necesitas:
     - Maven 3.5.0
@@ -22,3 +22,5 @@ necesitarás ejecutar esto en la linea de comandos preferida:
     
 En mi caso esta aplicación está desplegada aqui mismo: https://fast-depths-35905.herokuapp.com/
 Si elegis el servidor gratuito como yo la 1º vez os tardará en arrancar porque si no tiene tráfico a los 30 min se suspende y cada mes solo obtendreis de 23 días reales de servicio
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2eab58e7e7084cadb16d8c2c2e86a047)](https://www.codacy.com/app/MaQuiNa1995/GestionTallerMecanico?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MaQuiNa1995/GestionTallerMecanico&amp;utm_campaign=Badge_Grade)
