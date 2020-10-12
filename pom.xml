@@ -23,7 +23,7 @@
 		<vaadin.widgetset.mode>local</vaadin.widgetset.mode>
 		<spring.version>5.0.4.RELEASE</spring.version>
 		<hibernate.version>5.2.15.Final</hibernate.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<commonsdbcp.version>1.4</commonsdbcp.version>
 		<javax.servlet>4.0.0</javax.servlet>
 		<liquibase.version>3.5.5</liquibase.version>
