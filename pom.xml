@@ -26,7 +26,7 @@
 		<junit.version>4.12</junit.version>
 		<commonsdbcp.version>1.4</commonsdbcp.version>
 		<javax.servlet>4.0.0</javax.servlet>
-		<liquibase.version>3.5.5</liquibase.version>
+		<liquibase.version>4.8.0</liquibase.version>
 		<apache.commons>2.2.0</apache.commons>
 		<hsqldb>2.4.0</hsqldb>
 		<javax.persistence>1.0.2.Final</javax.persistence>
