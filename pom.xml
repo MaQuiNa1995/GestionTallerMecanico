@@ -21,7 +21,7 @@
 		<vaadin.plugin.version>7.7.7</vaadin.plugin.version>
 		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
 		<vaadin.widgetset.mode>local</vaadin.widgetset.mode>
-		<spring.version>5.0.4.RELEASE</spring.version>
+		<spring.version>5.2.20.RELEASE</spring.version>
 		<hibernate.version>5.2.15.Final</hibernate.version>
 		<junit.version>4.12</junit.version>
 		<commonsdbcp.version>1.4</commonsdbcp.version>
